@@ -40,7 +40,7 @@ public class BadgeUtility {
    * @throws IOException
    * @throws NumberFormatException
    */
-  public static int calculateCoverate(String csvPath) throws NumberFormatException, IOException {
+  public static int calculateCoverage(String csvPath) throws NumberFormatException, IOException {
     // intialize reader
     CSVReader reader =
         new CSVReaderBuilder(new FileReader(csvPath)).withSkipLines(1).build();

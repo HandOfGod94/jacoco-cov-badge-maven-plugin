@@ -50,4 +50,18 @@ public class Badge {
   public String getResultColor() {
     return resultColor;
   }
+
+  /**
+   * @return the badgeLabelWidth
+   */
+  public float getBadgeLabelWidth() {
+    return badgeLabelWidth;
+  }
+
+  /**
+   * @return the badgeValueWidth
+   */
+  public float getBadgeValueWidth() {
+    return badgeValueWidth;
+  }
 }
