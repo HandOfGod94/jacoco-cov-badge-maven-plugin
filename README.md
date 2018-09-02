@@ -8,7 +8,7 @@ Jacoco is code coverage utility which generates nice report for
 Java Based projects and is generally integrated as maven build plugin.
 
 `Badges` are like the one you are seeing above, which represents `build` status.
-There are several online utilities like `coeralls`, `shields.io` etc. which
+There are several online utilities like `coveralls`, `shields.io` etc. which
 provides badges as a service.
 
 ## Why?
