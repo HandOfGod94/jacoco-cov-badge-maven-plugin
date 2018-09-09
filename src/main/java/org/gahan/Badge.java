@@ -3,7 +3,8 @@ package org.gahan;
 import java.io.IOException;
 
 /**
- * BadgeConfig obtained from xml
+ * Badge class to hold configuration obtained from Maven config.
+ * This will be shared across all the classes, who needs badge related information.
  */
 public class Badge {
 
@@ -13,6 +14,12 @@ public class Badge {
   private float badgeLabelWidth = 0.0f;
   private float badgeValueWidth = 0.0f;
 
+  /**
+   * Badge configuration holder.
+   * @param badgeValue Value to be displayed in the badge i.e. coverage %age
+   * @param resultColor color of the value in badge
+   * @throws IOException Exception when trying to calculate width and height of badge
+   */
   public Badge(int badgeValue, String resultColor) throws IOException {
     this.badgeValue = badgeValue;
     this.resultColor = resultColor;
@@ -20,6 +27,13 @@ public class Badge {
     this.badgeValueWidth = BadgeUtility.calculateWidth(this.badgeValue + "%");
   }
 
+  /**
+   * Badge configuration holder.
+   * @param badgeLabel Text label for the badge
+   * @param resultColor color of the value in badge
+   * @param badgeValue Text value to be displayed in badge i.e. coverage %age
+   * @throws IOException Exception while trying to calculate width and height of badge.
+   */
   public Badge(String badgeLabel, String resultColor, int badgeValue) throws IOException {
     this.badgeLabel = badgeLabel;
     this.resultColor = resultColor;
@@ -31,6 +45,7 @@ public class Badge {
   // Getters
 
   /**
+   * Badge label. Default is "coverage"
    * @return the badgeLabel
    */
   public String getBadgeLabel() {
@@ -38,6 +53,7 @@ public class Badge {
   }
 
   /**
+   * Badge Value i.e. %age
    * @return the badgeValue
    */
   public int getBadgeValue() {
@@ -45,6 +61,7 @@ public class Badge {
   }
 
   /**
+   * Color of the badge.
    * @return the resultColor
    */
   public String getResultColor() {
@@ -52,6 +69,7 @@ public class Badge {
   }
 
   /**
+   * Width of the label of the badge.
    * @return the badgeLabelWidth
    */
   public float getBadgeLabelWidth() {
@@ -59,6 +77,7 @@ public class Badge {
   }
 
   /**
+   * Width of value of the badge.
    * @return the badgeValueWidth
    */
   public float getBadgeValueWidth() {

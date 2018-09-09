@@ -1,16 +1,15 @@
 package org.gahan;
 
-import java.io.FileReader;
-import java.io.IOException;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-
+import java.io.FileReader;
+import java.io.IOException;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 
+
 /**
- * BadgeGenerator
+ * Utility class for generating badges.
  */
 public class BadgeUtility {
 
@@ -37,8 +36,8 @@ public class BadgeUtility {
    *
    * @param csvPath Absolute path of csv report
    * @return integer value containing total coverage
-   * @throws IOException
-   * @throws NumberFormatException
+   * @throws IOException Unable to read jacoco csv report from config location
+   * @throws NumberFormatException Unable to parse %ages from jacoco reports
    */
   public static int calculateCoverage(String csvPath) throws NumberFormatException, IOException {
     // intialize reader
