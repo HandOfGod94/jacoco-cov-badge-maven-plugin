@@ -17,12 +17,11 @@ public class Badge {
   /**
    * Badge configuration holder.
    * @param badgeValue Value to be displayed in the badge i.e. coverage %age
-   * @param resultColor color of the value in badge
    * @throws IOException Exception when trying to calculate width and height of badge
    */
-  public Badge(int badgeValue, String resultColor) throws IOException {
+  public Badge(int badgeValue) throws IOException {
     this.badgeValue = badgeValue;
-    this.resultColor = resultColor;
+    this.resultColor = BadgeUtility.getColorFromRange(badgeValue).getColorCode();
     this.badgeLabelWidth = BadgeUtility.calculateWidth(this.badgeLabel);
     this.badgeValueWidth = BadgeUtility.calculateWidth(this.badgeValue + "%");
   }
@@ -30,14 +29,13 @@ public class Badge {
   /**
    * Badge configuration holder.
    * @param badgeLabel Text label for the badge
-   * @param resultColor color of the value in badge
    * @param badgeValue Text value to be displayed in badge i.e. coverage %age
    * @throws IOException Exception while trying to calculate width and height of badge.
    */
-  public Badge(String badgeLabel, String resultColor, int badgeValue) throws IOException {
+  public Badge(String badgeLabel, int badgeValue) throws IOException {
     this.badgeLabel = badgeLabel;
-    this.resultColor = resultColor;
     this.badgeValue = badgeValue;
+    this.resultColor = BadgeUtility.getColorFromRange(badgeValue).getColorCode();
     this.badgeLabelWidth = BadgeUtility.calculateWidth(this.badgeLabel);
     this.badgeValueWidth = BadgeUtility.calculateWidth(this.badgeValue + "%");
   }

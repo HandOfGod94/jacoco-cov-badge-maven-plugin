@@ -28,4 +28,21 @@ which can then be included in any `.md` files.
 > It is highly inspired from `gh-badges` which `shields.io` also uses for
 > generating badges.
 
+## Build Steps:
+```shell
+# To build jar file for plugin
+mvn clean package
+
+# To install it in local repo
+mvn clean install
+```
+
+## Usage:
+```console
+foo@bar:~$ mvn org.gahan:jacoco-badge-maven-plugin:1.0-SNAPSHOT:badge
+```
+
+Currently, it requires fully qualified name for executing a goal, once
+it's published to maven repository, it will change.
+
 More documentation and features coming soon...

@@ -11,11 +11,11 @@
 
   <g mask="url(#round)">
     <rect width="${badge.getBadgeLabelWidth()}" height="20" fill="#555"/>
-    <rect x="${badge.getBadgeLabelWidth()}" width="${badge.getBadgeValueWidth()}" height="20" fill="#4c1"/>
+    <rect x="${badge.getBadgeLabelWidth()}" width="${badge.getBadgeValueWidth()}" height="20" fill="${badge.getResultColor()}"/>
     <rect width="${badge.getBadgeLabelWidth() + badge.getBadgeValueWidth()}" height="20" fill="url(#smooth)"/>
   </g>
 
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="10">
     <text x="${badge.getBadgeLabelWidth()/2}" y="15" fill="#010101" fill-opacity=".3">${badge.getBadgeLabel()}</text>
     <text x="${badge.getBadgeLabelWidth()/2}" y="14">${badge.getBadgeLabel()}</text>
     <text x="${badge.getBadgeLabelWidth()+badge.getBadgeValueWidth()/2-1}" y="15" fill="#010101" fill-opacity=".3">${badge.getBadgeValue()}%</text>

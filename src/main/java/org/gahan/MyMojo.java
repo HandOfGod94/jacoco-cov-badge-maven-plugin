@@ -1,12 +1,9 @@
 package org.gahan;
 
-import freemarker.core.ParseException;
 import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.TemplateNotFoundException;
 import freemarker.template.Version;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,11 +12,10 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.reporting.AbstractMavenReport;
-import org.apache.maven.reporting.MavenReportException;
 
 /**
  * Goal to generate badge during the build.
@@ -27,32 +23,11 @@ import org.apache.maven.reporting.MavenReportException;
  * @phase verify
  */
 @Mojo(name = "badge")
-public class MyMojo extends AbstractMavenReport {
-  // TODO: Check if AbstractMavenReport is really needed, AbstractMojo is good enough?
+public class MyMojo extends AbstractMojo {
 
-  /**
-   * Label for the badge.
-   * <p>
-   * Default: <b>coverage</b>
-   * </p>
-   */
   @Parameter(property = "badge.badgeLabel", defaultValue = "coverage")
   private String badgeLabel;
 
-  /**
-   * Color for the result.
-   * <p>
-   * Default: <b>#4c1</b>
-   * </p>
-   */
-  @Parameter(property = "badge.resultColor", defaultValue = "#4c1")
-  private String resultColor;
-
-  /**
-   * Jacoco Reprot file location.
-   *
-   * <p>Default: <b>#4c1</b>
-   */
   @Parameter(property = "badge.jacocoReportLocation",
       defaultValue = "${project.reporting.outputDirectory}/jacoco/jacoco.csv")
   private File jacocoReportConfig;
@@ -65,7 +40,9 @@ public class MyMojo extends AbstractMavenReport {
   public void execute() throws MojoExecutionException {
     try {
       int badgeValue = BadgeUtility.calculateCoverage(jacocoReportConfig.getAbsolutePath());
-      Badge badge = new Badge(badgeLabel, resultColor, badgeValue);
+      Badge badge = new Badge(badgeLabel, badgeValue);
+
+      // TODO: Remove this from release version
       getLog().info("Total Coverage from Gahan's Plugin:" + badge.getBadgeValue());
       getLog().debug("Trying to render badge");
       renderBadge(badge);
@@ -74,23 +51,14 @@ public class MyMojo extends AbstractMavenReport {
     }
   }
 
-  @Override
-  protected void executeReport(Locale locale) throws MavenReportException {
-
-  }
-
   /**
    * Renders svg badge on configuration provided by user.
    *
    * @param badge Badge
-   * @throws IOException Unable to read freemarker template
-   * @throws ParseException Malformed freemarker template
-   * @throws MalformedTemplateNameException IllegalName for the template
-   * @throws TemplateNotFoundException freemarker Template not found for generating svg
-   * @throws TemplateException General exception occurred during processing of tempalte
+   * @throws IOException       Unable to read freemarker template
+   * @throws TemplateException General exception occurred during processing of template
    */
-  private void renderBadge(Badge badge) throws TemplateNotFoundException,
-      MalformedTemplateNameException, ParseException, IOException, TemplateException {
+  private void renderBadge(Badge badge) throws IOException, TemplateException {
     // configure freemarker
     Configuration configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
@@ -101,7 +69,7 @@ public class MyMojo extends AbstractMavenReport {
     // load the template
     Template template = configuration.getTemplate("svg-badge-template.ftl");
 
-    // map object for generating tempalte
+    // map object for generating template
     Map<String, Object> templateData = new HashMap<>();
     templateData.put("badge", badge);
 
@@ -110,21 +78,6 @@ public class MyMojo extends AbstractMavenReport {
     Writer writer = new FileWriter(outputFile);
     template.process(templateData, writer);
 
-  }
-
-  @Override
-  public String getOutputName() {
-    return null;
-  }
-
-  @Override
-  public String getName(Locale locale) {
-    return null;
-  }
-
-  @Override
-  public String getDescription(Locale locale) {
-    return null;
   }
 
 }
