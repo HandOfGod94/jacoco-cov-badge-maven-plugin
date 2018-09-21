@@ -7,3 +7,8 @@ cache:
 install: true
 script:
   -  mvn clean install
+
+# only build master on direct commit to it
+branches:
+  only:
+  - master
