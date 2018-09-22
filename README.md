@@ -39,7 +39,7 @@ mvn clean install
 
 ## Usage:
 ```console
-foo@bar:~$ mvn org.gahan:jacoco-badge-maven-plugin:1.0-SNAPSHOT:badge
+foo@bar:~$ mvn org.gahan:jacoco-cov-badge-maven-plugin:1.0-SNAPSHOT:badge
 ```
 
 Currently, it requires fully qualified name for executing a goal, once
