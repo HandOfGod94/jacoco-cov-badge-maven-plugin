@@ -1,8 +1,13 @@
 ---
-name: "[Bug] One line description"
+name: Bug Report
 about: Create a bug report to help us improve
 
 ---
+
+*Follow the checklist*
+- [ ] Make sure the title is prefixed with `Bug:`. For e.g. `Bug: Hell broke`
+- [ ] Make sure the `bug` label is attached.
+- [ ] Remove this checklist after filling in the details
 
 **Describe the bug**
 A clear and concise description of what the bug is.
