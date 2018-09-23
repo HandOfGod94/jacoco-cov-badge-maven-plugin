@@ -1,6 +1,6 @@
 # Jacoco Coverage Badge Maven Plugin
 
-![build](https://travis-ci.org/HandOfGod94/jacoco-badge-maven-plugin.svg?branch=master)
+![build](https://travis-ci.org/HandOfGod94/jacoco-cov-badge-maven-plugin.svg?branch=master)
 
 > WIP
 
