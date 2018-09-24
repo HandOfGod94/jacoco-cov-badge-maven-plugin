@@ -1,5 +1,9 @@
 package org.gahan;
 
+import freemarker.cache.ConditionalTemplateConfigurationFactory;
+import freemarker.cache.PathGlobMatcher;
+import freemarker.core.TemplateConfiguration;
+import freemarker.core.XMLOutputFormat;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -65,6 +69,12 @@ public class MyMojo extends AbstractMojo {
     configuration.setDefaultEncoding("UTF-8");
     configuration.setLocale(Locale.US);
     configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+
+    TemplateConfiguration tcSvg = new TemplateConfiguration();
+    tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
+
+    configuration.setTemplateConfigurations(
+        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
 
     // load the template
     Template template = configuration.getTemplate("svg-badge-template.ftl");
