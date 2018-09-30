@@ -14,6 +14,14 @@ public class Badge {
   private float badgeLabelWidth = 0.0f;
   private float badgeValueWidth = 0.0f;
 
+  public enum CoverageCategory {
+    INSTRUCTION,
+    BRANCH,
+    LINE,
+    COMPLEXITY,
+    METHOD
+  }
+
   /**
    * Badge configuration holder.
    * @param badgeValue Value to be displayed in the badge i.e. coverage %age

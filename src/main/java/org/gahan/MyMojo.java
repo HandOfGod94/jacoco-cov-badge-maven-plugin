@@ -40,10 +40,15 @@ public class MyMojo extends AbstractMojo {
       defaultValue = "${project.build.directory}/coverage.svg")
   private File outputFile;
 
+  @Parameter(property = "badge.coverageCategory", defaultValue = "INSTRUCTION")
+  private Badge.CoverageCategory coverageCategory;
+
   @Override
   public void execute() throws MojoExecutionException {
     try {
-      int badgeValue = BadgeUtility.calculateCoverage(jacocoReportConfig.getAbsolutePath());
+
+      int badgeValue = BadgeUtility.calculateCoverage(jacocoReportConfig.getAbsolutePath(),
+                                                      coverageCategory);
       Badge badge = new Badge(badgeLabel, badgeValue);
 
       // TODO: Remove this from release version
