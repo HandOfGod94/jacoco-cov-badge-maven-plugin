@@ -1,4 +1,4 @@
-package org.gahan;
+package io.github.handofgod94;
 
 import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.PathGlobMatcher;

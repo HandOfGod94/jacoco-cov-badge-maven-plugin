@@ -1,4 +1,4 @@
-package org.gahan.format;
+package io.github.handofgod94.format;
 
 import java.io.File;
 import java.io.FileWriter;
