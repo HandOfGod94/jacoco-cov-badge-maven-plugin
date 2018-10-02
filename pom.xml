@@ -5,8 +5,39 @@
   <artifactId>jacoco-cov-badge-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>jacoco-cov-badge-maven-plugin Maven Mojo</name>
-  <url>http://maven.apache.org</url>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A Maven plugin to generate coverage badges locally.</description>
+  <url>https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki</url>
+
+  <licenses>
+    <license>
+      <name>The Unlicense</name>
+      <url>http://unlicense.org/UNLICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Gahan Rakholia</name>
+      <email>gahan94rakh@gmail.com</email>
+      <organizationUrl>https://github.com/HandOfGod94</organizationUrl>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Chris Camel</name>
+      <organizationUrl>https://github.com/ccamel</organizationUrl>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:git://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://github.com:HandOfGod94/jacoco-cov-badge-maven-plugin.git</developerConnection>
+    <url>https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/tree/master</url>
+  </scm>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
