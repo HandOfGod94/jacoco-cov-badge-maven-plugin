@@ -97,6 +97,11 @@ based on the content of badge key and coverage percentage. Since badge key can b
 large this will help us calculate approx. width of the badge.
 * `org.freemarker:freemarker:2.3.28`:
 To deal with freemarker templates.
+* `org.apache.xmlgraphics:batik-transcoder:1.10`:
+To transcode rendered svg to various image formats such as `jpg`,`png` etc.
+It provides transcoding classes but it requires codecs for it to function.
+* `org.apache.xmlgraphics:batik-codec:1.10`:
+Provides codecs for transcoders.
 
 
 ## Branching Conventions

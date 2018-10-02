@@ -2,16 +2,27 @@ package org.gahan;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
+import org.gahan.format.Formatter;
+import org.gahan.format.JpegFormatter;
+import org.gahan.format.PngFormatter;
+import org.gahan.format.SvgFormatter;
 
 
 /**
  * Utility class for generating badges.
  */
 public class BadgeUtility {
+
+  // extensions supported
+  public static final String JPEG_EXT = "jpg";
+  public static final String SVG_EXT = "svg";
+  public static final String PNG_EXT = "png";
 
   // jacoco csv report column number
   public static final int INSTRUCTION_MISSED_COL_NO = 3;
@@ -153,5 +164,33 @@ public class BadgeUtility {
       case METHOD: return METHOD_COVERED_COL_NO;
       default: return INSTRUCTION_COVERED_COL_NO;
     }
+  }
+
+  /**
+   * Generates output file based on the extension give in configuration.
+   * It expects renderedText to filled in with the actual data, coverage percentage
+   * and label of the badge.
+   * @param outputFile output file object pointing to badge location
+   * @param renderedText rendered svg template having all the required data
+   * @throws IOException if it's unable to perform file operations for the output.
+   * @throws TranscoderException if it fails to convert svg rendered text to required format.
+   */
+  public static void generateFileBasedOnExt(File outputFile, String renderedText)
+      throws IOException, TranscoderException {
+
+    String extension = outputFile.getName().substring(outputFile.getName().lastIndexOf(".") + 1);
+    Formatter formatter;
+
+    if (extension.equals(JPEG_EXT)) {
+      formatter = new JpegFormatter();
+    } else if (extension.equals(PNG_EXT)) {
+      formatter = new PngFormatter();
+    } else {
+      // By default render SVG
+      formatter = new SvgFormatter();
+    }
+
+    formatter.save(outputFile, renderedText);
+
   }
 }
