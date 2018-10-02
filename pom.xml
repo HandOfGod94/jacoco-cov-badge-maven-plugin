@@ -46,6 +46,8 @@
     <maven.plugin.api.version>3.5.4</maven.plugin.api.version>
     <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
     <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
+    <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+    <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
     <checkstyle.version>8.11</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <pdfbox.version>2.0.4</pdfbox.version>
@@ -95,6 +97,32 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven.source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>

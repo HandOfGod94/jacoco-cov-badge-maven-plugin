@@ -43,6 +43,7 @@ public class BadgeUtility {
    *
    * @param str input string needed
    * @return width in pixels as floating point value
+   * @throws IOException if it's unable to calculate width from the badge label input
    */
   public static float calculateWidth(String str) throws IOException {
     PDFont font = PDMMType1Font.HELVETICA;
@@ -93,7 +94,7 @@ public class BadgeUtility {
   /**
    * Get correct color for the given %age range.
    * %age range is mapped to a particular color.
-   * <table>
+   * <table summary="Coverage to color map">
    *   <tr>
    *     <td>Coverage %age</td>
    *     <td>Color Enum</td>

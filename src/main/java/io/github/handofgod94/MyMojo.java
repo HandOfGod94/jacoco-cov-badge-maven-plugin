@@ -18,15 +18,16 @@ import java.util.Map;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Goal to generate badge during the build.
  *
- * @phase verify
+ * <p>Default Phase: Verify
  */
-@Mojo(name = "badge")
+@Mojo(name = "badge", defaultPhase = LifecyclePhase.VERIFY)
 public class MyMojo extends AbstractMojo {
 
   @Parameter(property = "badge.badgeLabel", defaultValue = "coverage")
