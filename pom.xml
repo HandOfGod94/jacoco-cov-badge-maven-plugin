@@ -20,6 +20,7 @@
     <pdfbox.version>2.0.4</pdfbox.version>
     <freemarker.version>2.3.28</freemarker.version>
     <opencsv.version>4.2</opencsv.version>
+    <batik.version>1.10</batik.version>
   </properties>
 
   <dependencies>
@@ -42,6 +43,16 @@
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
       <version>${freemarker.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-transcoder</artifactId>
+      <version>${batik.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-codec</artifactId>
+      <version>${batik.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>

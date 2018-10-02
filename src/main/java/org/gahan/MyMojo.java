@@ -10,12 +10,12 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -57,6 +57,8 @@ public class MyMojo extends AbstractMojo {
       renderBadge(badge);
     } catch (IOException | TemplateException ex) {
       getLog().error("Unable to generate badge", ex);
+    } catch (TranscoderException ex) {
+      getLog().error("Unable to generate badge in specified format", ex);
     }
   }
 
@@ -67,7 +69,7 @@ public class MyMojo extends AbstractMojo {
    * @throws IOException       Unable to read freemarker template
    * @throws TemplateException General exception occurred during processing of template
    */
-  private void renderBadge(Badge badge) throws IOException, TemplateException {
+  private void renderBadge(Badge badge) throws IOException, TemplateException, TranscoderException {
     // configure freemarker
     Configuration configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
@@ -90,9 +92,9 @@ public class MyMojo extends AbstractMojo {
 
     // Write to file
     outputFile = new File(outputFile.getAbsolutePath());
-    Writer writer = new FileWriter(outputFile);
+    StringWriter writer = new StringWriter();
     template.process(templateData, writer);
-
+    BadgeUtility.generateFileBasedOnExt(outputFile, writer.toString());
   }
 
 }
