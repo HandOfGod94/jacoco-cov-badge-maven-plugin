@@ -4,6 +4,25 @@
 
 > WIP
 
+Checkout Wiki for more info:
+[https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki)
+
+## Features
+
+* Automatically reads `jacoco.csv` reports and generates badge from it locally
+* Can be integrated as part of the build process
+* Auto color badges based on the coverage percentage from jacoco reports
+
+	![veryhigh](./docs/resources/veryhigh.svg) ![high](./docs/resources/high.svg)
+	![medium](./docs/resources/medium.svg) ![low](./docs/resources/low.svg)
+
+* Configurable badge keys
+
+	![custom1](./docs/resources/custom1.svg) ![custom2](./docs/resources/custom2.svg)
+
+
+## Introduction
+
 Jacoco is code coverage utility which generates nice report for
 Java Based projects and is generally integrated as maven build plugin.
 
