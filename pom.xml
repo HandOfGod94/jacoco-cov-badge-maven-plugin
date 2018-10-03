@@ -1,12 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.gahan</groupId>
+  <groupId>io.github.handofgod94</groupId>
   <artifactId>jacoco-cov-badge-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>jacoco-cov-badge-maven-plugin Maven Mojo</name>
-  <url>http://maven.apache.org</url>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A Maven plugin to generate coverage badges locally.</description>
+  <url>https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki</url>
+
+  <licenses>
+    <license>
+      <name>The Unlicense</name>
+      <url>http://unlicense.org/UNLICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Gahan Rakholia</name>
+      <email>gahan94rakh@gmail.com</email>
+      <organizationUrl>https://github.com/HandOfGod94</organizationUrl>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Chris Camel</name>
+      <organizationUrl>https://github.com/ccamel</organizationUrl>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:git://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://github.com:HandOfGod94/jacoco-cov-badge-maven-plugin.git</developerConnection>
+    <url>https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/tree/master</url>
+  </scm>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -15,6 +46,10 @@
     <maven.plugin.api.version>3.5.4</maven.plugin.api.version>
     <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
     <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
+    <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+    <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
+    <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+    <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
     <checkstyle.version>8.11</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <pdfbox.version>2.0.4</pdfbox.version>
@@ -63,35 +98,132 @@
   </dependencies>
 
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven.checkstyle.plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${checkstyle.version}</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <id>verify</id>
-            <phase>verify</phase>
-            <configuration>
-              <configLocation>checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>false</failsOnError>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven.source.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven.javadoc.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven.gpg.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <useReleaseProfile>false</useReleaseProfile>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>deploy</goals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven.checkstyle.plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>verify</id>
+              <phase>verify</phase>
+              <configuration>
+                <configLocation>checkstyle.xml</configLocation>
+                <encoding>UTF-8</encoding>
+                <consoleOutput>true</consoleOutput>
+                <failsOnError>false</failsOnError>
+              </configuration>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>ciManagement</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

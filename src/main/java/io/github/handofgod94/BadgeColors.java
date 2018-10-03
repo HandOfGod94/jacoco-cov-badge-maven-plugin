@@ -1,4 +1,4 @@
-package org.gahan;
+package io.github.handofgod94;
 
 /**
  * Enum for different colors a badge can have based on report.

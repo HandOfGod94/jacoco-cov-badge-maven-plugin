@@ -1,4 +1,4 @@
-package org.gahan;
+package io.github.handofgod94;
 
 import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.PathGlobMatcher;
@@ -18,15 +18,16 @@ import java.util.Map;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Goal to generate badge during the build.
  *
- * @phase verify
+ * <p>Default Phase: Verify
  */
-@Mojo(name = "badge")
+@Mojo(name = "badge", defaultPhase = LifecyclePhase.VERIFY)
 public class MyMojo extends AbstractMojo {
 
   @Parameter(property = "badge.badgeLabel", defaultValue = "coverage")
@@ -51,8 +52,7 @@ public class MyMojo extends AbstractMojo {
                                                       coverageCategory);
       Badge badge = new Badge(badgeLabel, badgeValue);
 
-      // TODO: Remove this from release version
-      getLog().info("Total Coverage from Gahan's Plugin:" + badge.getBadgeValue());
+      getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
       getLog().debug("Trying to render badge");
       renderBadge(badge);
     } catch (IOException | TemplateException ex) {
