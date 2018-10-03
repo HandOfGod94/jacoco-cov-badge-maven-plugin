@@ -32,9 +32,8 @@ provides badges as a service.
 
 ## Why?
 
-None of the utilities mentioned above solves the problem of generating local
-badges esp. for `Java` projects. There were few attempts in the past but they
-were not satisfactory.
+It's just my attempt to provide better looking badges, something similar to what `sheilds.io`,
+for java based projects.
 
 ## What it does?
 
