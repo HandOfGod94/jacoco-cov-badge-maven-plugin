@@ -52,8 +52,7 @@ public class MyMojo extends AbstractMojo {
                                                       coverageCategory);
       Badge badge = new Badge(badgeLabel, badgeValue);
 
-      // TODO: Remove this from release version
-      getLog().info("Total Coverage from Gahan's Plugin:" + badge.getBadgeValue());
+      getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
       getLog().debug("Trying to render badge");
       renderBadge(badge);
     } catch (IOException | TemplateException ex) {

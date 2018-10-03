@@ -4,7 +4,6 @@
 - [Technical Overview](#technical-overview)
   - [Base Idea](#base-idea)
   - [Code overview](#code-overview)
-  - [Dependencies](#dependencies)
 - [Branching Conventions](#branching-conventions)
 - [Commit Message Conventions](#commit-message-conventions)
 
@@ -74,35 +73,14 @@ The project structure is as follows:
 ```
 
 **Java**
-* `org.gahan.MyMojo`: This is the entry point for the `maven` plugin.
+* `io.github.handofgod94.MyMojo`: This is the entry point for the `maven` plugin.
 It reads the user configuration and then initializes the required class.
 Once it has all the information, it renders the `freemarker` template.  
 *Refer to java docs for more info on each class*
 
 **Resources**
-* `org.gahan.templates.svg-badge-template.ftl`:
+* `io.github.handofgod94.templates.svg-badge-template.ftl`:
 `freemarker` template for svg file which will be rendered through the mojo class.
-
-### Dependencies
-* `org.apache.maven:maven-plugin-api:3.5.4`:
-Dependency for creating `maven` plugin. Also the packaging for maven project has
-to be `maven-plugin`
-* `com.opencsv:opencsv:4.2`:
-To load and read `csv` files. Although we can directly load the files
-and read line by line by comma separated splits, but would still prefer
-more robust library solution.
-* `org.apache.pdfbox:pdfbox:2.0.4`:
-The sole purpose of to be able to calculate width and height of badge
-based on the content of badge key and coverage percentage. Since badge key can be
-large this will help us calculate approx. width of the badge.
-* `org.freemarker:freemarker:2.3.28`:
-To deal with freemarker templates.
-* `org.apache.xmlgraphics:batik-transcoder:1.10`:
-To transcode rendered svg to various image formats such as `jpg`,`png` etc.
-It provides transcoding classes but it requires codecs for it to function.
-* `org.apache.xmlgraphics:batik-codec:1.10`:
-Provides codecs for transcoders.
-
 
 ## Branching Conventions
 The issues can broadly classified into 3 categories.

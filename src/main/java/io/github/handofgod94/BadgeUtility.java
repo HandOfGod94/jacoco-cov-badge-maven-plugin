@@ -130,7 +130,6 @@ public class BadgeUtility {
    * @see io.github.handofgod94.BadgeColors
    */
   public static BadgeColors getColorFromRange(int coverage) {
-    // TODO: Grey for invalid coverage
     if (coverage >= 0 && coverage < 40) {
       return BadgeColors.RED;
     } else if (coverage >= 40 && coverage < 50) {
