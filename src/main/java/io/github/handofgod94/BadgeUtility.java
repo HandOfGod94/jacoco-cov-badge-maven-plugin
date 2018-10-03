@@ -19,9 +19,8 @@ import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
  */
 public class BadgeUtility {
 
-  // extensions supported
+  // extensions
   public static final String JPEG_EXT = "jpg";
-  public static final String SVG_EXT = "svg";
   public static final String PNG_EXT = "png";
 
   // jacoco csv report column number
