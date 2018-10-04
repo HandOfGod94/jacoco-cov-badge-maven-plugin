@@ -1,6 +1,7 @@
 # Jacoco Coverage Badge Maven Plugin
 
 ![build](https://travis-ci.org/HandOfGod94/jacoco-cov-badge-maven-plugin.svg?branch=master)
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/jacoco-cov-badge-maven-plugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 > WIP
 
