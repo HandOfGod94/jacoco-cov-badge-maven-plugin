@@ -65,6 +65,7 @@
     <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
     <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
     <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+    <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
     <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
     <checkstyle.version>8.11</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
@@ -169,6 +170,17 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <useReleaseProfile>false</useReleaseProfile>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>deploy</goals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>${maven.checkstyle.plugin.version}</version>
           <dependencies>
@@ -232,6 +244,10 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
