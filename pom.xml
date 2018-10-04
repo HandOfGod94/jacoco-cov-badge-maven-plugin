@@ -4,7 +4,7 @@
   <groupId>io.github.handofgod94</groupId>
   <artifactId>jacoco-cov-badge-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A Maven plugin to generate coverage badges locally.</description>
@@ -34,8 +34,8 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:git://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://github.com:HandOfGod94/jacoco-cov-badge-maven-plugin.git</developerConnection>
+    <connection>scm:git:https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin</connection>
+    <developerConnection>scm:git:git@github.com:HandOfGod94/jacoco-cov-badge-maven-plugin.git</developerConnection>
     <url>https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/tree/master</url>
   </scm>
 
