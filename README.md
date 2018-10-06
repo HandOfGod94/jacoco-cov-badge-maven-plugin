@@ -92,6 +92,6 @@ mvn clean install
 mvn io.github.handofgod94:jacoco-cov-badge-maven-plugin:1.0.0:badge # if you just want to execute goal
 ```
 
-See [quickstart](#Quickstart) example, if you want to use it inside `pom.xml`
+See [quickstart](#quickstart) example, if you want to use it inside `pom.xml`
 
 Checkout project wiki for more information.
