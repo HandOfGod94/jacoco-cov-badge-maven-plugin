@@ -108,7 +108,15 @@ bug-4/this-is-not-working
 task-11/add-more-docs
 ```
 
-Make sure you are using correct `id` for the issue.
+Make sure you are using correct `id` for the issue, and you are creating it from correct release branch.  
+Current development will happen on `master` branch.  
+Patch and feature porting to previous version will be on `release-x.y.z` version.
+* **x**: Major version
+* **y**: Minvor version
+* **z**: Patch version
+
+This means, if you are fixing a bug for `v1.0.0` then you have to create branch from `release-1.0.x`.
+If you are creating feature for current release then the branch should be created from `master`.
 
 ## Commit Message Conventions
 Commit message also follows similar conventions of using a fix prefix based on the type.
