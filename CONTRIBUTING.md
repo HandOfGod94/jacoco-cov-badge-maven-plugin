@@ -40,8 +40,8 @@ foo@bar:~/poject-dir $  mvn clean install    # Recommanded way to do a full buil
 
 
 ## Technical Overview
-This section comprises of a brief on technical aspects of the project such as the coding
-structure, base idea and dependencies used to create it.
+This section comprises of a brief on technical aspects of the project describing the directory
+structure and base idea used to create it.
 
 ### Base Idea
 The base idea is to use a `freemarker` template which has a mock `svg` file and
@@ -86,7 +86,7 @@ Once it has all the information, it renders the `freemarker` template.
 The issues can broadly classified into 3 categories.
 1. Feature: A new functionality which needs or requested to be introduced.
 2. Bug: An unexpected behavior of the functionality
-3. Task: Routine maintenance task such as adding documentation, upgrading dependencies etc.
+3. Task: Routine maintenance task such as adding documentation, upgrading dependencies, verification of functionality etc.
 
 For all the different types the branch name should be prefixed by `type` of issue plus the `id` of the issue
 followed by `/` and then make sure the description is in `kebab-case`
@@ -137,5 +137,5 @@ Notice the first letter in the message is in caps. i.e.
 * for bug it will be `Bug`
 * for task it will be `Task`
 
-Feel free to drop a mail on : gahan94rakh@gmail.com if you have more queries.  
+Feel free to drop a mail on : gahan94rakh@gmail.com or ask it on gitter if you have more queries.  
 Happy Coding !!
