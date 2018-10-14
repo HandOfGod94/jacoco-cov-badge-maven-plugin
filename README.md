@@ -3,6 +3,7 @@
 ![build](https://travis-ci.org/HandOfGod94/jacoco-cov-badge-maven-plugin.svg?branch=master)
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/jacoco-cov-badge-maven-plugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.handofgod94/jacoco-cov-badge-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.handofgod94%22%20AND%20a:%22jacoco-cov-badge-maven-plugin%22)
+[![Coverage Status](https://coveralls.io/repos/github/HandOfGod94/jacoco-cov-badge-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/HandOfGod94/jacoco-cov-badge-maven-plugin?branch=master)
 
 Checkout Wiki for more info:
 [https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/wiki)
