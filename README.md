@@ -1,6 +1,7 @@
 # Jacoco Coverage Badge Maven Plugin
 
 ![build](https://travis-ci.org/HandOfGod94/jacoco-cov-badge-maven-plugin.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/HandOfGod94/jacoco-cov-badge-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/HandOfGod94/jacoco-cov-badge-maven-plugin?branch=master)
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/jacoco-cov-badge-maven-plugin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.handofgod94/jacoco-cov-badge-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.handofgod94%22%20AND%20a:%22jacoco-cov-badge-maven-plugin%22)
 
@@ -53,8 +54,8 @@ provides badges as a service.
 The plugin needs `jacoco.csv` report, for it to function correctly.
 So you can bind it to any phase after the `jacoco.csv` reports gets generated.
 
-Although these are configurable, but some assumptions made by the plugin:  
-**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`  
+Although these are configurable, but some assumptions made by the plugin:
+**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`
 **Default Output location**:`${project.build.directory}/coverage.svg`
 
 ```xml
