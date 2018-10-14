@@ -76,6 +76,7 @@
     <batik.version>1.10</batik.version>
     <jacoco.version>0.8.1</jacoco.version>
     <xmlunit.version>2.6.1</xmlunit.version>
+    <coveralls.version>4.3.0</coveralls.version>
   </properties>
 
   <dependencies>
@@ -265,6 +266,11 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.eluder.coveralls</groupId>
+          <artifactId>coveralls-maven-plugin</artifactId>
+          <version>${coveralls.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -284,6 +290,10 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.eluder.coveralls</groupId>
+            <artifactId>coveralls-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
@@ -319,6 +329,10 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.eluder.coveralls</groupId>
+            <artifactId>coveralls-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
