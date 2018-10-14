@@ -56,10 +56,11 @@
   </distributionManagement>
 
   <properties>
+    <maven.version>3.5.2</maven.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.plugin.api.version>3.5.4</maven.plugin.api.version>
+    <maven.plugin.testing.harness.version>3.3.0</maven.plugin.testing.harness.version>
     <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
     <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
     <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
@@ -73,13 +74,15 @@
     <freemarker.version>2.3.28</freemarker.version>
     <opencsv.version>4.2</opencsv.version>
     <batik.version>1.10</batik.version>
+    <jacoco.version>0.8.1</jacoco.version>
+    <xmlunit.version>2.6.1</xmlunit.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>${maven.plugin.api.version}</version>
+      <version>${maven.version}</version>
     </dependency>
     <dependency>
         <groupId>com.opencsv</groupId>
@@ -111,6 +114,38 @@
       <artifactId>maven-plugin-annotations</artifactId>
       <version>${maven.plugin.annotations.version}</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- test dependencies -->
+    <dependency>
+      <groupId>org.apache.maven.plugin-testing</groupId>
+      <artifactId>maven-plugin-testing-harness</artifactId>
+      <version>${maven.plugin.testing.harness.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <version>${maven.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-compat</artifactId>
+      <version>${maven.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>${jacoco.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-core</artifactId>
+      <version>${xmlunit.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -206,6 +241,30 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+          <configuration>
+            <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+            <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+          </configuration>
+          <executions>
+            <execution>
+              <id>jacoco-initialize</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>jacoco-site</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -221,6 +280,10 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
@@ -252,6 +315,10 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>

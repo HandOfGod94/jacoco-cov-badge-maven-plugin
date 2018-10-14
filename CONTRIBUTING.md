@@ -11,12 +11,12 @@
 * `maven` version: 3.5.2
 * `java` version: Oracle JDK 1.8
 
-Make sure you are using correct `maven` version and required paths are added to classpath.  
+Make sure you are using correct `maven` version and required paths are added to classpath.
 The project setup is quite simple. It's a standard `maven` project.
 You can import the project into any ide such as `Eclipse` or `IntelliJ IDEA`.
 
 `maven` will take care of resolving dependencies.
-Both these IDE support importing of `maven` project directly.  
+Both these IDE support importing of `maven` project directly.
 Refer to their documentation to know more on how to import `maven` project in it.
 
 ## Building the Project
@@ -24,7 +24,7 @@ The project can be built in multiple ways. Several IDE's directly support `maven
 That can be leveraged directly to execute the targets. Few of the important `maven` targets are:
 * `clean`: Clean up the build i.e. delete `target` directory from project.
 * `package`: Generates the plugin `jar`, which can be included as part of dependencies in your maven
-project by explicitly specifying dependency path to a local `jar`.  
+project by explicitly specifying dependency path to a local `jar`.
 Refer `maven` documentation to know how to add local jar as dependency.
 * `install`: Generates the plugin `jar` and install it in your local repository. Generally local repository
 resides in `$HOME\.m2` directory. This can then be directly included as the dependency in your project.
@@ -75,7 +75,7 @@ The project structure is as follows:
 **Java**
 * `io.github.handofgod94.MyMojo`: This is the entry point for the `maven` plugin.
 It reads the user configuration and then initializes the required class.
-Once it has all the information, it renders the `freemarker` template.  
+Once it has all the information, it renders the `freemarker` template.
 *Refer to java docs for more info on each class*
 
 **Resources**
@@ -108,11 +108,19 @@ bug-4/this-is-not-working
 task-11/add-more-docs
 ```
 
+<<<<<<< Updated upstream
 Make sure you are using correct `id` for the issue, and you are creating it from correct release branch.  
 Current development will happen on `master` branch.  
 Patch and feature porting to previous version will be on `release-x.y.z` version.
 * **x**: Major version
 * **y**: Minvor version
+=======
+Make sure you are using correct `id` for the issue, and you are creating it from correct release branch.
+Current development will happen on `master` branch.
+Patch and feature porting to previous version will be on `release-x.y.z` version.
+* **x**: Major version
+* **y**: Minor version
+>>>>>>> Stashed changes
 * **z**: Patch version
 
 This means, if you are fixing a bug for `v1.0.0` then you have to create branch from `release-1.0.x`.
@@ -126,7 +134,7 @@ Commit message also follows similar conventions of using a fix prefix based on t
 <Type> #<id>, Regualr Commit Message Description
 ```
 
-For e.g. if you are working on a feature for which you want to commit,  
+For e.g. if you are working on a feature for which you want to commit,
 it may look like this
 
 ```
@@ -137,5 +145,9 @@ Notice the first letter in the message is in caps. i.e.
 * for bug it will be `Bug`
 * for task it will be `Task`
 
+<<<<<<< Updated upstream
 Feel free to drop a mail on : gahan94rakh@gmail.com or ask it on gitter if you have more queries.  
+=======
+Feel free to drop a mail on : gahan94rakh@gmail.com if you have more queries.
+>>>>>>> Stashed changes
 Happy Coding !!
