@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="80.696" height="20">
+  width="84.02" height="20">
   <linearGradient id="smooth" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
     <stop offset="1" stop-opacity=".1"/>
   </linearGradient>
 
   <mask id="round">
-    <rect width="80.696" height="20" rx="3" fill="#fff"/>
+    <rect width="84.02" height="20" rx="3" fill="#fff"/>
   </mask>
 
   <g mask="url(#round)">
-    <rect width="46.684" height="20" fill="#555"/>
-    <rect x="46.684" width="34.012" height="20" fill="#a4a61d"/>
-    <rect width="80.696" height="20" fill="url(#smooth)"/>
+    <rect width="50.008" height="20" fill="#555"/>
+    <rect x="50.008" width="34.012" height="20" fill="#a4a61d"/>
+    <rect width="84.02" height="20" fill="url(#smooth)"/>
   </g>
 
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="10">
-    <text x="23.342" y="15" fill="#010101" fill-opacity=".3">branch</text>
-    <text x="23.342" y="14">branch</text>
-    <text x="62.69" y="15" fill="#010101" fill-opacity=".3">69%</text>
-    <text x="62.69" y="14">69%</text>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="25.004" y="15" fill="#010101" fill-opacity=".3">branch</text>
+    <text x="25.004" y="14">branch</text>
+    <text x="66.014" y="15" fill="#010101" fill-opacity=".3">69%</text>
+    <text x="66.014" y="14">69%</text>
   </g>
 </svg>
