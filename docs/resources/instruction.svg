@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="98.696" height="20">
+  width="106.016" height="20">
   <linearGradient id="smooth" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
     <stop offset="1" stop-opacity=".1"/>
   </linearGradient>
 
   <mask id="round">
-    <rect width="98.696" height="20" rx="3" fill="#fff"/>
+    <rect width="106.016" height="20" rx="3" fill="#fff"/>
   </mask>
 
   <g mask="url(#round)">
-    <rect width="64.684" height="20" fill="#555"/>
-    <rect x="64.684" width="34.012" height="20" fill="#44cc11"/>
-    <rect width="98.696" height="20" fill="url(#smooth)"/>
+    <rect width="72.004" height="20" fill="#555"/>
+    <rect x="72.004" width="34.012" height="20" fill="#44cc11"/>
+    <rect width="106.016" height="20" fill="url(#smooth)"/>
   </g>
 
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="10">
-    <text x="32.342" y="15" fill="#010101" fill-opacity=".3">instruction</text>
-    <text x="32.342" y="14">instruction</text>
-    <text x="80.69" y="15" fill="#010101" fill-opacity=".3">85%</text>
-    <text x="80.69" y="14">85%</text>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="36.002" y="15" fill="#010101" fill-opacity=".3">instruction</text>
+    <text x="36.002" y="14">instruction</text>
+    <text x="88.01" y="15" fill="#010101" fill-opacity=".3">85%</text>
+    <text x="88.01" y="14">85%</text>
   </g>
 </svg>

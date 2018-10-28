@@ -45,7 +45,7 @@ public class BadgeUtility {
    * @throws IOException if it's unable to calculate width from the badge label input
    */
   public static float calculateWidth(String str) throws IOException {
-    PDFont font = PDMMType1Font.HELVETICA;
+    PDFont font = PDMMType1Font.HELVETICA_BOLD;
     int fontSize = 12;
     float width = ((font.getStringWidth(str) / 1000) * fontSize) + 10.0f;
     return width;
