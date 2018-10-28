@@ -108,19 +108,11 @@ bug-4/this-is-not-working
 task-11/add-more-docs
 ```
 
-<<<<<<< Updated upstream
-Make sure you are using correct `id` for the issue, and you are creating it from correct release branch.  
-Current development will happen on `master` branch.  
-Patch and feature porting to previous version will be on `release-x.y.z` version.
-* **x**: Major version
-* **y**: Minvor version
-=======
 Make sure you are using correct `id` for the issue, and you are creating it from correct release branch.
 Current development will happen on `master` branch.
 Patch and feature porting to previous version will be on `release-x.y.z` version.
 * **x**: Major version
 * **y**: Minor version
->>>>>>> Stashed changes
 * **z**: Patch version
 
 This means, if you are fixing a bug for `v1.0.0` then you have to create branch from `release-1.0.x`.
@@ -145,9 +137,5 @@ Notice the first letter in the message is in caps. i.e.
 * for bug it will be `Bug`
 * for task it will be `Task`
 
-<<<<<<< Updated upstream
 Feel free to drop a mail on : gahan94rakh@gmail.com or ask it on gitter if you have more queries.  
-=======
-Feel free to drop a mail on : gahan94rakh@gmail.com if you have more queries.
->>>>>>> Stashed changes
 Happy Coding !!
