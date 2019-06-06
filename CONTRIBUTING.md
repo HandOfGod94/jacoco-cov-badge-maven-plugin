@@ -8,16 +8,19 @@
 - [Commit Message Conventions](#commit-message-conventions)
 
 ## Project Setup
-* `maven` version: 3.5.2
-* `java` version: Oracle JDK 1.8
+* `java` version: AdoptOpen JDK 1.8
 
-Make sure you are using correct `maven` version and required paths are added to classpath.
 The project setup is quite simple. It's a standard `maven` project.
 You can import the project into any ide such as `Eclipse` or `IntelliJ IDEA`.
 
 `maven` will take care of resolving dependencies.
 Both these IDE support importing of `maven` project directly.
 Refer to their documentation to know more on how to import `maven` project in it.
+
+The project uses `mvnw` (Maven Wrapper) which makes sure that the version across all the
+builds remain same.
+
+> Use `mvnw` supplied with project to build instead of custom `mvn` installation.
 
 ## Building the Project
 The project can be built in multiple ways. Several IDE's directly support `maven` support natively.
@@ -32,12 +35,12 @@ resides in `$HOME\.m2` directory. This can then be directly included as the depe
 To build project from command line you can use these commands as per your needs.
 *project-dir* is the location where `pom.xml` is present.
 ```console
-foo@bar:~/poject-dir $  mvn clean            # To clean up target directory
-foo@bar:~/poject-dir $  mvn package          # To generate jar
-foo@bar:~/poject-dir $  mvn install          # To generate jar and install it local maven repo
-foo@bar:~/poject-dir $  mvn clean install    # Recommanded way to do a full build
+foo@bar:~/poject-dir $  ./mvnw clean            # To clean up target directory
+foo@bar:~/poject-dir $  ./mvnw package          # To generate jar
+foo@bar:~/poject-dir $  ./mvnw install          # To generate jar and install it local maven repo
+foo@bar:~/poject-dir $  ./mvnw clean install    # Recommanded way to do a full build
 ```
-
+> Use `mvnw.cmd` instead of `/.mvnw` in windows systems.
 
 ## Technical Overview
 This section comprises of a brief on technical aspects of the project describing the directory
@@ -60,8 +63,8 @@ The project structure is as follows:
 ├───src/
 │   └───main/
 │       ├───java/         # java source files
-│       └───resources/    # freemakrer tempaltes
-├───.editorconfig         # config utlity for editors
+│       └───resources/    # freemakrer templates
+├───.editorconfig         # config utility for editors
 ├───.gitattributes        # git config for the project
 ├───.gitignore            # ignore files for git
 ├───.travis.yml           # travis ci/cd config file
@@ -123,7 +126,7 @@ Commit message also follows similar conventions of using a fix prefix based on t
 > Make sure to include issue `#id` in all the commit message to reference it correctly to an issue, followed by comma.
 
 ```
-<Type> #<id>, Regualr Commit Message Description
+<Type> #<id>, Regular Commit Message Description
 ```
 
 For e.g. if you are working on a feature for which you want to commit,
@@ -137,5 +140,5 @@ Notice the first letter in the message is in caps. i.e.
 * for bug it will be `Bug`
 * for task it will be `Task`
 
-Feel free to drop a mail on : gahan94rakh@gmail.com or ask it on gitter if you have more queries.  
+Feel free to drop a mail on : gahan94rakh@gmail.com or ask it on gitter if you have more queries.
 Happy Coding !!
