@@ -82,11 +82,13 @@ Although these are configurable, but some assumptions made by the plugin:
 ## Build Steps
 ```shell
 # To build jar file for plugin
-mvn clean package
+./mvnw clean package
 
 # To install it in local repo
-mvn clean install
+./mvnw clean install
 ```
+
+Use `mvnw.cmd` for windows system.
 
 ## Usage
 ```shell
