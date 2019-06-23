@@ -1,4 +1,4 @@
-package io.github.handofgod94;
+package io.github.handofgod94.domain;
 
 import java.io.IOException;
 
