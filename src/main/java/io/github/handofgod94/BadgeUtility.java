@@ -2,6 +2,8 @@ package io.github.handofgod94;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+
+import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.JpegFormatter;
 import io.github.handofgod94.format.PngFormatter;
@@ -18,10 +20,6 @@ import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
  * Utility class for generating badges.
  */
 public class BadgeUtility {
-
-  // extensions
-  public static final String JPEG_EXT = "jpg";
-  public static final String PNG_EXT = "png";
 
   // jacoco csv report column number
   public static final int INSTRUCTION_MISSED_COL_NO = 3;
@@ -166,32 +164,12 @@ public class BadgeUtility {
     }
   }
 
-  /**
-   * Generates output file based on the extension give in configuration.
-   * It expects renderedText to filled in with the actual data, coverage percentage
-   * and label of the badge.
-   *
-   * @param outputFile output file object pointing to badge location
-   * @param renderedText rendered svg template having all the required data
-   * @throws IOException if it's unable to perform file operations for the output.
-   * @throws TranscoderException if it fails to convert svg rendered text to required format.
-   */
-  public static void generateFileBasedOnExt(File outputFile, String renderedText)
-      throws IOException, TranscoderException {
-
-    String extension = outputFile.getName().substring(outputFile.getName().lastIndexOf(".") + 1);
-    Formatter formatter;
-
-    if (extension.equals(JPEG_EXT)) {
-      formatter = new JpegFormatter();
-    } else if (extension.equals(PNG_EXT)) {
-      formatter = new PngFormatter();
-    } else {
-      // By default render SVG
-      formatter = new SvgFormatter();
+  public static final String getFileExtFromString(File file) {
+    String extension = "";
+    int i = file.getName().lastIndexOf(".");
+    if (i > 0) {
+      extension = file.getName().substring(i + 1);
     }
-
-    formatter.save(outputFile, renderedText);
-
+    return extension;
   }
 }
