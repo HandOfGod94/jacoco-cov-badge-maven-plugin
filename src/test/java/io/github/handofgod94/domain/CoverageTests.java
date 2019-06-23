@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 public class CoverageTests {
 
   @Test
-  void testGetCoverageForValidInput() {
+  void getCoveragePercentage_returns_coverage_for_valid_input() {
     Coverage coverage = new Coverage(10, 10);
     float actualPercentage = coverage.getCoveragePercentage();
     assertEquals(Float.valueOf(50.0f), actualPercentage);
   }
 
   @Test
-  void testGetCoverageForInvalidInput() {
+  void getCoveragePercentage_returns_zero_for_invalid_input() {
     Coverage coverage = new Coverage(-10, 10);
     float actualPercentage = coverage.getCoveragePercentage();
     assertEquals(0f, actualPercentage);
