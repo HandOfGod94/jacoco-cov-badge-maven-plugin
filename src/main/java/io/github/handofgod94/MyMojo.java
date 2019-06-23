@@ -9,12 +9,18 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
+import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.format.Formatter;
+import io.github.handofgod94.format.FormatterFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -62,13 +68,6 @@ public class MyMojo extends AbstractMojo {
     }
   }
 
-  /**
-   * Renders svg badge on configuration provided by user.
-   *
-   * @param badge Badge
-   * @throws IOException       Unable to read freemarker template
-   * @throws TemplateException General exception occurred during processing of template
-   */
   private void renderBadge(Badge badge) throws IOException, TemplateException, TranscoderException {
     // configure freemarker
     Configuration configuration = new Configuration(new Version(2, 3, 20));
@@ -94,7 +93,10 @@ public class MyMojo extends AbstractMojo {
     outputFile = new File(outputFile.getAbsolutePath());
     StringWriter writer = new StringWriter();
     template.process(templateData, writer);
-    BadgeUtility.generateFileBasedOnExt(outputFile, writer.toString());
+    String fileExt = BadgeUtility.getFileExtFromString(outputFile)
+                        .orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
+    Formatter formatter = FormatterFactory.createFormatter(fileExt);
+    formatter.save(outputFile, writer.toString());
   }
 
 }
