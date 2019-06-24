@@ -161,7 +161,7 @@ public class BadgeUtility {
     }
   }
 
-  public static final Optional<String> getFileExtFromString(File file) {
+  public static final Optional<String> getFileExt(File file) {
     int i = file.getName().lastIndexOf(".");
     if (i > 0) {
       return Optional.of(file.getName().substring(i + 1));

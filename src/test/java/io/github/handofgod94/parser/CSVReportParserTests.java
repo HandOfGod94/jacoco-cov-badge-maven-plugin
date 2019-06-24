@@ -1,5 +1,6 @@
 package io.github.handofgod94.parser;
 
+import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.github.handofgod94.domain.ReportLineBuilder;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.List;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -22,7 +22,7 @@ public class CSVReportParserTests {
       + "io.github.handofgod94:jacoco-cov-badge-maven-plugin,io.github.handofgod94,MyMojo,13,113,0,0,4,24,0,3,0,3\n";
     BufferedReader reader = new BufferedReader(new StringReader(csvString));
     ReportParser reportParser = new CSVReportParser();
-    List<ReportLine> actualReport = reportParser.parseReport(reader);
+    Report actualReport = reportParser.parseReport(reader);
     ReportLine expectedReportLine = new ReportLineBuilder()
       .addGroup("io.github.handofgod94:jacoco-cov-badge-maven-plugin")
       .addPackage("io.github.handofgod94")
@@ -35,7 +35,7 @@ public class CSVReportParserTests {
       .addJMethodCovered(3).build();
 
     assertAll("should have correct entities in report",
-      () -> assertFalse("it should have ReportLine" , actualReport.isEmpty()),
-      () -> assertTrue("it should contain expected ReportLine",actualReport.contains(expectedReportLine)));
+      () -> assertFalse("it should have ReportLine" , actualReport.getLines().isEmpty()),
+      () -> assertTrue("it should contain expected ReportLine",actualReport.getLines().contains(expectedReportLine)));
   }
 }

@@ -2,6 +2,8 @@ package io.github.handofgod94.domain;
 
 import java.io.IOException;
 
+import io.github.handofgod94.BadgeUtility;
+
 /**
  * Badge class to hold configuration obtained from Maven config.
  * This will be shared across all the classes, who needs badge related information.

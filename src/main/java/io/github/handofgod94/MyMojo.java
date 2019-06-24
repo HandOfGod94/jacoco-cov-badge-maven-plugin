@@ -1,5 +1,19 @@
 package io.github.handofgod94;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
 import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.PathGlobMatcher;
 import freemarker.core.TemplateConfiguration;
@@ -12,21 +26,6 @@ import freemarker.template.Version;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.FormatterFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.batik.transcoder.TranscoderException;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Goal to generate badge during the build.
@@ -93,7 +92,7 @@ public class MyMojo extends AbstractMojo {
     outputFile = new File(outputFile.getAbsolutePath());
     StringWriter writer = new StringWriter();
     template.process(templateData, writer);
-    String fileExt = BadgeUtility.getFileExtFromString(outputFile)
+    String fileExt = BadgeUtility.getFileExt(outputFile)
                         .orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
     Formatter formatter = FormatterFactory.createFormatter(fileExt);
     formatter.save(outputFile, writer.toString());

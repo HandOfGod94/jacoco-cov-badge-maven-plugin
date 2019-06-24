@@ -14,7 +14,7 @@ public class BadgeUtilityTests {
   void getFileExtFromString_returns_extension_wrapped_in_optional_for_valid_file() {
     File file = mock(File.class);
     when(file.getName()).thenReturn("filename.txt");
-    String ext = BadgeUtility.getFileExtFromString(file).get();
+    String ext = BadgeUtility.getFileExt(file).get();
     assertEquals("txt", ext);
   }
 
@@ -22,7 +22,7 @@ public class BadgeUtilityTests {
   void getFileExtFromString_returns_empty_for_invalid_file() {
     File file = mock(File.class);
     when(file.getName()).thenReturn("filename");
-    Optional<String> optExt = BadgeUtility.getFileExtFromString(file);
+    Optional<String> optExt = BadgeUtility.getFileExt(file);
     assertEquals(Optional.empty(), optExt);
   }
 }

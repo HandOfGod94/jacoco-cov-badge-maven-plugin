@@ -2,6 +2,7 @@ package io.github.handofgod94.parser;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.github.handofgod94.domain.ReportLineBuilder;
 
@@ -28,7 +29,7 @@ public class CSVReportParser implements ReportParser {
   public static final int METHOD_COVERED_COL_NO = 12;
 
   @Override
-  public List<ReportLine> parseReport(Reader reader) throws IOException {
+  public Report parseReport(Reader reader) throws IOException {
     CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
     String[] line;
     List<ReportLine> report = new ArrayList<>();
@@ -61,6 +62,6 @@ public class CSVReportParser implements ReportParser {
         .addJMethodCovered(jMethodCovered).build();
       report.add(reportLine);
     }
-    return report;
+    return new Report(report);
   }
 }

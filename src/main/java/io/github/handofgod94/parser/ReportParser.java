@@ -1,11 +1,10 @@
 package io.github.handofgod94.parser;
 
-import io.github.handofgod94.domain.ReportLine;
+import io.github.handofgod94.domain.Report;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
 
 public interface ReportParser {
-  List<ReportLine> parseReport(Reader reader) throws IOException;
+  Report parseReport(Reader reader) throws IOException;
 }
