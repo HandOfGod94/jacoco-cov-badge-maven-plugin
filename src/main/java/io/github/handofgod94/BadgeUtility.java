@@ -18,17 +18,7 @@ import io.github.handofgod94.domain.Badge;
  */
 public class BadgeUtility {
 
-  // jacoco csv report column number
-  public static final int INSTRUCTION_MISSED_COL_NO = 3;
-  public static final int INSTRUCTION_COVERED_COL_NO = 4;
-  public static final int BRANCH_MISSED_COL_NO = 5;
-  public static final int BRANCH_COVERED_COL_NO = 6;
-  public static final int LINE_MISSED_COL_NO = 7;
-  public static final int LINE_COVERED_COL_NO = 8;
-  public static final int COMPLEXITY_MISSED_COL_NO = 9;
-  public static final int COMPLEXITY_COVERED_COL_NO = 10;
-  public static final int METHOD_MISSED_COL_NO = 11;
-  public static final int METHOD_COVERED_COL_NO = 12;
+
 
   /**
    * Calculates width of given string in pixels. Font size currently is 11,
@@ -55,7 +45,6 @@ public class BadgeUtility {
    * @throws IOException           Unable to read jacoco csv report from config
    *                               location
    * @throws NumberFormatException Unable to parse %ages from jacoco reports
-   * @see io.github.handofgod94.Badge.CoverageCategory
    */
   public static int calculateCoverage(String csvPath, Badge.CoverageCategory category)
       throws NumberFormatException, IOException {
@@ -63,8 +52,8 @@ public class BadgeUtility {
 
     long instructionsMissed = 0;
     long instructionsCovered = 0;
-    int missedColNo = getMissedColNo(category);
-    int coveredColNo = getCoveredColNo(category);
+    int missedColNo = 0;
+    int coveredColNo = 0;
 
     String[] line;
     while (null != (line = reader.readNext())) {
@@ -136,28 +125,6 @@ public class BadgeUtility {
       return BadgeColors.GREEN;
     } else {
       return BadgeColors.BRIGHTGREEN;
-    }
-  }
-
-  private static int getMissedColNo(Badge.CoverageCategory category) {
-    switch (category) {
-      case INSTRUCTION: return INSTRUCTION_MISSED_COL_NO;
-      case LINE: return LINE_MISSED_COL_NO;
-      case BRANCH: return BRANCH_MISSED_COL_NO;
-      case COMPLEXITY: return COMPLEXITY_MISSED_COL_NO;
-      case METHOD: return METHOD_MISSED_COL_NO;
-      default: return INSTRUCTION_MISSED_COL_NO;
-    }
-  }
-
-  private static int getCoveredColNo(Badge.CoverageCategory category) {
-    switch (category) {
-      case INSTRUCTION: return INSTRUCTION_COVERED_COL_NO;
-      case LINE: return LINE_COVERED_COL_NO;
-      case BRANCH: return BRANCH_COVERED_COL_NO;
-      case COMPLEXITY: return COMPLEXITY_COVERED_COL_NO;
-      case METHOD: return METHOD_COVERED_COL_NO;
-      default: return INSTRUCTION_COVERED_COL_NO;
     }
   }
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class BadgeUtilityTests {
   @Test
-  void getFileExtFromString_returns_extension_wrapped_in_optional_for_valid_file() {
+  void getFileExt_returns_extension_wrapped_in_optional_for_valid_file() {
     File file = mock(File.class);
     when(file.getName()).thenReturn("filename.txt");
     String ext = BadgeUtility.getFileExt(file).get();
@@ -19,7 +19,7 @@ public class BadgeUtilityTests {
   }
 
   @Test
-  void getFileExtFromString_returns_empty_for_invalid_file() {
+  void getFileExt_returns_empty_for_invalid_file() {
     File file = mock(File.class);
     when(file.getName()).thenReturn("filename");
     Optional<String> optExt = BadgeUtility.getFileExt(file);

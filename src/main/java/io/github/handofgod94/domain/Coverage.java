@@ -1,14 +1,16 @@
 package io.github.handofgod94.domain;
 
 public class Coverage {
-  private final int covered;
-  private final int missed;
+  private final long covered;
+  private final long missed;
+  private final Badge.CoverageCategory category;
 
   public static final float INVALID_COVERAGE_PERCENTAGE = 0f;
 
-  Coverage(int covered, int missed) {
+  public Coverage(long covered, long missed, Badge.CoverageCategory category) {
     this.covered = covered;
     this.missed = missed;
+    this.category = category;
   }
 
   public float getCoveragePercentage() {

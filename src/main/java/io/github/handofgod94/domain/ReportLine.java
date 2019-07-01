@@ -11,26 +11,26 @@ public class ReportLine {
   private final String jGroup;
   private final String jPackage;
   private final String jClass;
-  private final int jInstructionMissed;
-  private final int jInstructionCovered;
-  private final int jBranchMissed;
-  private final int jBranchCovered;
-  private final int jLineMissed;
-  private final int jLineCovered;
-  private final int jComplexityCovered;
-  private final int jComplexityMissed;
-  private final int jMethodMissed;
-  private final int jMethodCovered;
+  private final long jInstructionMissed;
+  private final long jInstructionCovered;
+  private final long jBranchMissed;
+  private final long jBranchCovered;
+  private final long jLineMissed;
+  private final long jLineCovered;
+  private final long jComplexityCovered;
+  private final long jComplexityMissed;
+  private final long jMethodMissed;
+  private final long jMethodCovered;
 
 
   ReportLine(String jGroup,
              String jPackage,
              String jClass,
-             int jInstructionMissed, int jInstructionCovered,
-             int jBranchMissed, int jBranchCovered,
-             int jLineMissed, int jLineCovered,
-             int jComplexityMissed, int jComplexityCovered,
-             int jMethodMissed, int jMethodCovered) {
+             long jInstructionMissed, long jInstructionCovered,
+             long jBranchMissed, long jBranchCovered,
+             long jLineMissed, long jLineCovered,
+             long jComplexityMissed, long jComplexityCovered,
+             long jMethodMissed, long jMethodCovered) {
     this.jGroup = jGroup;
     this.jPackage = jPackage;
     this.jClass = jClass;
@@ -58,43 +58,43 @@ public class ReportLine {
     return jClass;
   }
 
-  public int getjInstructionMissed() {
+  public long getjInstructionMissed() {
     return jInstructionMissed;
   }
 
-  public int getjInstructionCovered() {
+  public long getjInstructionCovered() {
     return jInstructionCovered;
   }
 
-  public int getjBranchMissed() {
+  public long getjBranchMissed() {
     return jBranchMissed;
   }
 
-  public int getjBranchCovered() {
+  public long getjBranchCovered() {
     return jBranchCovered;
   }
 
-  public int getjLineMissed() {
+  public long getjLineMissed() {
     return jLineMissed;
   }
 
-  public int getjLineCovered() {
+  public long getjLineCovered() {
     return jLineCovered;
   }
 
-  public int getjComplexityCovered() {
+  public long getjComplexityCovered() {
     return jComplexityCovered;
   }
 
-  public int getjComplexityMissed() {
+  public long getjComplexityMissed() {
     return jComplexityMissed;
   }
 
-  public int getjMethodMissed() {
+  public long getjMethodMissed() {
     return jMethodMissed;
   }
 
-  public int getjMethodCovered() {
+  public long getjMethodCovered() {
     return jMethodCovered;
   }
 
