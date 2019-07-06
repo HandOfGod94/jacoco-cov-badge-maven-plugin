@@ -58,7 +58,6 @@ public class MyMojo extends AbstractMojo {
       Badge badge = new Badge(badgeLabel, badgeValue);
 
       getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
-      getLog().debug("Trying to render badge");
       renderBadge(badge);
     } catch (IOException | TemplateException ex) {
       getLog().error("Unable to generate badge", ex);

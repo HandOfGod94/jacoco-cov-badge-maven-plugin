@@ -1,5 +1,7 @@
 package io.github.handofgod94.domain;
 
+import java.util.Objects;
+
 public class Coverage {
   private final long covered;
   private final long missed;
@@ -22,5 +24,29 @@ public class Coverage {
     float totalInstructions = this.covered + this.missed;
     float result = (this.covered / totalInstructions) * 100.0f;
     return result;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Coverage coverage = (Coverage) o;
+    return covered == coverage.covered &&
+      missed == coverage.missed &&
+      category == coverage.category;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(covered, missed, category);
+  }
+
+  @Override
+  public String toString() {
+    return "Coverage{" +
+      "covered=" + covered +
+      ", missed=" + missed +
+      ", category=" + category +
+      '}';
   }
 }
