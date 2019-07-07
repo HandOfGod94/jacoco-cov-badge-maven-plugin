@@ -1,4 +1,4 @@
-package io.github.handofgod94;
+package io.github.handofgod94.domain;
 
 /**
  * Enum for different colors a badge can have based on report.
