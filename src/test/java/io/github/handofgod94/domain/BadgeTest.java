@@ -43,7 +43,7 @@ class BadgeTest {
   @Test
   void calculateValueWidth_returns_width_of_value_to_be_rendered_based_on_string() throws IOException {
     Badge badge = new Badge("foo", 20);
-    float expected = 23.344f;
+    float expected = 34.012f;
     float actual = badge.valueWidth();
     assertEquals(expected, actual);
   }

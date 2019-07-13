@@ -14,13 +14,13 @@ public class BadgeGenerator extends BaseBadgeGenerator {
   private final Badge.CoverageCategory category;
   private final String badgeLabel;
   private final File jacocoReportFile;
-  private final File badgeFile;
+  private final File outputFile;
 
-  public BadgeGenerator(Badge.CoverageCategory category, String badgeLabel, File jacocoReportFile, File badgeFile) {
+  public BadgeGenerator(Badge.CoverageCategory category, String badgeLabel, File jacocoReportFile, File outputFile) {
     this.category = category;
     this.badgeLabel = badgeLabel !=  null ? badgeLabel : DEFAULT_BADGE_LABEL;
     this.jacocoReportFile = jacocoReportFile;
-    this.badgeFile = badgeFile;
+    this.outputFile = outputFile;
   }
 
   public void execute() throws IOException, TemplateException, TranscoderException {
@@ -28,6 +28,6 @@ public class BadgeGenerator extends BaseBadgeGenerator {
     calculateCoverage(jacocoReportFile, category);
     generateBadgeData(badgeLabel);
     processSvgBadgeTemplate();
-    save(badgeFile);
+    save(outputFile);
   }
 }

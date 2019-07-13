@@ -24,6 +24,12 @@ public class FormatterFactoryTests {
   }
 
   @Test
+  void createFormatter_returns_PngFormatter_when_fileExt_is_svg() {
+    Formatter formatter = FormatterFactory.createFormatter("svg");
+    assertTrue(formatter instanceof SvgFormatter);
+  }
+
+  @Test
   void createFormatter_throws_NotImplementedException_when_fileExt_is_invalid() {
     assertThrows(NotImplementedException.class, () -> {
       FormatterFactory.createFormatter("dummy");

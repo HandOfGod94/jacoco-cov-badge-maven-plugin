@@ -58,7 +58,7 @@ public class Badge {
   }
 
   public float valueWidth() throws IOException {
-    return calculateWidth(String.valueOf(badgeValue));
+    return calculateWidth(badgeValue + "%");
   }
 
   private float calculateWidth(String str) throws IOException {

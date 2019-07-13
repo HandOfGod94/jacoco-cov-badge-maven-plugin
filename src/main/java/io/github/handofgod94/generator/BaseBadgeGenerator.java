@@ -72,10 +72,10 @@ class BaseBadgeGenerator {
     this.setProcessedTemplateString(writer.toString());
   }
 
-  void save(File badgeFile) throws IOException, TranscoderException {
-    String fileExt = BadgeUtility.getFileExt(badgeFile).orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
+  void save(File outputFile) throws IOException, TranscoderException {
+    String fileExt = BadgeUtility.getFileExt(outputFile).orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
     Formatter formatter = FormatterFactory.createFormatter(fileExt);
-    formatter.save(badgeFile, processedTemplateString);
+    formatter.save(outputFile, processedTemplateString);
   }
 
   public void setConfiguration(Configuration configuration) {
