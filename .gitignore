@@ -6,3 +6,4 @@ target/
 .factorypath
 .idea/
 *.iml
+.DS_Store
