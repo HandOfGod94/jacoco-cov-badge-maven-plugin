@@ -1,13 +1,13 @@
 package io.github.handofgod94.generator;
 
-import freemarker.template.TemplateException;
 import io.github.handofgod94.domain.Badge;
-import org.apache.batik.transcoder.TranscoderException;
+import io.github.handofgod94.generator.tasks.*;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class BadgeGenerator extends BaseBadgeGenerator {
+public class BadgeGenerator {
 
   public static final String DEFAULT_BADGE_LABEL = "coverage";
 
@@ -23,11 +23,22 @@ public class BadgeGenerator extends BaseBadgeGenerator {
     this.outputFile = outputFile;
   }
 
-  public void execute() throws IOException, TemplateException, TranscoderException {
-    loadFreemarkerConfig();
-    calculateCoverage(jacocoReportFile, category);
-    generateBadgeData(badgeLabel);
-    processSvgBadgeTemplate();
-    save(outputFile);
+  public BadgeProcessState execute() {
+    BadgeProcessState state = new BadgeProcessState(jacocoReportFile, outputFile, category, badgeLabel);
+    List<Task> taskList = initializeTaskList();
+
+    taskList.forEach(task -> task.perform(state));
+    return state;
+  }
+
+  private List<Task> initializeTaskList() {
+    List<Task> taskList = new ArrayList<>();
+    taskList.add(new LoadConfigurationTask());
+    taskList.add(new CalculateCoverageTask());
+    taskList.add(new GenerateBadgeDataTask());
+    taskList.add(new RenderBadgeStringTask());
+    taskList.add(new SaveBadgeTask());
+
+    return taskList;
   }
 }
