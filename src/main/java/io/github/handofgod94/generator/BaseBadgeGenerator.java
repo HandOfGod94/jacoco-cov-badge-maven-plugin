@@ -4,7 +4,9 @@ import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.PathGlobMatcher;
 import freemarker.core.TemplateConfiguration;
 import freemarker.core.XMLOutputFormat;
-import freemarker.template.*;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.Version;
 import io.github.handofgod94.BadgeUtility;
 import io.github.handofgod94.MyMojo;
 import io.github.handofgod94.domain.Badge;
@@ -15,9 +17,13 @@ import io.github.handofgod94.format.FormatterFactory;
 import io.github.handofgod94.generator.helper.CoverageHelper;
 import io.github.handofgod94.parser.ReportParser;
 import io.github.handofgod94.parser.ReportParserFactory;
-import org.apache.batik.transcoder.TranscoderException;
+import io.vavr.control.Try;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -42,16 +48,9 @@ class BaseBadgeGenerator {
 
   Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
     ReportParser reportParser = ReportParserFactory.create(jacocoReport);
-    Reader reader;
-    Report report = null;
-    try {
-      reader = new FileReader(jacocoReport);
-      report = reportParser.parseReport(reader);
-    } catch (IOException e) {
-      // do something meaningful.
-      // TODO: evaluate use of vavr
-      e.printStackTrace();
-    }
+    Report report = Try.of(() -> reportParser.parseReport(new FileReader(jacocoReport)))
+                        .getOrElse(() -> new Report(Collections.emptyList()));
+
     CoverageHelper coverageHelper = new CoverageHelper(category, report);
     return coverageHelper.loadCoverage();
   }
@@ -63,36 +62,23 @@ class BaseBadgeGenerator {
     return badge;
   }
 
-  String renderBadgeString(Configuration configuration, Badge badge) {
+  Try<String> renderBadgeString(Configuration configuration, Badge badge) {
     Map<String, Object> templateData = new HashMap<>();
     templateData.put("badge", badge);
-
-    Template template = null;
     Writer writer = new StringWriter();
 
-    try {
-      template = configuration.getTemplate("svg-badge-template.ftl");
-      template.process(templateData, writer);
-    } catch (IOException | TemplateException e) {
-      // TODO: Evaluate use of vavr
-      e.printStackTrace();
-    }
+    Try<String> badgeString =
+      Try.of(() -> configuration.getTemplate("svg-badge-template.ftl"))
+         .andThenTry(template -> template.process(templateData, writer))
+         .mapTry(_x -> writer.toString());
 
-    return writer.toString();
+    return badgeString;
   }
 
-  boolean saveToFile(File outputFile, String renderedString) {
-    try {
-      String fileExt = BadgeUtility.getFileExt(outputFile).orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
-      Formatter formatter = FormatterFactory.createFormatter(fileExt);
-      formatter.save(outputFile, renderedString);
-    } catch (IOException | TranscoderException e) {
-      e.printStackTrace();
-      // TODO: evalute use of vavr
-      return false;
-    }
-
-    return true;
+  Try<Void> saveToFile(File outputFile, String renderedString) {
+    String fileExt = BadgeUtility.getFileExt(outputFile).orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
+    Formatter formatter = FormatterFactory.createFormatter(fileExt);
+    return formatter.save(outputFile, renderedString);
   }
 
 }

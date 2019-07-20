@@ -5,11 +5,12 @@ import com.opencsv.CSVReaderBuilder;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.github.handofgod94.domain.ReportLineBuilder;
+import io.vavr.control.Try;
 
-import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CSVReportParser implements ReportParser {
 
@@ -28,40 +29,44 @@ public class CSVReportParser implements ReportParser {
   public static final int METHOD_MISSED_COL_NO = 11;
   public static final int METHOD_COVERED_COL_NO = 12;
 
-  @Override
-  public Report parseReport(Reader reader) throws IOException {
-    CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
-    String[] line;
-    List<ReportLine> report = new ArrayList<>();
-    while (null != (line = csvReader.readNext())) {
-      String jGroup = line[GROUP_COL_NO];
-      String jPackage = line[PACKAGE_COL_NO];
-      String jClass = line[CLASS_COL_NO];
-      int jInstructionMissed = Integer.parseInt(line[INSTRUCTION_MISSED_COL_NO]);
-      int jInstructionCovered = Integer.parseInt(line[INSTRUCTION_COVERED_COL_NO]);
-      int jBranchMissed = Integer.parseInt(line[BRANCH_MISSED_COL_NO]);
-      int jBranchCovered = Integer.parseInt(line[BRANCH_COVERED_COL_NO]);
-      int jLineMissed = Integer.parseInt(line[LINE_MISSED_COL_NO]);
-      int jLineCovered = Integer.parseInt(line[LINE_COVERED_COL_NO]);
-      int jComplexityMissed = Integer.parseInt(line[COMPLEXITY_MISSED_COL_NO]);
-      int jComplexityCovered = Integer.parseInt(line[COMPLEXITY_COVERED_COL_NO]);
-      int jMethodMissed = Integer.parseInt(line[METHOD_MISSED_COL_NO]);
-      int jMethodCovered = Integer.parseInt(line[METHOD_COVERED_COL_NO]);
+  private final Function<String[], ReportLine> csvLineToReportLineMapper = line -> {
+    String jGroup = line[GROUP_COL_NO];
+    String jPackage = line[PACKAGE_COL_NO];
+    String jClass = line[CLASS_COL_NO];
+    int jInstructionMissed = Integer.parseInt(line[INSTRUCTION_MISSED_COL_NO]);
+    int jInstructionCovered = Integer.parseInt(line[INSTRUCTION_COVERED_COL_NO]);
+    int jBranchMissed = Integer.parseInt(line[BRANCH_MISSED_COL_NO]);
+    int jBranchCovered = Integer.parseInt(line[BRANCH_COVERED_COL_NO]);
+    int jLineMissed = Integer.parseInt(line[LINE_MISSED_COL_NO]);
+    int jLineCovered = Integer.parseInt(line[LINE_COVERED_COL_NO]);
+    int jComplexityMissed = Integer.parseInt(line[COMPLEXITY_MISSED_COL_NO]);
+    int jComplexityCovered = Integer.parseInt(line[COMPLEXITY_COVERED_COL_NO]);
+    int jMethodMissed = Integer.parseInt(line[METHOD_MISSED_COL_NO]);
+    int jMethodCovered = Integer.parseInt(line[METHOD_COVERED_COL_NO]);
 
-      ReportLine reportLine = new ReportLineBuilder()
-        .addGroup(jGroup).addPackage(jPackage).addClass(jClass)
-        .addJInstructionMissed(jInstructionMissed)
-        .addJInstructionCovered(jInstructionCovered)
-        .addJBranchMissed(jBranchMissed)
-        .addJBranchCovered(jBranchCovered)
-        .addJLineMissed(jLineMissed)
-        .addJLineCovered(jLineCovered)
-        .addJComplexityCovered(jComplexityCovered)
-        .addJComplexityMissed(jComplexityMissed)
-        .addJMethodMissed(jMethodMissed)
-        .addJMethodCovered(jMethodCovered).build();
-      report.add(reportLine);
-    }
+    return new ReportLineBuilder()
+      .addGroup(jGroup).addPackage(jPackage).addClass(jClass)
+      .addJInstructionMissed(jInstructionMissed)
+      .addJInstructionCovered(jInstructionCovered)
+      .addJBranchMissed(jBranchMissed)
+      .addJBranchCovered(jBranchCovered)
+      .addJLineMissed(jLineMissed)
+      .addJLineCovered(jLineCovered)
+      .addJComplexityCovered(jComplexityCovered)
+      .addJComplexityMissed(jComplexityMissed)
+      .addJMethodMissed(jMethodMissed)
+      .addJMethodCovered(jMethodCovered).build();
+  };
+
+  @Override
+  public Report parseReport(Reader reader) {
+    CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
+    List<ReportLine> report = Try.of(csvReader::readNext)
+      .toStream()
+      .map(csvLineToReportLineMapper)
+      .collect(Collectors.toList());
+
     return new Report(report);
   }
 }

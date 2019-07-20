@@ -2,9 +2,8 @@ package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.generator.BadgeGenerator;
-import io.github.handofgod94.generator.BadgeProcessState;
+import io.vavr.control.Option;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -34,10 +33,11 @@ public class MyMojo extends AbstractMojo {
   private Badge.CoverageCategory coverageCategory;
 
   @Override
-  public void execute() throws MojoExecutionException {
+  public void execute() {
     BadgeGenerator generator = new BadgeGenerator(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
-    Badge badge = generator.execute();
-    getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
+    Option<Badge> badge = generator.execute();
+    getLog().info("Total Coverage calculated by badge plugin: " +
+        badge.getOrElseThrow(() -> new RuntimeException("Could not create badge")));
   }
 
 }

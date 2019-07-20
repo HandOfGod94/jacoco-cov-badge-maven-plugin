@@ -1,11 +1,12 @@
 package io.github.handofgod94;
 
-import java.io.File;
-import junit.framework.Assert;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.junit.jupiter.api.Assertions;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.builder.Input;
 import org.xmlunit.diff.Diff;
+
+import java.io.File;
 
 public class MyMojoTest extends AbstractMojoTestCase {
 
@@ -21,18 +22,19 @@ public class MyMojoTest extends AbstractMojoTestCase {
 
     MyMojo mojo = (MyMojo) lookupMojo("badge", testPom);
 
-    Assert.assertNotNull(mojo);
+    Assertions.assertNotNull(mojo);
 
     mojo.execute();
 
     // Verify svg file generated
-    Assert.assertTrue(outputFile.exists());
+    Assertions.assertTrue(outputFile.exists());
+
     Diff diff =
       DiffBuilder
         .compare(Input.fromFile(outputFile))
         .withTest(expectedSvg)
         .ignoreWhitespace().ignoreComments().build();
 
-    Assert.assertFalse(diff.toString(), diff.hasDifferences());
+    Assertions.assertFalse(diff.hasDifferences(), diff.toString());
   }
 }

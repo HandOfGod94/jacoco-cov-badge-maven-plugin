@@ -80,6 +80,7 @@
     <coveralls.version>4.3.0</coveralls.version>
     <junit.version>5.4.2</junit.version>
     <mockito.version>1.10.19</mockito.version>
+    <vavr.version>0.9.3</vavr.version>
   </properties>
 
   <dependencies>
@@ -119,6 +120,12 @@
       <version>${maven.plugin.annotations.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${vavr.version}</version>
+    </dependency>
+
 
     <!-- test dependencies -->
     <dependency>

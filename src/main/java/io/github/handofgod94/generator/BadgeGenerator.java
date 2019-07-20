@@ -3,8 +3,14 @@ package io.github.handofgod94.generator;
 import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
+import io.vavr.control.Option;
+import io.vavr.control.Try;
+
+import static io.vavr.Patterns.*;
 
 import java.io.File;
+
+import static io.vavr.API.*;
 
 public class BadgeGenerator extends BaseBadgeGenerator {
 
@@ -22,12 +28,20 @@ public class BadgeGenerator extends BaseBadgeGenerator {
     this.outputFile = outputFile;
   }
 
-  public Badge execute() {
+  public Option<Badge> execute() {
     Configuration configuration = initializeConfiguration();
     Coverage coverage = calculateCoverage(jacocoReportFile, category);
     Badge badge = initializeBadge(coverage, badgeLabel);
-    String badgeString = renderBadgeString(configuration, badge);
-    boolean isSaveSuccess = saveToFile(outputFile, badgeString);
-    return isSaveSuccess ? badge : null;
+
+    String badgeString = Match(renderBadgeString(configuration, badge)).of(
+      Case($Success($()), str -> str),
+      Case($Failure($()), "")
+    );
+
+    Try<Void> result = saveToFile(outputFile, badgeString);
+
+    return Match(result).option(
+      Case($Success($()), () -> badge)
+    );
   }
 }

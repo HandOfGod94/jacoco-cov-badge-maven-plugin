@@ -1,6 +1,7 @@
 package io.github.handofgod94.generator;
 
 import io.github.handofgod94.domain.Badge;
+import io.vavr.control.Option;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,7 @@ class BadgeGeneratorTest {
 
   @Test
   void execute() {
-    Badge badge = badgeGenerator.execute();
-    assertNotNull(badge);
+    Option<Badge> badge = badgeGenerator.execute();
+    assertFalse(badge.isEmpty());
   }
 }

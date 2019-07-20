@@ -2,6 +2,8 @@ package io.github.handofgod94.format;
 
 import java.io.File;
 import java.io.IOException;
+
+import io.vavr.control.Try;
 import org.apache.batik.transcoder.TranscoderException;
 
 /**
@@ -17,5 +19,5 @@ public interface Formatter {
    * @throws IOException if unable to create file at the specified location
    * @throws TranscoderException if unable to transcode the svg to its format
    */
-  public void save(File file, String text) throws IOException, TranscoderException;
+  Try<Void> save(File file, String text);
 }

@@ -3,6 +3,7 @@ package io.github.handofgod94.generator;
 import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
+import io.vavr.control.Option;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+
+import static io.vavr.API.*;
+import static io.vavr.Patterns.*;
 
 class BaseBadgeGeneratorTest {
 
@@ -35,7 +39,7 @@ class BaseBadgeGeneratorTest {
   @Test
   void calculateCoverage_calculates_coverage_for_the_badge() {
     Coverage actual = base.calculateCoverage(jacocoReport, Badge.CoverageCategory.INSTRUCTION);
-    Coverage expected = new Coverage( 528L,  171L, Badge.CoverageCategory.INSTRUCTION);
+    Coverage expected = new Coverage( 113L,  13L, Badge.CoverageCategory.INSTRUCTION);
 
     Assertions.assertEquals(expected, actual);
   }
@@ -56,9 +60,12 @@ class BaseBadgeGeneratorTest {
     Configuration configuration = base.initializeConfiguration();
     Badge badge = new Badge("foobarvalue", 55);
 
-    String badgeString = base.renderBadgeString(configuration, badge);
+    Option<String> badgeString = Match(base.renderBadgeString(configuration, badge)).option(
+      Case($Success($()), v -> v)
+    );
 
-    Assertions.assertTrue(badgeString.contains("foobarvalue"));
+    Assertions.assertFalse(badgeString.isEmpty());
+    Assertions.assertTrue(badgeString.get().contains("foobarvalue"));
   }
 
   @Test
@@ -66,7 +73,7 @@ class BaseBadgeGeneratorTest {
     File outputTempFile = Files.createTempFile("temp",".svg").toFile();
     String dummyRenderedString = "dummy";
 
-    boolean isSaveSuccess = base.saveToFile(outputTempFile, dummyRenderedString);
+    boolean isSaveSuccess = base.saveToFile(outputTempFile, dummyRenderedString).isSuccess();
 
     Assertions.assertTrue(isSaveSuccess);
   }

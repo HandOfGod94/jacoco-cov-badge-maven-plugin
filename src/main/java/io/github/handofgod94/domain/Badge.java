@@ -1,10 +1,14 @@
 package io.github.handofgod94.domain;
 
+import io.vavr.control.Try;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 
-import java.io.IOException;
 import java.util.Objects;
+
+import static io.vavr.API.*;
+import static io.vavr.Patterns.$Failure;
+import static io.vavr.Patterns.$Success;
 
 /**
  * Badge class to hold configuration obtained from Maven config.
@@ -53,18 +57,24 @@ public class Badge {
     }
   }
 
-  public float labelWidth() throws IOException {
+  public float labelWidth() {
     return calculateWidth(badgeLabel);
   }
 
-  public float valueWidth() throws IOException {
+  public float valueWidth() {
     return calculateWidth(badgeValue + "%");
   }
 
-  private float calculateWidth(String str) throws IOException {
+  private float calculateWidth(String str) {
     PDFont font = PDMMType1Font.HELVETICA_BOLD;
     int fontSize = 12;
-    float width = ((font.getStringWidth(str) / 1000) * fontSize) + 10.0f;
+    Try<Float> stringWidth = Try.of(() -> font.getStringWidth(str));
+
+    float width = Match(stringWidth).of(
+      Case($Success($()), val -> (val / 1000 * fontSize + 10.0f)),
+      Case($Failure($()), () -> 0.0f)
+    );
+
     return width;
   }
 
