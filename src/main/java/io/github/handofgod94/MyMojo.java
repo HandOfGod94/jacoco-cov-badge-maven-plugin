@@ -36,8 +36,8 @@ public class MyMojo extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException {
     BadgeGenerator generator = new BadgeGenerator(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
-    BadgeProcessState state = generator.execute();
-    getLog().info("Total Coverage calculated by badge plugin:" + state.getBadge().getBadgeValue());
+    Badge badge = generator.execute();
+    getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
   }
 
 }

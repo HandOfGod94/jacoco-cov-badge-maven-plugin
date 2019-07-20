@@ -1,13 +1,12 @@
 package io.github.handofgod94.generator;
 
+import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.generator.tasks.*;
+import io.github.handofgod94.domain.Coverage;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BadgeGenerator {
+public class BadgeGenerator extends BaseBadgeGenerator {
 
   public static final String DEFAULT_BADGE_LABEL = "coverage";
 
@@ -23,22 +22,12 @@ public class BadgeGenerator {
     this.outputFile = outputFile;
   }
 
-  public BadgeProcessState execute() {
-    BadgeProcessState state = new BadgeProcessState(jacocoReportFile, outputFile, category, badgeLabel);
-    List<Task> taskList = initializeTaskList();
-
-    taskList.forEach(task -> task.perform(state));
-    return state;
-  }
-
-  private List<Task> initializeTaskList() {
-    List<Task> taskList = new ArrayList<>();
-    taskList.add(new LoadConfigurationTask());
-    taskList.add(new CalculateCoverageTask());
-    taskList.add(new GenerateBadgeDataTask());
-    taskList.add(new RenderBadgeStringTask());
-    taskList.add(new SaveBadgeTask());
-
-    return taskList;
+  public Badge execute() {
+    Configuration configuration = initializeConfiguration();
+    Coverage coverage = calculateCoverage(jacocoReportFile, category);
+    Badge badge = initializeBadge(coverage, badgeLabel);
+    String badgeString = renderBadgeString(configuration, badge);
+    boolean isSaveSuccess = saveToFile(outputFile, badgeString);
+    return isSaveSuccess ? badge : null;
   }
 }
