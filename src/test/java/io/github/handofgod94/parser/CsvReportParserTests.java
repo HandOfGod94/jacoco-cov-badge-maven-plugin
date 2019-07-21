@@ -2,7 +2,6 @@ package io.github.handofgod94.parser;
 
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
-import io.github.handofgod94.domain.ReportLineBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -23,16 +22,16 @@ public class CsvReportParserTests {
     BufferedReader reader = new BufferedReader(new StringReader(csvString));
     ReportParser reportParser = new CsvReportParser();
     Report actualReport = reportParser.parseReport(reader);
-    ReportLine expectedReportLine = new ReportLineBuilder()
-      .addGroupName("io.github.handofgod94:jacoco-cov-badge-maven-plugin")
-      .addPackageName("io.github.handofgod94")
-      .addClassName("MyMojo")
-      .addInstructionMissed(13)
-      .addInstructionCovered(113)
-      .addLineMissed(4)
-      .addLineCovered(24)
-      .addComplexityCovered(3)
-      .addMethodCovered(3).build();
+    ReportLine expectedReportLine = ReportLine.builder()
+      .setGroupName("io.github.handofgod94:jacoco-cov-badge-maven-plugin")
+      .setPackageName("io.github.handofgod94")
+      .setClassName("MyMojo")
+      .setInstructionMissed(13)
+      .setInstructionCovered(113)
+      .setLineMissed(4)
+      .setLineCovered(24)
+      .setComplexityCovered(3)
+      .setMethodCovered(3).build();
 
     assertAll("should have correct entities in report",
       () -> assertFalse("it should have ReportLine" , actualReport.getLines().isEmpty()),

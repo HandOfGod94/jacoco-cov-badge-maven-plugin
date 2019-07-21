@@ -39,7 +39,7 @@ class BaseBadgeGeneratorTest {
   @Test
   void calculateCoverage_calculates_coverage_for_the_badge() {
     Coverage actual = base.calculateCoverage(jacocoReport, Badge.CoverageCategory.INSTRUCTION);
-    Coverage expected = new Coverage( 113L,  13L, Badge.CoverageCategory.INSTRUCTION);
+    Coverage expected = Coverage.create( 113L,  13L, Badge.CoverageCategory.INSTRUCTION);
 
     Assertions.assertEquals(expected, actual);
   }
@@ -50,7 +50,7 @@ class BaseBadgeGeneratorTest {
     Mockito.when(mockCoverage.getCoveragePercentage()).thenReturn(45.0f);
 
     Badge actual = base.initializeBadge(mockCoverage, "foo");
-    Badge execpted = new Badge("foo", 45);
+    Badge execpted = Badge.create("foo", 45);
 
     Assertions.assertEquals(execpted, actual);
   }
@@ -58,7 +58,7 @@ class BaseBadgeGeneratorTest {
   @Test
   void renderBadgeString_creates_badge_svg_String_with_filled_values() {
     Configuration configuration = base.initializeConfiguration();
-    Badge badge = new Badge("foobarvalue", 55);
+    Badge badge = Badge.create("foobarvalue", 55);
 
     Option<String> badgeString = Match(base.renderBadgeString(configuration, badge)).option(
       Case($Success($()), v -> v)

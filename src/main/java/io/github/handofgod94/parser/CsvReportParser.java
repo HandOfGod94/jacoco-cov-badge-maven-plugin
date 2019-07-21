@@ -4,7 +4,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
-import io.github.handofgod94.domain.ReportLineBuilder;
 import io.vavr.control.Try;
 
 import java.io.Reader;
@@ -44,18 +43,18 @@ public class CsvReportParser implements ReportParser {
     int methodMissed = Integer.parseInt(line[METHOD_MISSED_COL_NO]);
     int methodCovered = Integer.parseInt(line[METHOD_COVERED_COL_NO]);
 
-    return new ReportLineBuilder()
-      .addGroupName(groupName).addPackageName(packageName).addClassName(className)
-      .addInstructionMissed(instructionMissed)
-      .addInstructionCovered(instructionCovered)
-      .addBranchMissed(branchMissed)
-      .addBranchCovered(branchCovered)
-      .addLineMissed(lineMissed)
-      .addLineCovered(lineCovered)
-      .addComplexityCovered(complexityCovered)
-      .addComplexityMissed(complexityMissed)
-      .addMethodMissed(methodMissed)
-      .addMethodCovered(methodCovered).build();
+    return ReportLine.builder()
+      .setGroupName(groupName).setPackageName(packageName).setClassName(className)
+      .setInstructionMissed(instructionMissed)
+      .setInstructionCovered(instructionCovered)
+      .setBranchMissed(branchMissed)
+      .setBranchCovered(branchCovered)
+      .setLineMissed(lineMissed)
+      .setLineCovered(lineCovered)
+      .setComplexityCovered(complexityCovered)
+      .setComplexityMissed(complexityMissed)
+      .setMethodMissed(methodMissed)
+      .setMethodCovered(methodCovered).build();
   };
 
   @Override
@@ -67,6 +66,6 @@ public class CsvReportParser implements ReportParser {
         .map(csvLineToReportLineMapper)
         .collect(Collectors.toList());
 
-    return new Report(report);
+    return Report.create(report);
   }
 }

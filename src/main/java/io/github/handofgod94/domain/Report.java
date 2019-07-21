@@ -1,17 +1,16 @@
 package io.github.handofgod94.domain;
 
+import com.google.auto.value.AutoValue;
+
 import java.util.List;
 
-public class Report {
+@AutoValue
+public abstract class Report {
   public static final String CSV_EXT = "csv";
 
-  private final List<ReportLine> lines;
-
-  public Report(List<ReportLine> lines) {
-    this.lines = lines;
+  public static Report create(List<ReportLine> lines) {
+    return new AutoValue_Report(lines);
   }
 
-  public List<ReportLine> getLines() {
-    return this.lines;
-  }
+  public abstract List<ReportLine> getLines();
 }

@@ -49,7 +49,7 @@ class BaseBadgeGenerator {
   Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
     ReportParser reportParser = ReportParserFactory.create(jacocoReport);
     Report report = Try.of(() -> reportParser.parseReport(new FileReader(jacocoReport)))
-                        .getOrElse(() -> new Report(Collections.emptyList()));
+                        .getOrElse(() -> Report.create(Collections.emptyList()));
 
     CoverageHelper coverageHelper = new CoverageHelper(category, report);
     return coverageHelper.loadCoverage();
@@ -57,7 +57,7 @@ class BaseBadgeGenerator {
 
   Badge initializeBadge(Coverage coverage, String badgeLabel) {
     int badgeValue = (int) Math.floor(coverage.getCoveragePercentage());
-    Badge badge = new Badge(badgeLabel, badgeValue);
+    Badge badge = Badge.create(badgeLabel, badgeValue);
 
     return badge;
   }

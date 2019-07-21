@@ -15,7 +15,7 @@ class BadgeTest {
   @ParameterizedTest
   @MethodSource("colorMap")
   void resultColorCode_returns_correct_color_code_for_each_percentage_range(int badgeValue, BadgeColors color) {
-    Badge badge = new Badge("foo", badgeValue);
+    Badge badge = Badge.create("foo", badgeValue);
     String expected = color.getColorCode();
     String actual = badge.resultColorCode();
     assertEquals(expected, actual);
@@ -34,7 +34,7 @@ class BadgeTest {
 
   @Test
   void calculateLabelWidth_returns_width_of_label_to_be_rendered_based_on_string() throws IOException {
-    Badge badge = new Badge("foo", 20);
+    Badge badge = Badge.create("foo", 20);
     float expected = 28.66f;
     float actual = badge.labelWidth();
     assertEquals(expected, actual);
@@ -42,7 +42,7 @@ class BadgeTest {
 
   @Test
   void calculateValueWidth_returns_width_of_value_to_be_rendered_based_on_string() throws IOException {
-    Badge badge = new Badge("foo", 20);
+    Badge badge = Badge.create("foo", 20);
     float expected = 34.012f;
     float actual = badge.valueWidth();
     assertEquals(expected, actual);

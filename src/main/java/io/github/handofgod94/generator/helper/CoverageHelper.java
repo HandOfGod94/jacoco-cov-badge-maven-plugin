@@ -22,23 +22,23 @@ public class CoverageHelper {
       case INSTRUCTION:
         covered = totalCoveredInstruction();
         missed = totalMissedInstruction();
-        return new Coverage(covered, missed, category);
+        return Coverage.create(covered, missed, category);
       case LINE:
         covered = totalCoveredLine();
         missed = totalMissedLine();
-        return new Coverage(covered, missed, category);
+        return Coverage.create(covered, missed, category);
       case BRANCH:
         covered = totalCoveredBranch();
         missed = totalMissedBranch();
-        return new Coverage(covered, missed, category);
+        return Coverage.create(covered, missed, category);
       case METHOD:
         covered = totalCoveredMethod();
         missed = totalMissedMethod();
-        return new Coverage(covered, missed, category);
+        return Coverage.create(covered, missed, category);
       case COMPLEXITY:
         covered = totalCoveredComplexity();
         missed = totalMissedComplexity();
-        return new Coverage(covered, missed, category);
+        return Coverage.create(covered, missed, category);
       default:
         throw new IllegalArgumentException("Invalid Coverage Category provided");
     }
