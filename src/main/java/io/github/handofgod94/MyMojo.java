@@ -34,10 +34,11 @@ public class MyMojo extends AbstractMojo {
 
   @Override
   public void execute() {
-    BadgeGenerator generator = new BadgeGenerator(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
+    BadgeGenerator generator =
+        new BadgeGenerator(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
     Option<Badge> badge = generator.execute();
-    getLog().info("Total Coverage calculated by badge plugin: " +
-        badge.getOrElseThrow(() -> new RuntimeException("Could not create badge")));
+    getLog().info("Total Coverage calculated by badge plugin: "
+        + badge.getOrElseThrow(() -> new RuntimeException("Could not create badge")));
   }
 
 }

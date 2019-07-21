@@ -6,11 +6,13 @@ import io.github.handofgod94.domain.Coverage;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
-import static io.vavr.Patterns.*;
-
 import java.io.File;
 
-import static io.vavr.API.*;
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
+import static io.vavr.Patterns.$Failure;
+import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerator extends BaseBadgeGenerator {
 
@@ -21,7 +23,8 @@ public class BadgeGenerator extends BaseBadgeGenerator {
   private final File jacocoReportFile;
   private final File outputFile;
 
-  public BadgeGenerator(Badge.CoverageCategory category, String badgeLabel, File jacocoReportFile, File outputFile) {
+  public BadgeGenerator(Badge.CoverageCategory category, String badgeLabel,
+                        File jacocoReportFile, File outputFile) {
     this.category = category;
     this.badgeLabel = badgeLabel !=  null ? badgeLabel : DEFAULT_BADGE_LABEL;
     this.jacocoReportFile = jacocoReportFile;
@@ -34,8 +37,8 @@ public class BadgeGenerator extends BaseBadgeGenerator {
     Badge badge = initializeBadge(coverage, badgeLabel);
 
     String badgeString = Match(renderBadgeString(configuration, badge)).of(
-      Case($Success($()), str -> str),
-      Case($Failure($()), "")
+        Case($Success($()), str -> str),
+        Case($Failure($()), "")
     );
 
     Try<Void> result = saveToFile(outputFile, badgeString);

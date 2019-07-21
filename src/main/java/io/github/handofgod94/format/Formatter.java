@@ -1,10 +1,10 @@
 package io.github.handofgod94.format;
 
-import java.io.File;
-import java.io.IOException;
-
 import io.vavr.control.Try;
 import org.apache.batik.transcoder.TranscoderException;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Interface for converting svg rendered text to output file formats.

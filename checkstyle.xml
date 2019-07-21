@@ -54,7 +54,9 @@
       <property name="tokens"
                 value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH"/>
     </module>
-    <module name="NeedBraces"/>
+    <module name="NeedBraces">
+      <property name="allowSingleLineStatement" value="true" />
+    </module>
     <module name="LeftCurly"/>
     <module name="RightCurly">
       <property name="id" value="RightCurlySame"/>
@@ -194,7 +196,7 @@
     <module name="CustomImportOrder">
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="true"/>
-      <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+      <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE###STATIC"/>
     </module>
     <module name="MethodParamPad"/>
     <module name="NoWhitespaceBefore">

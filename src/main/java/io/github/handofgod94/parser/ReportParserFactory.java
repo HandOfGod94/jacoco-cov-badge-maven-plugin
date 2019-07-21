@@ -9,10 +9,12 @@ import java.io.File;
 public class ReportParserFactory {
 
   public static ReportParser create(File file) {
-    String ext = BadgeUtility.getFileExt(file).orElseThrow(() -> new IllegalArgumentException("Invalid Jacoco file provided"));
+    String ext =
+        BadgeUtility.getFileExt(file)
+          .orElseThrow(() -> new IllegalArgumentException("Invalid Jacoco file provided"));
 
     if (ext.equals(Report.CSV_EXT)) {
-      return new CSVReportParser();
+      return new CsvReportParser();
     } else {
       throw new NotImplementedException("Report extension is not yet parsable");
     }

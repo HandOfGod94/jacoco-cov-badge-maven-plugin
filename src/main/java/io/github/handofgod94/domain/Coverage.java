@@ -18,8 +18,8 @@ public class Coverage {
   public float getCoveragePercentage() {
     if (this.covered < 0
         || this.missed < 0) {
-          return 0f;
-        }
+      return 0f;
+    }
 
     float totalInstructions = this.covered + this.missed;
     float result = (this.covered / totalInstructions) * 100.0f;
@@ -31,9 +31,9 @@ public class Coverage {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Coverage coverage = (Coverage) o;
-    return covered == coverage.covered &&
-      missed == coverage.missed &&
-      category == coverage.category;
+    return covered == coverage.covered
+        && missed == coverage.missed
+        && category == coverage.category;
   }
 
   @Override
@@ -43,10 +43,10 @@ public class Coverage {
 
   @Override
   public String toString() {
-    return "Coverage{" +
-      "covered=" + covered +
-      ", missed=" + missed +
-      ", category=" + category +
-      '}';
+    return "Coverage{"
+      + "covered=" + covered
+      + ", missed=" + missed
+      + ", category=" + category
+      + '}';
   }
 }

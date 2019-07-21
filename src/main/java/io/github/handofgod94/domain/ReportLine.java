@@ -1,101 +1,104 @@
 package io.github.handofgod94.domain;
 
-
 import java.util.Objects;
 
 /**
- * Represents each line in jacoco report
+ * Domain representing a line in jacoco report.
+ * Different jacoco report formats will have different ways of representing a report.
+ * For e.g. CSV Report, each entity is separated by commas,
+ * while in Lcov report it will be different.
+ * All of them represents same thing.
  */
 public class ReportLine {
 
-  private final String jGroup;
-  private final String jPackage;
-  private final String jClass;
-  private final long jInstructionMissed;
-  private final long jInstructionCovered;
-  private final long jBranchMissed;
-  private final long jBranchCovered;
-  private final long jLineMissed;
-  private final long jLineCovered;
-  private final long jComplexityCovered;
-  private final long jComplexityMissed;
-  private final long jMethodMissed;
-  private final long jMethodCovered;
+  private final String groupName;
+  private final String packageName;
+  private final String className;
+  private final long instructionMissed;
+  private final long instructionCovered;
+  private final long branchMissed;
+  private final long branchCovered;
+  private final long lineMissed;
+  private final long lineCovered;
+  private final long complexityCovered;
+  private final long complexityMissed;
+  private final long methodMissed;
+  private final long methodCovered;
 
 
-  ReportLine(String jGroup,
-             String jPackage,
-             String jClass,
-             long jInstructionMissed, long jInstructionCovered,
-             long jBranchMissed, long jBranchCovered,
-             long jLineMissed, long jLineCovered,
-             long jComplexityMissed, long jComplexityCovered,
-             long jMethodMissed, long jMethodCovered) {
-    this.jGroup = jGroup;
-    this.jPackage = jPackage;
-    this.jClass = jClass;
-    this.jInstructionMissed = jInstructionMissed;
-    this.jInstructionCovered = jInstructionCovered;
-    this.jBranchMissed = jBranchMissed;
-    this.jBranchCovered = jBranchCovered;
-    this.jLineMissed = jLineMissed;
-    this.jLineCovered = jLineCovered;
-    this.jComplexityCovered = jComplexityCovered;
-    this.jComplexityMissed = jComplexityMissed;
-    this.jMethodMissed = jMethodMissed;
-    this.jMethodCovered = jMethodCovered;
+  ReportLine(String groupName,
+             String packageName,
+             String className,
+             long instructionMissed, long instructionCovered,
+             long branchMissed, long branchCovered,
+             long lineMissed, long lineCovered,
+             long complexityMissed, long complexityCovered,
+             long methodMissed, long methodCovered) {
+    this.groupName = groupName;
+    this.packageName = packageName;
+    this.className = className;
+    this.instructionMissed = instructionMissed;
+    this.instructionCovered = instructionCovered;
+    this.branchMissed = branchMissed;
+    this.branchCovered = branchCovered;
+    this.lineMissed = lineMissed;
+    this.lineCovered = lineCovered;
+    this.complexityCovered = complexityCovered;
+    this.complexityMissed = complexityMissed;
+    this.methodMissed = methodMissed;
+    this.methodCovered = methodCovered;
   }
 
-  public String getjGroup() {
-    return jGroup;
+  public String getGroupName() {
+    return groupName;
   }
 
-  public String getjPackage() {
-    return jPackage;
+  public String getPackageName() {
+    return packageName;
   }
 
-  public String getjClass() {
-    return jClass;
+  public String getClassName() {
+    return className;
   }
 
-  public long getjInstructionMissed() {
-    return jInstructionMissed;
+  public long getInstructionMissed() {
+    return instructionMissed;
   }
 
-  public long getjInstructionCovered() {
-    return jInstructionCovered;
+  public long getInstructionCovered() {
+    return instructionCovered;
   }
 
-  public long getjBranchMissed() {
-    return jBranchMissed;
+  public long getBranchMissed() {
+    return branchMissed;
   }
 
-  public long getjBranchCovered() {
-    return jBranchCovered;
+  public long getBranchCovered() {
+    return branchCovered;
   }
 
-  public long getjLineMissed() {
-    return jLineMissed;
+  public long getLineMissed() {
+    return lineMissed;
   }
 
-  public long getjLineCovered() {
-    return jLineCovered;
+  public long getLineCovered() {
+    return lineCovered;
   }
 
-  public long getjComplexityCovered() {
-    return jComplexityCovered;
+  public long getComplexityCovered() {
+    return complexityCovered;
   }
 
-  public long getjComplexityMissed() {
-    return jComplexityMissed;
+  public long getComplexityMissed() {
+    return complexityMissed;
   }
 
-  public long getjMethodMissed() {
-    return jMethodMissed;
+  public long getMethodMissed() {
+    return methodMissed;
   }
 
-  public long getjMethodCovered() {
-    return jMethodCovered;
+  public long getMethodCovered() {
+    return methodCovered;
   }
 
   @Override
@@ -103,23 +106,28 @@ public class ReportLine {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ReportLine that = (ReportLine) o;
-    return jInstructionMissed == that.jInstructionMissed &&
-      jInstructionCovered == that.jInstructionCovered &&
-      jBranchMissed == that.jBranchMissed &&
-      jBranchCovered == that.jBranchCovered &&
-      jLineMissed == that.jLineMissed &&
-      jLineCovered == that.jLineCovered &&
-      jComplexityCovered == that.jComplexityCovered &&
-      jComplexityMissed == that.jComplexityMissed &&
-      jMethodMissed == that.jMethodMissed &&
-      jMethodCovered == that.jMethodCovered &&
-      Objects.equals(jGroup, that.jGroup) &&
-      Objects.equals(jPackage, that.jPackage) &&
-      Objects.equals(jClass, that.jClass);
+    return instructionMissed == that.instructionMissed
+        && instructionCovered == that.instructionCovered
+        && branchMissed == that.branchMissed
+        && branchCovered == that.branchCovered
+        && lineMissed == that.lineMissed
+        && lineCovered == that.lineCovered
+        && complexityCovered == that.complexityCovered
+        && complexityMissed == that.complexityMissed
+        && methodMissed == that.methodMissed
+        && methodCovered == that.methodCovered
+        && Objects.equals(groupName, that.groupName)
+        && Objects.equals(packageName, that.packageName)
+        && Objects.equals(className, that.className);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(jGroup, jPackage, jClass, jInstructionMissed, jInstructionCovered, jBranchMissed, jBranchCovered, jLineMissed, jLineCovered, jComplexityCovered, jComplexityMissed, jMethodMissed, jMethodCovered);
+    return Objects.hash(groupName, packageName, className,
+        instructionMissed,instructionCovered,
+        branchMissed, branchCovered,
+        lineMissed, lineCovered,
+        complexityCovered, complexityMissed,
+        methodMissed, methodCovered);
   }
 }

@@ -6,7 +6,9 @@ import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 
 import java.util.Objects;
 
-import static io.vavr.API.*;
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
 import static io.vavr.Patterns.$Failure;
 import static io.vavr.Patterns.$Success;
 
@@ -71,8 +73,8 @@ public class Badge {
     Try<Float> stringWidth = Try.of(() -> font.getStringWidth(str));
 
     float width = Match(stringWidth).of(
-      Case($Success($()), val -> (val / 1000 * fontSize + 10.0f)),
-      Case($Failure($()), () -> 0.0f)
+        Case($Success($()), val -> (val / 1000 * fontSize + 10.0f)),
+        Case($Failure($()), () -> 0.0f)
     );
 
     return width;
@@ -84,8 +86,8 @@ public class Badge {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Badge badge = (Badge) o;
-    return badgeValue == badge.badgeValue &&
-      badgeLabel.equals(badge.badgeLabel);
+    return badgeValue == badge.badgeValue
+        && badgeLabel.equals(badge.badgeLabel);
   }
 
   @Override
@@ -113,9 +115,9 @@ public class Badge {
 
   @Override
   public String toString() {
-    return "Badge{" +
-      "badgeLabel='" + badgeLabel + '\'' +
-      ", badgeValue=" + badgeValue +
-      '}';
+    return "Badge{"
+        + "badgeLabel='" + badgeLabel + '\''
+        + ", badgeValue=" + badgeValue
+        + '}';
   }
 }

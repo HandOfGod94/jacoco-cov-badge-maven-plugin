@@ -41,7 +41,7 @@ class BaseBadgeGenerator {
     tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
 
     configuration.setTemplateConfigurations(
-      new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
+        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
 
     return configuration;
   }
@@ -68,15 +68,17 @@ class BaseBadgeGenerator {
     Writer writer = new StringWriter();
 
     Try<String> badgeString =
-      Try.of(() -> configuration.getTemplate("svg-badge-template.ftl"))
-         .andThenTry(template -> template.process(templateData, writer))
-         .mapTry(_x -> writer.toString());
+        Try.of(() -> configuration.getTemplate("svg-badge-template.ftl"))
+           .andThenTry(template -> template.process(templateData, writer))
+           .mapTry(ignore -> writer.toString());
 
     return badgeString;
   }
 
   Try<Void> saveToFile(File outputFile, String renderedString) {
-    String fileExt = BadgeUtility.getFileExt(outputFile).orElseThrow(()-> new IllegalArgumentException("Invalid output file provided"));
+    String fileExt =
+        BadgeUtility.getFileExt(outputFile)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid output file provided"));
     Formatter formatter = FormatterFactory.createFormatter(fileExt);
     return formatter.save(outputFile, renderedString);
   }

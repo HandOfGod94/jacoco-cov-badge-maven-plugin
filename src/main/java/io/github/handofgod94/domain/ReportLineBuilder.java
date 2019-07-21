@@ -1,84 +1,92 @@
 package io.github.handofgod94.domain;
 
 public class ReportLineBuilder {
-  private String jGroup = "";
-  private String jPackage = "";
-  private String jClass = "";
-  private int jInstructionMissed = 0;
-  private int jInstructionCovered = 0;
-  private int jBranchMissed = 0;
-  private int jBranchCovered = 0;
-  private int jLineMissed = 0;
-  private int jLineCovered= 0 ;
-  private int jComplexityCovered = 0;
-  private int jComplexityMissed = 0;
-  private int jMethodMissed = 0;
-  private int jMethodCovered = 0;
+  private String groupName = "";
+  private String packageName = "";
+  private String className = "";
+  private int instructionMissed = 0;
+  private int instructionCovered = 0;
+  private int branchMissed = 0;
+  private int branchCovered = 0;
+  private int lineMissed = 0;
+  private int lineCovered = 0;
+  private int complexityCovered = 0;
+  private int complexityMissed = 0;
+  private int methodMissed = 0;
+  private int methodCovered = 0;
 
-  public ReportLineBuilder addGroup(String jGroup) {
-    this.jGroup = jGroup;
-    return this;
-  }
-
-  public ReportLineBuilder addPackage(String jPackage) {
-    this.jPackage = jPackage;
+  public ReportLineBuilder addGroupName(String group) {
+    this.groupName = group;
     return this;
   }
 
-  public ReportLineBuilder addClass(String jClass) {
-    this.jClass = jClass;
+  public ReportLineBuilder addPackageName(String packageName) {
+    this.packageName = packageName;
     return this;
   }
 
-  public ReportLineBuilder addJInstructionMissed(int jInstructionMissed) {
-    this.jInstructionMissed = jInstructionMissed;
+  public ReportLineBuilder addClassName(String className) {
+    this.className = className;
+    return this;
+  }
+
+  public ReportLineBuilder addInstructionMissed(int instructionMissed) {
+    this.instructionMissed = instructionMissed;
     return this;
   }
 
 
-  public ReportLineBuilder addJInstructionCovered(int jInstructionCovered) {
-    this.jInstructionCovered = jInstructionCovered;
+  public ReportLineBuilder addInstructionCovered(int instructionCovered) {
+    this.instructionCovered = instructionCovered;
     return this;
   }
-  public ReportLineBuilder addJBranchMissed(int jBranchMissed) {
-    this.jBranchMissed = jBranchMissed;
+
+  public ReportLineBuilder addBranchMissed(int branchMissed) {
+    this.branchMissed = branchMissed;
     return this;
   }
-  public ReportLineBuilder addJBranchCovered(int jBranchCovered) {
-    this.jBranchCovered = jBranchCovered;
+
+  public ReportLineBuilder addBranchCovered(int branchCovered) {
+    this.branchCovered = branchCovered;
     return this;
   }
-  public ReportLineBuilder addJLineMissed(int jLineMissed) {
-    this.jLineMissed = jLineMissed;
+
+  public ReportLineBuilder addLineMissed(int lineMissed) {
+    this.lineMissed = lineMissed;
     return this;
   }
-  public ReportLineBuilder addJLineCovered(int jLineCovered) {
-    this.jLineCovered = jLineCovered;
+
+  public ReportLineBuilder addLineCovered(int lineCovered) {
+    this.lineCovered = lineCovered;
     return this;
   }
-  public ReportLineBuilder addJComplexityMissed(int jComplexityMissed) {
-    this.jComplexityMissed = jComplexityMissed;
+
+  public ReportLineBuilder addComplexityMissed(int complexityMissed) {
+    this.complexityMissed = complexityMissed;
     return this;
   }
-  public ReportLineBuilder addJComplexityCovered(int jComplexityCovered) {
-    this.jComplexityCovered = jComplexityCovered;
+
+  public ReportLineBuilder addComplexityCovered(int complexityCovered) {
+    this.complexityCovered = complexityCovered;
     return this;
   }
-  public ReportLineBuilder addJMethodMissed(int jMethodMissed) {
-    this.jMethodMissed = jMethodMissed;
+
+  public ReportLineBuilder addMethodMissed(int methodMissed) {
+    this.methodMissed = methodMissed;
     return this;
   }
-  public ReportLineBuilder addJMethodCovered(int jMethodCovered) {
-    this.jMethodCovered = jMethodCovered;
+
+  public ReportLineBuilder addMethodCovered(int methodCovered) {
+    this.methodCovered = methodCovered;
     return this;
   }
 
   public ReportLine build() {
-    return new ReportLine(jGroup, jPackage, jClass,
-                          jInstructionMissed, jInstructionCovered,
-                          jBranchMissed, jBranchCovered,
-                          jLineMissed, jLineCovered,
-                          jComplexityMissed, jComplexityCovered,
-                          jMethodMissed, jMethodCovered);
+    return new ReportLine(groupName, packageName, className,
+      instructionMissed, instructionCovered,
+      branchMissed, branchCovered,
+      lineMissed, lineCovered,
+      complexityMissed, complexityCovered,
+      methodMissed, methodCovered);
   }
 }
