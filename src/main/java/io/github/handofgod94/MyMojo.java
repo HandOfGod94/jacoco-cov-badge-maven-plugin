@@ -1,7 +1,7 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.generator.BadgeGenerator;
+import io.github.handofgod94.service.BadgeGenerationService;
 import io.vavr.control.Option;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -9,6 +9,12 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
+
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
+import static io.vavr.Patterns.$None;
+import static io.vavr.Patterns.$Some;
 
 /**
  * Goal to generate badge during the build.
@@ -34,11 +40,17 @@ public class MyMojo extends AbstractMojo {
 
   @Override
   public void execute() {
-    BadgeGenerator generator =
-        new BadgeGenerator(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
-    Option<Badge> badge = generator.execute();
-    getLog().info("Total Coverage calculated by badge plugin: "
-        + badge.getOrElseThrow(() -> new RuntimeException("Could not create badge")));
+    BadgeGenerationService generationService =
+        new BadgeGenerationService(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
+    Option<Badge> badge = generationService.generate();
+
+    String buildMessage = Match(badge).of(
+        Case($Some($()), b -> String.format("Total Coverage calculated by badge plugin: %s",
+                                            b.getBadgeValue())),
+        Case($None(), () -> "Could not create badge, please verify config")
+    );
+
+    getLog().info(buildMessage);
   }
 
 }

@@ -1,4 +1,4 @@
-package io.github.handofgod94.generator;
+package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
 import io.vavr.control.Option;
@@ -13,9 +13,9 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BadgeGeneratorTest {
+class BadgeGenerationServiceTest {
 
-  BadgeGenerator badgeGenerator;
+  BadgeGenerationService service;
   File jacocoReportFile;
   File outputFile;
 
@@ -24,12 +24,12 @@ class BadgeGeneratorTest {
   void setup() throws IOException, URISyntaxException {
     jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
     outputFile = Files.createTempFile("temp",".svg").toFile();
-    badgeGenerator = new BadgeGenerator(Badge.CoverageCategory.INSTRUCTION, "foo", jacocoReportFile, outputFile);
+    service = new BadgeGenerationService(Badge.CoverageCategory.INSTRUCTION, "foo", jacocoReportFile, outputFile);
   }
 
   @Test
   void execute() {
-    Option<Badge> badge = badgeGenerator.execute();
+    Option<Badge> badge = service.generate();
     assertFalse(badge.isEmpty());
   }
 }

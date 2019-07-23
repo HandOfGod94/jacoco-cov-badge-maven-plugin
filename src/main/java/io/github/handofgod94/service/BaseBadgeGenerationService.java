@@ -1,4 +1,4 @@
-package io.github.handofgod94.generator;
+package io.github.handofgod94.service;
 
 import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.PathGlobMatcher;
@@ -14,9 +14,9 @@ import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.FormatterFactory;
-import io.github.handofgod94.generator.helper.CoverageHelper;
 import io.github.handofgod94.parser.ReportParser;
 import io.github.handofgod94.parser.ReportParserFactory;
+import io.github.handofgod94.service.helper.CoverageHelper;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
 
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-class BaseBadgeGenerator {
+class BaseBadgeGenerationService {
 
   Configuration initializeConfiguration() {
     Configuration configuration = new freemarker.template.Configuration(new Version(2, 3, 20));

@@ -1,4 +1,4 @@
-package io.github.handofgod94.generator;
+package io.github.handofgod94.service;
 
 import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
@@ -14,7 +14,7 @@ import static io.vavr.API.Match;
 import static io.vavr.Patterns.$Failure;
 import static io.vavr.Patterns.$Success;
 
-public class BadgeGenerator extends BaseBadgeGenerator {
+public class BadgeGenerationService extends BaseBadgeGenerationService {
 
   public static final String DEFAULT_BADGE_LABEL = "coverage";
 
@@ -23,15 +23,15 @@ public class BadgeGenerator extends BaseBadgeGenerator {
   private final File jacocoReportFile;
   private final File outputFile;
 
-  public BadgeGenerator(Badge.CoverageCategory category, String badgeLabel,
-                        File jacocoReportFile, File outputFile) {
+  public BadgeGenerationService(Badge.CoverageCategory category, String badgeLabel,
+                                File jacocoReportFile, File outputFile) {
     this.category = category;
     this.badgeLabel = badgeLabel !=  null ? badgeLabel : DEFAULT_BADGE_LABEL;
     this.jacocoReportFile = jacocoReportFile;
     this.outputFile = outputFile;
   }
 
-  public Option<Badge> execute() {
+  public Option<Badge> generate() {
     Configuration configuration = initializeConfiguration();
     Coverage coverage = calculateCoverage(jacocoReportFile, category);
     Badge badge = initializeBadge(coverage, badgeLabel);

@@ -1,4 +1,4 @@
-package io.github.handofgod94.generator.helper;
+package io.github.handofgod94.service.helper;
 
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;

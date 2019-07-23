@@ -1,4 +1,4 @@
-package io.github.handofgod94.generator;
+package io.github.handofgod94.service;
 
 import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
@@ -18,15 +18,15 @@ import java.nio.file.Files;
 import static io.vavr.API.*;
 import static io.vavr.Patterns.*;
 
-class BaseBadgeGeneratorTest {
+class BaseBadgeGenerationServiceTest {
 
   File jacocoReport;
-  BaseBadgeGenerator base;
+  BaseBadgeGenerationService base;
 
   @BeforeEach
   void setup() throws URISyntaxException {
     jacocoReport = new File(getClass().getClassLoader().getResource("jacoco.csv").toURI());
-    base = new BaseBadgeGenerator();
+    base = new BaseBadgeGenerationService();
   }
 
   @Test

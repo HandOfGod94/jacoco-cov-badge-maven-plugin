@@ -4,8 +4,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
-import io.vavr.control.Try;
 import io.vavr.collection.List;
+import io.vavr.control.Try;
 
 import java.io.Reader;
 import java.util.function.Function;
