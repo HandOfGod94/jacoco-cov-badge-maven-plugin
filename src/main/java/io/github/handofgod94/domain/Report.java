@@ -1,8 +1,8 @@
 package io.github.handofgod94.domain;
 
 import com.google.auto.value.AutoValue;
+import io.vavr.collection.List;
 
-import java.util.List;
 
 @AutoValue
 public abstract class Report {

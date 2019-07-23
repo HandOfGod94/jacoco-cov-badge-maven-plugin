@@ -47,44 +47,44 @@ public class CoverageHelper {
 
   // missed instructions
   private final long totalMissedInstruction() {
-    return report.getLines().stream().map(ReportLine::getInstructionMissed).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getInstructionMissed).sum().longValue();
   }
 
   private final long totalMissedLine() {
-    return report.getLines().stream().map(ReportLine::getLineMissed).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getLineMissed).sum().longValue();
   }
 
   private final long totalMissedBranch() {
-    return report.getLines().stream().map(ReportLine::getBranchMissed).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getBranchMissed).sum().longValue();
   }
 
   private final long totalMissedMethod() {
-    return report.getLines().stream().map(ReportLine::getMethodMissed).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getMethodMissed).sum().longValue();
   }
 
   private final long totalMissedComplexity() {
-    return report.getLines().stream().map(ReportLine::getComplexityMissed).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getComplexityMissed).sum().longValue();
   }
 
 
   // covered instructions
   private final long totalCoveredInstruction() {
-    return report.getLines().stream().map(ReportLine::getInstructionCovered).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getInstructionCovered).sum().longValue();
   }
 
   private final long totalCoveredLine() {
-    return report.getLines().stream().map(ReportLine::getLineCovered).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getLineCovered).sum().longValue();
   }
 
   private final long totalCoveredBranch() {
-    return report.getLines().stream().map(ReportLine::getBranchCovered).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getBranchCovered).sum().longValue();
   }
 
   private final long totalCoveredMethod() {
-    return report.getLines().stream().map(ReportLine::getMethodCovered).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getMethodCovered).sum().longValue();
   }
 
   private final long totalCoveredComplexity() {
-    return report.getLines().stream().map(ReportLine::getComplexityCovered).reduce(0L, Long::sum);
+    return report.getLines().map(ReportLine::getComplexityCovered).sum().longValue();
   }
 }

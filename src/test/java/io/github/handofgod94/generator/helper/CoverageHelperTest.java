@@ -4,12 +4,10 @@ import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
+import io.vavr.collection.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +23,7 @@ class CoverageHelperTest {
     report = Mockito.mock(Report.class);
     line1 = Mockito.mock(ReportLine.class);
     line2 = Mockito.mock(ReportLine.class);
-    lines = Arrays.asList(line1, line2);
+    lines = List.of(line1, line2);
     Mockito.when(report.getLines()).thenReturn(lines);
   }
 

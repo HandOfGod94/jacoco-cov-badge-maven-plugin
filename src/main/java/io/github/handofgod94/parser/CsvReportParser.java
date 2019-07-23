@@ -5,11 +5,10 @@ import com.opencsv.CSVReaderBuilder;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.control.Try;
+import io.vavr.collection.List;
 
 import java.io.Reader;
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class CsvReportParser implements ReportParser {
 
@@ -64,7 +63,7 @@ public class CsvReportParser implements ReportParser {
     List<ReportLine> report = Try.of(csvReader::readNext)
         .toStream()
         .map(csvLineToReportLineMapper)
-        .collect(Collectors.toList());
+        .toList();
 
     return Report.create(report);
   }

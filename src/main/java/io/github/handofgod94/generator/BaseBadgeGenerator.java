@@ -17,13 +17,13 @@ import io.github.handofgod94.format.FormatterFactory;
 import io.github.handofgod94.generator.helper.CoverageHelper;
 import io.github.handofgod94.parser.ReportParser;
 import io.github.handofgod94.parser.ReportParserFactory;
+import io.vavr.collection.List;
 import io.vavr.control.Try;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -49,7 +49,7 @@ class BaseBadgeGenerator {
   Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
     ReportParser reportParser = ReportParserFactory.create(jacocoReport);
     Report report = Try.of(() -> reportParser.parseReport(new FileReader(jacocoReport)))
-                        .getOrElse(() -> Report.create(Collections.emptyList()));
+                        .getOrElse(() -> Report.create(List.empty()));
 
     CoverageHelper coverageHelper = new CoverageHelper(category, report);
     return coverageHelper.loadCoverage();
