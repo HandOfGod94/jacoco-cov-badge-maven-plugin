@@ -8,7 +8,7 @@
 - [Commit Message Conventions](#commit-message-conventions)
 
 ## Project Setup
-* `maven` version: 3.5.2
+* `maven` version: 3.5.4
 * `java` version: Oracle JDK 1.8
 
 Make sure you are using correct `maven` version and required paths are added to classpath.  
@@ -32,10 +32,10 @@ resides in `$HOME\.m2` directory. This can then be directly included as the depe
 To build project from command line you can use these commands as per your needs.
 *project-dir* is the location where `pom.xml` is present.
 ```console
-foo@bar:~/poject-dir $  mvn clean            # To clean up target directory
-foo@bar:~/poject-dir $  mvn package          # To generate jar
-foo@bar:~/poject-dir $  mvn install          # To generate jar and install it local maven repo
-foo@bar:~/poject-dir $  mvn clean install    # Recommanded way to do a full build
+foo@bar:~/poject-dir $  ./mvnw clean            # To clean up target directory
+foo@bar:~/poject-dir $  ./mvnw package          # To generate jar
+foo@bar:~/poject-dir $  ./mvnw install          # To generate jar and install it local maven repo
+foo@bar:~/poject-dir $  ./mvnw clean install    # Recommanded way to do a full build
 ```
 
 
