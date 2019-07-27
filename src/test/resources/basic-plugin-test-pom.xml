@@ -25,7 +25,7 @@
           <badgeLabel>codeCov</badgeLabel>
           <coverageCategory>INSTRUCTION</coverageCategory>
           <outputFile>${basedir}/target/test-classes/out.svg</outputFile>
-          <jacocoReportConfig>${basedir}/src/test/resources/jacoco.csv</jacocoReportConfig>
+          <jacocoReportFile>${basedir}/src/test/resources/jacoco.csv</jacocoReportFile>
         </configuration>
       </plugin>
     </plugins>

@@ -1,26 +1,20 @@
 package io.github.handofgod94;
 
-import freemarker.cache.ConditionalTemplateConfigurationFactory;
-import freemarker.cache.PathGlobMatcher;
-import freemarker.core.TemplateConfiguration;
-import freemarker.core.XMLOutputFormat;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.Version;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import org.apache.batik.transcoder.TranscoderException;
+import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.service.BadgeGenerationService;
+import io.vavr.control.Option;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+
+import java.io.File;
+
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
+import static io.vavr.Patterns.$None;
+import static io.vavr.Patterns.$Some;
 
 /**
  * Goal to generate badge during the build.
@@ -35,7 +29,7 @@ public class MyMojo extends AbstractMojo {
 
   @Parameter(property = "badge.jacocoReportLocation",
       defaultValue = "${project.reporting.outputDirectory}/jacoco/jacoco.csv")
-  private File jacocoReportConfig;
+  private File jacocoReportFile;
 
   @Parameter(property = "badge.outputFile",
       defaultValue = "${project.build.directory}/coverage.svg")
@@ -45,56 +39,18 @@ public class MyMojo extends AbstractMojo {
   private Badge.CoverageCategory coverageCategory;
 
   @Override
-  public void execute() throws MojoExecutionException {
-    try {
+  public void execute() {
+    BadgeGenerationService generationService =
+        new BadgeGenerationService(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
+    Option<Badge> badge = generationService.generate();
 
-      int badgeValue = BadgeUtility.calculateCoverage(jacocoReportConfig.getAbsolutePath(),
-                                                      coverageCategory);
-      Badge badge = new Badge(badgeLabel, badgeValue);
+    String buildMessage = Match(badge).of(
+        Case($Some($()), b -> String.format("Total Coverage calculated by badge plugin: %s",
+                                            b.getBadgeValue())),
+        Case($None(), () -> "Could not create badge, please verify config")
+    );
 
-      getLog().info("Total Coverage calculated by badge plugin:" + badge.getBadgeValue());
-      getLog().debug("Trying to render badge");
-      renderBadge(badge);
-    } catch (IOException | TemplateException ex) {
-      getLog().error("Unable to generate badge", ex);
-    } catch (TranscoderException ex) {
-      getLog().error("Unable to generate badge in specified format", ex);
-    }
-  }
-
-  /**
-   * Renders svg badge on configuration provided by user.
-   *
-   * @param badge Badge
-   * @throws IOException       Unable to read freemarker template
-   * @throws TemplateException General exception occurred during processing of template
-   */
-  private void renderBadge(Badge badge) throws IOException, TemplateException, TranscoderException {
-    // configure freemarker
-    Configuration configuration = new Configuration(new Version(2, 3, 20));
-    configuration.setClassForTemplateLoading(MyMojo.class, "templates");
-    configuration.setDefaultEncoding("UTF-8");
-    configuration.setLocale(Locale.US);
-    configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-    TemplateConfiguration tcSvg = new TemplateConfiguration();
-    tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
-
-    configuration.setTemplateConfigurations(
-        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
-
-    // load the template
-    Template template = configuration.getTemplate("svg-badge-template.ftl");
-
-    // map object for generating template
-    Map<String, Object> templateData = new HashMap<>();
-    templateData.put("badge", badge);
-
-    // Write to file
-    outputFile = new File(outputFile.getAbsolutePath());
-    StringWriter writer = new StringWriter();
-    template.process(templateData, writer);
-    BadgeUtility.generateFileBasedOnExt(outputFile, writer.toString());
+    getLog().info(buildMessage);
   }
 
 }
