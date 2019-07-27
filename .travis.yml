@@ -17,4 +17,4 @@ jobs:
 stages:
   - test
   - name: install
-    if: ((branch = master) OR (type = pull_request))
+    if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
