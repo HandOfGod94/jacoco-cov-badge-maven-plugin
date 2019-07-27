@@ -30,8 +30,8 @@ import java.util.Map;
 
 class BaseBadgeGenerationService {
 
-  Configuration initializeConfiguration() {
-    Configuration configuration = new freemarker.template.Configuration(new Version(2, 3, 20));
+  protected Configuration initializeConfiguration() {
+    Configuration configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
     configuration.setDefaultEncoding("UTF-8");
     configuration.setLocale(Locale.US);
@@ -46,7 +46,7 @@ class BaseBadgeGenerationService {
     return configuration;
   }
 
-  Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
+  protected Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
     ReportParser reportParser = ReportParserFactory.create(jacocoReport);
     Report report = Try.of(() -> reportParser.parseReport(new FileReader(jacocoReport)))
                         .getOrElse(() -> Report.create(List.empty()));
@@ -55,14 +55,14 @@ class BaseBadgeGenerationService {
     return coverageHelper.loadCoverage();
   }
 
-  Badge initializeBadge(Coverage coverage, String badgeLabel) {
+  protected Badge initializeBadge(Coverage coverage, String badgeLabel) {
     int badgeValue = (int) Math.floor(coverage.getCoveragePercentage());
     Badge badge = Badge.create(badgeLabel, badgeValue);
 
     return badge;
   }
 
-  Try<String> renderBadgeString(Configuration configuration, Badge badge) {
+  protected Try<String> renderBadgeString(Configuration configuration, Badge badge) {
     Map<String, Object> templateData = new HashMap<>();
     templateData.put("badge", badge);
     Writer writer = new StringWriter();
@@ -75,7 +75,7 @@ class BaseBadgeGenerationService {
     return badgeString;
   }
 
-  Try<Void> saveToFile(File outputFile, String renderedString) {
+  protected Try<Void> saveToFile(File outputFile, String renderedString) {
     String fileExt =
         BadgeUtility.getFileExt(outputFile)
             .orElseThrow(() -> new IllegalArgumentException("Invalid output file provided"));

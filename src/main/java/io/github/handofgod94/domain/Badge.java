@@ -39,6 +39,11 @@ public abstract class Badge {
     return new AutoValue_Badge(badgeLabel, badgeValue);
   }
 
+  /**
+   * Calculates the color code for the badge.
+   * This is useful for template to render the background color of the badge
+   * @return String representing color in hex code format.
+   */
   public String resultColorCode() {
     int badgeValue = getBadgeValue();
     if (badgeValue >= 0 && badgeValue < 40) {

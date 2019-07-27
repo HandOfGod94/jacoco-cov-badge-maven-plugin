@@ -15,6 +15,10 @@ public class CoverageHelper {
     this.report = report;
   }
 
+  /**
+   * Generates an instance of Coverage by calculating the coverage for given category.
+   * @return Coverage with missing and covered instruction calculated.
+   */
   public Coverage loadCoverage() {
     long missed = 0;
     long covered = 0;

@@ -26,6 +26,12 @@ public abstract class ReportLine {
   public abstract long getMethodMissed();
   public abstract long getMethodCovered();
 
+  /**
+   * Builder for generating instance of ReportLine.
+   * For CSV Jacoco reprot format, a ReportLine represents a row in CSV.
+   * This abstracts out the information stored in the report in form of record
+   * @return Builder to generate ReportLine
+   */
   public static Builder builder() {
     return new AutoValue_ReportLine.Builder()
       .setBranchCovered(0).setBranchMissed(0)
