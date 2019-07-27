@@ -212,7 +212,7 @@
 
   <profiles>
     <profile>
-      <id>ciManagement</id>
+      <id>staging</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>

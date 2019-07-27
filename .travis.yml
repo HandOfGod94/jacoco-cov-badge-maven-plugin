@@ -12,7 +12,6 @@ jobs:
       script: ./mvnw clean test
     - stage: "install"
       script: ./mvnw clean install -Pstaging
-      after_success: ./mvnw jacoco:report coveralls:report
 
 stages:
   - test
