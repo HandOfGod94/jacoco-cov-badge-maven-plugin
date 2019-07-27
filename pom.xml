@@ -71,7 +71,7 @@
     <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
     <checkstyle.version>8.21</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
-    <pdfbox.version>2.0.12</pdfbox.version>
+    <pdfbox.version>2.0.16</pdfbox.version>
     <freemarker.version>2.3.28</freemarker.version>
     <opencsv.version>4.2</opencsv.version>
     <batik.version>1.10</batik.version>
