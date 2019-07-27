@@ -1,9 +1,7 @@
 ### Contents
 - [Project Setup](#project-setup)
 - [Building the Project](#building-the-project)
-- [Technical Overview](#technical-overview)
-  - [Base Idea](#base-idea)
-  - [Code overview](#code-overview)
+- [Approach](#approach)
 - [Branching Conventions](#branching-conventions)
 - [Commit Message Conventions](#commit-message-conventions)
 
@@ -42,11 +40,8 @@ foo@bar:~/poject-dir $  ./mvnw clean install    # Recommanded way to do a full b
 ```
 > Use `mvnw.cmd` instead of `/.mvnw` in windows systems.
 
-## Technical Overview
-This section comprises of a brief on technical aspects of the project describing the directory
-structure and base idea used to create it.
 
-### Base Idea
+## Approach
 The base idea is to use a `freemarker` template which has a mock `svg` file and
 fill in all the required values obtained from the configuration to it, then render the
 template. This makes sure that we generate consistent and clean `svg` files.
@@ -57,33 +52,6 @@ The coloring and the percentage covered will be retrieved from the `csv` generat
 jacoco report. The path of the report will be provided by user. It will then read
 `missed branches` and `missed instructions` as per the config and will calculate percentage.
 
-### Code overview
-The project structure is as follows:
-```bash
-├───src/
-│   └───main/
-│       ├───java/         # java source files
-│       └───resources/    # freemakrer templates
-├───.editorconfig         # config utility for editors
-├───.gitattributes        # git config for the project
-├───.gitignore            # ignore files for git
-├───.travis.yml           # travis ci/cd config file
-├───checkstyle.xml        # checkstyle config for code quality
-├───CONTRIBUTING.md
-├───LICENSE
-├───pom.xml               # maven config file
-└───README.md
-```
-
-**Java**
-* `io.github.handofgod94.MyMojo`: This is the entry point for the `maven` plugin.
-It reads the user configuration and then initializes the required class.
-Once it has all the information, it renders the `freemarker` template.
-*Refer to java docs for more info on each class*
-
-**Resources**
-* `io.github.handofgod94.templates.svg-badge-template.ftl`:
-`freemarker` template for svg file which will be rendered through the mojo class.
 
 ## Branching Conventions
 The issues can broadly classified into 3 categories.
@@ -133,9 +101,12 @@ For e.g. if you are working on a feature for which you want to commit,
 it may look like this
 
 ```
-Feature #10, Added Custom feature
+Feature #10, Add Custom feature
 ```
-Notice the first letter in the message is in caps. i.e.
+
+Keep the commit message as imperative, present tense: "change" not "changed" nor "changes"
+
+irst letter in the message is in caps. i.e.
 * for feature it will be `Feature`
 * for bug it will be `Bug`
 * for task it will be `Task`
