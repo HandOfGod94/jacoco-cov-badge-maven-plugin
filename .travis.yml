@@ -1,14 +1,20 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk8
+
 cache:
   directories:
-  - $HOME/.m2
-install: true
-script:
-  -  mvn clean install
+    - $HOME/.m2
 
-# only build master on direct commit to it
-branches:
-  only:
-  - master
+jobs:
+  include:
+    - stage: "test"
+      script: ./mvnw clean test
+    - stage: "install"
+      script: ./mvnw clean install -Pstaging
+      after_success: ./mvnw jacoco:report coveralls:report
+
+stages:
+  - test
+  - name: install
+    if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
