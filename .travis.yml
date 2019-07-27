@@ -1,19 +1,20 @@
 language: java
 jdk:
   - openjdk8
+
 cache:
   directories:
   - $HOME/.m2
-install: true
-script:
-  -  ./mvnw clean install
 
-# since tests are already executed during build
-# so no need to run it again.
-after_success:
-  - ./mvnw jacoco:report coveralls:report
+jobs:
+  include:
+    - stage: "test"
+      script: ./mvnw clean test
+    - stage: "install"
+      script: ./mvnw clean install -Pstaging
+      after_success: ./mvnw jacoco:report coveralls:report
 
-# only build master on direct commit to it
-branches:
-  only:
-  - master
+stages:
+  - test
+  - name: install
+    if: ((branch = master) OR (type = pull_request))
