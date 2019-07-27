@@ -18,11 +18,11 @@ Refer to their documentation to know more on how to import `maven` project in it
 The project uses `mvnw` (Maven Wrapper) which makes sure that the version across all the
 builds remain same.
 
-> Use `mvnw` supplied with project to build instead of custom `mvn` installation.
+Use `mvnw` supplied with project to build instead of custom `mvn` installation.
 
-> Make sure you don't loose on coverage.
-> Current min coverage threshold: 80%
-> Current %age decrease in coverage threshold: 5%
+> Make sure you don't loose on coverage.  
+> Current min coverage threshold: 80%  
+> Current %age decrease in coverage threshold: 5%  
 
 ## Building the Project
 The project can be built in multiple ways. Several IDE's directly support `maven` support natively.
