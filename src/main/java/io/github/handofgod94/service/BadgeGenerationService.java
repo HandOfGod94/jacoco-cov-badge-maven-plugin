@@ -24,6 +24,10 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   private final File jacocoReportFile;
   private final File outputFile;
 
+  /**
+   * Service to generate badges.
+   * @param myMojoConfig config params provided in pom file of user.
+   */
   public BadgeGenerationService(MyMojoConfiguration myMojoConfig) {
     this.category = myMojoConfig.getCoverageCategory();
     this.badgeLabel = myMojoConfig.getBadgeLabel();
