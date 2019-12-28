@@ -1,10 +1,7 @@
 package io.github.handofgod94.service;
 
-import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
-import io.vavr.control.Option;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,9 +12,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 
-import static io.vavr.API.*;
-import static io.vavr.Patterns.*;
-
 class BaserBadgeGenerationServiceTest {
 
   File jacocoReport;
@@ -27,13 +21,6 @@ class BaserBadgeGenerationServiceTest {
   void setup() throws URISyntaxException {
     jacocoReport = new File(getClass().getClassLoader().getResource("jacoco.csv").toURI());
     base = new BaseBadgeGenerationService();
-  }
-
-  @Test
-  void initializeConfiguration_loads_freemarker_configuration() {
-    Configuration actual = base.initializeConfiguration();
-
-    Assert.assertEquals("UTF-8", actual.getDefaultEncoding());
   }
 
   @Test
