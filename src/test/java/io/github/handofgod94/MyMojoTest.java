@@ -1,6 +1,7 @@
 package io.github.handofgod94;
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.junit.jupiter.api.Assertions;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.builder.Input;
@@ -15,7 +16,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
     super.setUp();
   }
 
-  public void testBadgeGoal() throws Exception {
+  public void testBadgeGoal_WhenPomIsValid_ItGeneratesBadge() throws Exception {
     File testPom = new File(getBasedir(), "src/test/resources/basic-plugin-test-pom.xml");
     File outputFile = new File(getBasedir(), "target/test-classes/out.svg");
     File expectedSvg = new File(getBasedir(), "src/test/resources/in.svg");
@@ -36,5 +37,14 @@ public class MyMojoTest extends AbstractMojoTestCase {
         .ignoreWhitespace().ignoreComments().build();
 
     Assertions.assertFalse(diff.hasDifferences(), diff.toString());
+  }
+
+  public void testBadgeGoal_WhenPomIsInvalid_ItThrowsException() throws Exception {
+    File testPom = new File(getBasedir(), "src/test/resources/basic-plugin-test-invalid-pom.xml");
+
+    Assertions.assertThrows(ComponentConfigurationException.class, () -> {
+      MyMojo mojo = (MyMojo) lookupMojo("badge", testPom);
+      mojo.execute();
+    });
   }
 }
