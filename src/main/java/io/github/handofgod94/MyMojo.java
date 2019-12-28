@@ -1,7 +1,10 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.ReportLine;
 import io.github.handofgod94.service.BadgeGenerationService;
+import io.vavr.Lazy;
 import io.vavr.control.Option;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -38,10 +41,18 @@ public class MyMojo extends AbstractMojo {
   @Parameter(property = "badge.coverageCategory", defaultValue = "INSTRUCTION")
   private Badge.CoverageCategory coverageCategory;
 
+  private Lazy<MyMojoConfiguration> myMojoConfig = Lazy.of(() -> {
+    return MyMojoConfiguration.builder()
+      .setBadgeLabel(badgeLabel)
+      .setJacocoReportFile(jacocoReportFile)
+      .setOutputFile(outputFile)
+      .setCoverageCategory(coverageCategory)
+      .build();
+  });
+
   @Override
   public void execute() {
-    BadgeGenerationService generationService =
-        new BadgeGenerationService(coverageCategory, badgeLabel, jacocoReportFile, outputFile);
+    BadgeGenerationService generationService = new BadgeGenerationService(myMojoConfig.get());
     Option<Badge> badge = generationService.generate();
 
     String buildMessage = Match(badge).of(

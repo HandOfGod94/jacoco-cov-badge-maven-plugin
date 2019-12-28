@@ -3,6 +3,7 @@ package io.github.handofgod94.service;
 import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
+import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
@@ -36,6 +37,13 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     this.badgeLabel = badgeLabel !=  null ? badgeLabel : DEFAULT_BADGE_LABEL;
     this.jacocoReportFile = jacocoReportLocation;
     this.outputFile = outputFile;
+  }
+
+  public BadgeGenerationService(MyMojoConfiguration myMojoConfig) {
+    this.category = myMojoConfig.getCoverageCategory();
+    this.badgeLabel = myMojoConfig.getBadgeLabel();
+    this.jacocoReportFile = myMojoConfig.getJacocoReportFile();
+    this.outputFile = myMojoConfig.getOutputFile();
   }
 
   /**
