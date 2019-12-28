@@ -4,6 +4,7 @@ import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.vavr.Lazy;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
@@ -24,6 +25,8 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   private final File jacocoReportFile;
   private final File outputFile;
 
+  private Lazy<Configuration> freemarkerConfig = Lazy.of(() -> initializeConfiguration());
+
   /**
    * Service to generate badges.
    * @param myMojoConfig config params provided in pom file of user.
@@ -41,11 +44,10 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
    * @return Instance of Badge, if rendering is success, Option.empty() otherwise.
    */
   public Option<Badge> generate() {
-    Configuration configuration = initializeConfiguration();
     Coverage coverage = calculateCoverage(jacocoReportFile, category);
     Badge badge = initializeBadge(coverage, badgeLabel);
 
-    String badgeString = Match(renderBadgeString(configuration, badge)).of(
+    String badgeString = Match(renderBadgeString(badge)).of(
         Case($Success($()), str -> str),
         Case($Failure($()), "")
     );
@@ -56,4 +58,9 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
       Case($Success($()), () -> badge)
     );
   }
+
+  private Try<String> renderBadgeString(Badge badge) {
+    return renderBadgeString(freemarkerConfig.get(), badge);
+  }
+
 }
