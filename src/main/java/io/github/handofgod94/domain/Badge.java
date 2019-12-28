@@ -1,9 +1,12 @@
 package io.github.handofgod94.domain;
 
 import com.google.auto.value.AutoValue;
+import io.vavr.collection.HashMap;
 import io.vavr.control.Try;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
+
+import java.util.Map;
 
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
@@ -80,6 +83,10 @@ public abstract class Badge {
     );
 
     return width;
+  }
+
+  public Map<String, Badge> templateData() {
+    return HashMap.of("badge", this).toJavaMap();
   }
 
   // Getters

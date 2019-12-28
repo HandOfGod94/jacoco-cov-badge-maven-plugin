@@ -17,6 +17,7 @@ import io.github.handofgod94.format.FormatterFactory;
 import io.github.handofgod94.parser.ReportParser;
 import io.github.handofgod94.parser.ReportParserFactory;
 import io.github.handofgod94.service.helper.CoverageHelper;
+import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
 
@@ -24,9 +25,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 class BaseBadgeGenerationService {
 
@@ -60,19 +59,6 @@ class BaseBadgeGenerationService {
     Badge badge = Badge.create(badgeLabel, badgeValue);
 
     return badge;
-  }
-
-  protected Try<String> renderBadgeString(Configuration configuration, Badge badge) {
-    Map<String, Object> templateData = new HashMap<>();
-    templateData.put("badge", badge);
-    Writer writer = new StringWriter();
-
-    Try<String> badgeString =
-        Try.of(() -> configuration.getTemplate("svg-badge-template.ftl"))
-           .andThenTry(template -> template.process(templateData, writer))
-           .mapTry(ignore -> writer.toString());
-
-    return badgeString;
   }
 
   protected Try<Void> saveToFile(File outputFile, String renderedString) {

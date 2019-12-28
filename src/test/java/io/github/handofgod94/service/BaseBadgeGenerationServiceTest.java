@@ -18,7 +18,7 @@ import java.nio.file.Files;
 import static io.vavr.API.*;
 import static io.vavr.Patterns.*;
 
-class BaseBadgeGenerationServiceTest {
+class BaserBadgeGenerationServiceTest {
 
   File jacocoReport;
   BaseBadgeGenerationService base;
@@ -53,19 +53,6 @@ class BaseBadgeGenerationServiceTest {
     Badge execpted = Badge.create("foo", 45);
 
     Assertions.assertEquals(execpted, actual);
-  }
-
-  @Test
-  void renderBadgeString_creates_badge_svg_String_with_filled_values() {
-    Configuration configuration = base.initializeConfiguration();
-    Badge badge = Badge.create("foobarvalue", 55);
-
-    Option<String> badgeString = Match(base.renderBadgeString(configuration, badge)).option(
-      Case($Success($()), v -> v)
-    );
-
-    Assertions.assertFalse(badgeString.isEmpty());
-    Assertions.assertTrue(badgeString.get().contains("foobarvalue"));
   }
 
   @Test
