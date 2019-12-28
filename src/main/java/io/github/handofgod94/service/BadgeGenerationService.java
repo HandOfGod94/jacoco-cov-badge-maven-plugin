@@ -24,21 +24,6 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   private final File jacocoReportFile;
   private final File outputFile;
 
-  /**
-   * Service to calculate and render the badge.
-   * @param category category for which coverage needs to be considered.
-   * @param badgeLabel label for the final rendered badge.
-   * @param jacocoReportLocation full path of jacoco report.
-   * @param outputFile path of the output badge file.
-   */
-  public BadgeGenerationService(Badge.CoverageCategory category, String badgeLabel,
-                                File jacocoReportLocation, File outputFile) {
-    this.category = category;
-    this.badgeLabel = badgeLabel !=  null ? badgeLabel : DEFAULT_BADGE_LABEL;
-    this.jacocoReportFile = jacocoReportLocation;
-    this.outputFile = outputFile;
-  }
-
   public BadgeGenerationService(MyMojoConfiguration myMojoConfig) {
     this.category = myMojoConfig.getCoverageCategory();
     this.badgeLabel = myMojoConfig.getBadgeLabel();

@@ -1,6 +1,7 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.vavr.control.Option;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,20 @@ class BadgeGenerationServiceTest {
   BadgeGenerationService service;
   File jacocoReportFile;
   File outputFile;
+  MyMojoConfiguration configuration;
 
 
   @BeforeEach
   void setup() throws IOException, URISyntaxException {
     jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
     outputFile = Files.createTempFile("temp",".svg").toFile();
-    service = new BadgeGenerationService(Badge.CoverageCategory.INSTRUCTION, "foo", jacocoReportFile, outputFile);
+    configuration = MyMojoConfiguration.builder()
+      .setCoverageCategory(Badge.CoverageCategory.INSTRUCTION)
+      .setBadgeLabel("foo")
+      .setJacocoReportFile(jacocoReportFile)
+      .setOutputFile(outputFile)
+      .build();
+    service = new BadgeGenerationService(configuration);
   }
 
   @Test

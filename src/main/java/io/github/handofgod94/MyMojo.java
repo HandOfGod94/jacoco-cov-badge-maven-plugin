@@ -54,14 +54,14 @@ public class MyMojo extends AbstractMojo {
   public void execute() {
     BadgeGenerationService generationService = new BadgeGenerationService(myMojoConfig.get());
     Option<Badge> badge = generationService.generate();
-
-    String buildMessage = Match(badge).of(
-        Case($Some($()), b -> String.format("Total Coverage calculated by badge plugin: %s",
-                                            b.getBadgeValue())),
-        Case($None(), () -> "Could not create badge, please verify config")
-    );
-
-    getLog().info(buildMessage);
+    getLog().info(buildMessage(badge));
   }
 
+  private String buildMessage(Option<Badge> badge) {
+    return Match(badge).of(
+      Case($Some($()), b -> String.format("Total Coverage calculated by badge plugin: %s",
+        b.getBadgeValue())),
+      Case($None(), () -> "Could not create badge, please verify config")
+    );
+  }
 }
