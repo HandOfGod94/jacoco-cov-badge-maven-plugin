@@ -116,8 +116,9 @@ public class Coverage {
         missed = coverage2.calculateMissed();
         break;
       case METHOD:
-        covered = totalCoveredMethod();
-        missed = totalMissedMethod();
+        MethodCoverage methodCoverage = new MethodCoverage(category, report);
+        covered = methodCoverage.calculateCovered();
+        missed = methodCoverage.calculateMissed();
         break;
       case COMPLEXITY:
         covered = totalCoveredComplexity();
@@ -143,7 +144,7 @@ public class Coverage {
   }
 
   private final long totalMissedMethod() {
-    return report.getLines().map(ReportLine::getMethodMissed).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalMissedComplexity() {
@@ -165,7 +166,7 @@ public class Coverage {
   }
 
   private final long totalCoveredMethod() {
-    return report.getLines().map(ReportLine::getMethodCovered).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalCoveredComplexity() {
