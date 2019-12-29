@@ -1,9 +1,8 @@
 package io.github.handofgod94.domain;
 
-import com.google.auto.value.AutoValue;
+import java.util.Objects;
 
-@AutoValue
-public abstract class Coverage {
+public class Coverage {
 
   /**
    * Enum constants for coverage category.
@@ -24,13 +23,18 @@ public abstract class Coverage {
 
   public static final float INVALID_COVERAGE_PERCENTAGE = 0f;
 
-  public abstract long getCovered();
-  public abstract long getMissed();
+  public long covered;
+  public long missed;
+  public CoverageCategory category;
 
-  public abstract CoverageCategory getCategory();
+  Coverage(long covered, long missed, CoverageCategory category) {
+    this.covered = covered;
+    this.missed = missed;
+    this.category = category;
+  }
 
   public static Coverage create(long covered, long missed, CoverageCategory category) {
-    return new AutoValue_Coverage(covered, missed, category);
+    return new Coverage(covered, missed, category);
   }
 
   /**
@@ -39,8 +43,6 @@ public abstract class Coverage {
    *     INVALID_COVERAGE_PERCENTAGE = 0f otherwise
    */
   public float getCoveragePercentage() {
-    long covered = getCovered();
-    long missed = getMissed();
     if (covered < 0
         || missed < 0) {
       return INVALID_COVERAGE_PERCENTAGE;
@@ -49,5 +51,37 @@ public abstract class Coverage {
     float totalInstructions = covered + missed;
     float result = (covered / totalInstructions) * 100.0f;
     return result;
+  }
+
+  public long getCovered() {
+    return covered;
+  }
+
+  public long getMissed() {
+    return missed;
+  }
+
+  @Override
+  public String toString() {
+    return "Coverage{" +
+      "covered=" + covered +
+      ", missed=" + missed +
+      ", category=" + category +
+      '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Coverage coverage = (Coverage) o;
+    return covered == coverage.covered &&
+      missed == coverage.missed &&
+      category == coverage.category;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(covered, missed, category);
   }
 }
