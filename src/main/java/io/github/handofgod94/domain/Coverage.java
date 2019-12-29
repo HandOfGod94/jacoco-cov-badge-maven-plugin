@@ -121,55 +121,12 @@ public class Coverage {
         missed = methodCoverage.calculateMissed();
         break;
       case COMPLEXITY:
-        covered = totalCoveredComplexity();
-        missed = totalMissedComplexity();
+        ComplexityCoverage complexityCoverage = new ComplexityCoverage(category, report);
+        covered = complexityCoverage.calculateCovered();
+        missed = complexityCoverage.calculateMissed();
         break;
       default:
         throw new IllegalArgumentException("Invalid Coverage Category provided");
     }
-  }
-
-
-  // missed instructions
-  private final long totalMissedInstruction() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalMissedLine() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalMissedBranch() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalMissedMethod() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalMissedComplexity() {
-    return report.getLines().map(ReportLine::getComplexityMissed).sum().longValue();
-  }
-
-
-  // covered instructions
-  private final long totalCoveredInstruction() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalCoveredLine() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalCoveredBranch() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalCoveredMethod() {
-    throw new IllegalAccessError("It should not come here");
-  }
-
-  private final long totalCoveredComplexity() {
-    return report.getLines().map(ReportLine::getComplexityCovered).sum().longValue();
   }
 }
