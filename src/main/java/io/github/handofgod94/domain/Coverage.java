@@ -101,8 +101,9 @@ public class Coverage {
   public void loadCoverage() {
     switch (category) {
       case INSTRUCTION:
-        covered = totalCoveredInstruction();
-        missed = totalMissedInstruction();
+        InstructionCoverage coverage = new InstructionCoverage(category, report);
+        covered = coverage.calculateCovered();
+        missed = coverage.calculateMissed();
         break;
       case LINE:
         covered = totalCoveredLine();
@@ -128,7 +129,7 @@ public class Coverage {
 
   // missed instructions
   private final long totalMissedInstruction() {
-    return report.getLines().map(ReportLine::getInstructionMissed).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalMissedLine() {
@@ -150,7 +151,7 @@ public class Coverage {
 
   // covered instructions
   private final long totalCoveredInstruction() {
-    return report.getLines().map(ReportLine::getInstructionCovered).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalCoveredLine() {
