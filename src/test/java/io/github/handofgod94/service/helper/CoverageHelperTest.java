@@ -1,6 +1,5 @@
 package io.github.handofgod94.service.helper;
 
-import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
@@ -9,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CoverageHelperTest {
 
