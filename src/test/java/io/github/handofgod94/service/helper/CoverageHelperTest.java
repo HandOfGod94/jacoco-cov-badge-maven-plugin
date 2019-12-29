@@ -35,8 +35,8 @@ class CoverageHelperTest {
     Mockito.when(line2.getInstructionMissed()).thenReturn(30L);
     Mockito.when(line2.getInstructionCovered()).thenReturn(50L);
 
-    CoverageHelper coverageHelper = new CoverageHelper(Badge.CoverageCategory.INSTRUCTION, report);
-    Coverage expected = Coverage.create(100L, 130L, Badge.CoverageCategory.INSTRUCTION);
+    CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.INSTRUCTION, report);
+    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.INSTRUCTION);
     Coverage actual = coverageHelper.loadCoverage();
     assertEquals(expected, actual);
   }
@@ -49,8 +49,8 @@ class CoverageHelperTest {
     Mockito.when(line2.getMethodMissed()).thenReturn(30L);
     Mockito.when(line2.getMethodCovered()).thenReturn(50L);
 
-    CoverageHelper coverageHelper = new CoverageHelper(Badge.CoverageCategory.METHOD, report);
-    Coverage expected = Coverage.create(100L, 130L, Badge.CoverageCategory.METHOD);
+    CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.METHOD, report);
+    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.METHOD);
     Coverage actual = coverageHelper.loadCoverage();
     assertEquals(expected, actual);
   }
@@ -63,8 +63,8 @@ class CoverageHelperTest {
     Mockito.when(line2.getLineMissed()).thenReturn(30L);
     Mockito.when(line2.getLineCovered()).thenReturn(50L);
 
-    CoverageHelper coverageHelper = new CoverageHelper(Badge.CoverageCategory.LINE, report);
-    Coverage expected = Coverage.create(100L, 130L, Badge.CoverageCategory.LINE);
+    CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.LINE, report);
+    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.LINE);
     Coverage actual = coverageHelper.loadCoverage();
     assertEquals(expected, actual);
   }
@@ -77,8 +77,8 @@ class CoverageHelperTest {
     Mockito.when(line2.getBranchMissed()).thenReturn(30L);
     Mockito.when(line2.getBranchCovered()).thenReturn(50L);
 
-    CoverageHelper coverageHelper = new CoverageHelper(Badge.CoverageCategory.BRANCH, report);
-    Coverage expected = Coverage.create(100L, 130L, Badge.CoverageCategory.BRANCH);
+    CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.BRANCH, report);
+    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.BRANCH);
     Coverage actual = coverageHelper.loadCoverage();
     assertEquals(expected, actual);
   }
@@ -91,8 +91,8 @@ class CoverageHelperTest {
     Mockito.when(line2.getComplexityMissed()).thenReturn(30L);
     Mockito.when(line2.getComplexityCovered()).thenReturn(50L);
 
-    CoverageHelper coverageHelper = new CoverageHelper(Badge.CoverageCategory.COMPLEXITY, report);
-    Coverage expected = Coverage.create(100L, 130L, Badge.CoverageCategory.COMPLEXITY);
+    CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.COMPLEXITY, report);
+    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.COMPLEXITY);
     Coverage actual = coverageHelper.loadCoverage();
     assertEquals(expected, actual);
   }

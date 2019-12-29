@@ -17,7 +17,7 @@ import java.io.FileReader;
 
 class BaseBadgeGenerationService {
 
-  protected Coverage calculateCoverage(File jacocoReport, Badge.CoverageCategory category) {
+  protected Coverage calculateCoverage(File jacocoReport, Coverage.CoverageCategory category) {
     ReportParser reportParser = ReportParserFactory.create(jacocoReport);
     Report report = Try.of(() -> reportParser.parseReport(new FileReader(jacocoReport)))
                         .getOrElse(() -> Report.create(List.empty()));

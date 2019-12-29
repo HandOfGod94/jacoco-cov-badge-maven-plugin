@@ -25,8 +25,8 @@ class BaserBadgeGenerationServiceTest {
 
   @Test
   void calculateCoverage_calculates_coverage_for_the_badge() {
-    Coverage actual = base.calculateCoverage(jacocoReport, Badge.CoverageCategory.INSTRUCTION);
-    Coverage expected = Coverage.create( 113L,  13L, Badge.CoverageCategory.INSTRUCTION);
+    Coverage actual = base.calculateCoverage(jacocoReport, Coverage.CoverageCategory.INSTRUCTION);
+    Coverage expected = Coverage.create( 113L,  13L, Coverage.CoverageCategory.INSTRUCTION);
 
     Assertions.assertEquals(expected, actual);
   }

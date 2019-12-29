@@ -1,10 +1,9 @@
 package io.github.handofgod94.service;
 
-import freemarker.template.Configuration;
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.vavr.control.Option;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +13,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static io.vavr.API.*;
-import static io.vavr.Patterns.$Success;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BadgeGenerationServiceTest {
 
@@ -31,7 +29,7 @@ class BadgeGenerationServiceTest {
     jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
     outputFile = Files.createTempFile("temp",".svg").toFile();
     configBuilder = MyMojoConfiguration.builder()
-      .setCoverageCategory(Badge.CoverageCategory.INSTRUCTION)
+      .setCoverageCategory(Coverage.CoverageCategory.INSTRUCTION)
       .setBadgeLabel("foobarfizzbuzz")
       .setJacocoReportFile(jacocoReportFile)
       .setOutputFile(outputFile);

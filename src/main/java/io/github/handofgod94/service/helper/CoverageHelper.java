@@ -1,16 +1,15 @@
 package io.github.handofgod94.service.helper;
 
-import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 
 public class CoverageHelper {
 
-  private final Badge.CoverageCategory category;
+  private final Coverage.CoverageCategory category;
   private final Report report;
 
-  public CoverageHelper(Badge.CoverageCategory category, Report report) {
+  public CoverageHelper(Coverage.CoverageCategory category, Report report) {
     this.category = category;
     this.report = report;
   }

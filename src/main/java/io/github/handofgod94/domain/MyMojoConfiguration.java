@@ -12,7 +12,7 @@ public abstract class MyMojoConfiguration {
   public abstract String getBadgeLabel();
   public abstract File getJacocoReportFile();
   public abstract File getOutputFile();
-  public abstract Badge.CoverageCategory getCoverageCategory();
+  public abstract Coverage.CoverageCategory getCoverageCategory();
 
 
   public static Builder builder() {
@@ -25,7 +25,7 @@ public abstract class MyMojoConfiguration {
     public abstract Builder setBadgeLabel(String badgeLabel);
     public abstract Builder setJacocoReportFile(File jacocoReportFile);
     public abstract Builder setOutputFile(File outputFile);
-    public abstract Builder setCoverageCategory(Badge.CoverageCategory category);
+    public abstract Builder setCoverageCategory(Coverage.CoverageCategory category);
     public abstract MyMojoConfiguration build();
   }
 

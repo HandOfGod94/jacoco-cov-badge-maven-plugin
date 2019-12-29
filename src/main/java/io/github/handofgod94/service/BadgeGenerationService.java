@@ -22,7 +22,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
 
   public static final String DEFAULT_BADGE_LABEL = "coverage";
 
-  private Badge.CoverageCategory category;
+  private Coverage.CoverageCategory category;
   private String badgeLabel;
   private File jacocoReportFile;
   private File outputFile;

@@ -1,6 +1,7 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.service.BadgeGenerationService;
 import io.vavr.Lazy;
@@ -12,9 +13,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
-import static io.vavr.API.$;
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
+import static io.vavr.API.*;
 import static io.vavr.Patterns.$None;
 import static io.vavr.Patterns.$Some;
 
@@ -38,7 +37,7 @@ public class MyMojo extends AbstractMojo {
   private File outputFile;
 
   @Parameter(property = "badge.coverageCategory", defaultValue = "INSTRUCTION")
-  private Badge.CoverageCategory coverageCategory;
+  private Coverage.CoverageCategory coverageCategory;
 
   private Lazy<MyMojoConfiguration> myMojoConfig = Lazy.of(() -> MyMojoConfiguration.builder()
       .setBadgeLabel(badgeLabel)
