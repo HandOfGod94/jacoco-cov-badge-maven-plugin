@@ -30,19 +30,9 @@ public class Coverage {
   public CoverageCategory category;
   public Report report;
 
-  Coverage(long covered, long missed, CoverageCategory category) {
-    this.covered = covered;
-    this.missed = missed;
-    this.category = category;
-  }
-
   Coverage(CoverageCategory category, Report report) {
     this.category = category;
     this.report = report;
-  }
-
-  public static Coverage create(long covered, long missed, CoverageCategory category) {
-    return new Coverage(covered, missed, category);
   }
 
   public static Coverage create(CoverageCategory category, Report report) {
@@ -63,38 +53,6 @@ public class Coverage {
     float totalInstructions = covered + missed;
     float result = (covered / totalInstructions) * 100.0f;
     return result;
-  }
-
-  public long getCovered() {
-    return covered;
-  }
-
-  public long getMissed() {
-    return missed;
-  }
-
-  @Override
-  public String toString() {
-    return "Coverage{" +
-      "covered=" + covered +
-      ", missed=" + missed +
-      ", category=" + category +
-      '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Coverage coverage = (Coverage) o;
-    return covered == coverage.covered &&
-      missed == coverage.missed &&
-      category == coverage.category;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(covered, missed, category);
   }
 
   /**
@@ -130,5 +88,46 @@ public class Coverage {
       default:
         throw new IllegalArgumentException("Invalid Coverage Category provided");
     }
+  }
+
+  public long getCovered() {
+    return covered;
+  }
+
+  public long getMissed() {
+    return missed;
+  }
+
+  // TODO: see if setters can be removed
+  public void setCovered(long covered) {
+    this.covered = covered;
+  }
+
+  public void setMissed(long missed) {
+    this.missed = missed;
+  }
+
+  @Override
+  public String toString() {
+    return "Coverage{" +
+      "covered=" + covered +
+      ", missed=" + missed +
+      ", category=" + category +
+      '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Coverage coverage = (Coverage) o;
+    return covered == coverage.covered &&
+      missed == coverage.missed &&
+      category == coverage.category;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(covered, missed, category);
   }
 }

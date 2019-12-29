@@ -16,20 +16,6 @@ public class CoverageTests {
   private ReportLine line2;
   private List<ReportLine> lines;
 
-  @Test
-  void getCoveragePercentage_returns_coverage_for_valid_input() {
-    Coverage coverage = Coverage.create(10, 10, Coverage.CoverageCategory.INSTRUCTION);
-    float actualPercentage = coverage.getCoveragePercentage();
-    assertEquals(Float.valueOf(50.0f), actualPercentage);
-  }
-
-  @Test
-  void getCoveragePercentage_returns_zero_for_invalid_input() {
-    Coverage coverage = Coverage.create(-10, 10, Coverage.CoverageCategory.INSTRUCTION);
-    float actualPercentage = coverage.getCoveragePercentage();
-    assertEquals(0f, actualPercentage);
-  }
-
   @BeforeEach
   void setup() {
     report = Mockito.mock(Report.class);
@@ -37,6 +23,24 @@ public class CoverageTests {
     line2 = Mockito.mock(ReportLine.class);
     lines = List.of(line1, line2);
     Mockito.when(report.getLines()).thenReturn(lines);
+  }
+
+  @Test
+  void getCoveragePercentage_returns_coverage_for_valid_input() {
+    Coverage coverage = new Coverage(Coverage.CoverageCategory.INSTRUCTION, report);
+    coverage.setCovered(10);
+    coverage.setMissed(10);
+    float actualPercentage = coverage.getCoveragePercentage();
+    assertEquals(Float.valueOf(50.0f), actualPercentage);
+  }
+
+  @Test
+  void getCoveragePercentage_returns_zero_for_invalid_input() {
+    Coverage coverage = new Coverage(Coverage.CoverageCategory.INSTRUCTION, report);
+    coverage.setCovered(-10);
+    coverage.setMissed(10);
+    float actualPercentage = coverage.getCoveragePercentage();
+    assertEquals(0f, actualPercentage);
   }
 
   @Test
@@ -48,9 +52,12 @@ public class CoverageTests {
     Mockito.when(line2.getInstructionCovered()).thenReturn(50L);
 
     Coverage actual = new Coverage(Coverage.CoverageCategory.INSTRUCTION, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.INSTRUCTION);
     actual.loadCoverage();
-    assertEquals(expected, actual);
+
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
   }
 
   @Test
@@ -62,9 +69,12 @@ public class CoverageTests {
     Mockito.when(line2.getMethodCovered()).thenReturn(50L);
 
     Coverage actual = new Coverage(Coverage.CoverageCategory.METHOD, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.METHOD);
     actual.loadCoverage();
-    assertEquals(expected, actual);
+
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
   }
 
   @Test
@@ -76,9 +86,12 @@ public class CoverageTests {
     Mockito.when(line2.getLineCovered()).thenReturn(50L);
 
     Coverage actual = new Coverage(Coverage.CoverageCategory.LINE, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.LINE);
     actual.loadCoverage();
-    assertEquals(expected, actual);
+
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
   }
 
   @Test
@@ -90,9 +103,12 @@ public class CoverageTests {
     Mockito.when(line2.getBranchCovered()).thenReturn(50L);
 
     Coverage actual = new Coverage(Coverage.CoverageCategory.BRANCH, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.BRANCH);
     actual.loadCoverage();
-    assertEquals(expected, actual);
+
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
   }
 
   @Test
@@ -104,9 +120,11 @@ public class CoverageTests {
     Mockito.when(line2.getComplexityCovered()).thenReturn(50L);
 
     Coverage actual = new Coverage(Coverage.CoverageCategory.COMPLEXITY, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.COMPLEXITY);
     actual.loadCoverage();
-    assertEquals(expected, actual);
-  }
 
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
+  }
 }

@@ -35,8 +35,10 @@ class CoverageHelperTest {
     Mockito.when(line2.getInstructionCovered()).thenReturn(50L);
 
     CoverageHelper coverageHelper = new CoverageHelper(Coverage.CoverageCategory.INSTRUCTION, report);
-    Coverage expected = Coverage.create(100L, 130L, Coverage.CoverageCategory.INSTRUCTION);
+    long expectedCovered = 100L;
+    long expectedMissed = 130L;
     Coverage actual = coverageHelper.loadCoverage();
-    assertEquals(expected, actual);
+    assertEquals(expectedCovered, actual.getCovered());
+    assertEquals(expectedMissed, actual.getMissed());
   }
 }
