@@ -1,4 +1,6 @@
-package io.github.handofgod94.domain;
+package io.github.handofgod94.domain.coverage;
+
+import io.github.handofgod94.domain.Report;
 
 import java.util.Objects;
 

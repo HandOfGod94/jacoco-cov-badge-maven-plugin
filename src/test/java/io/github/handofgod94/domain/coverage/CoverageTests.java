@@ -1,9 +1,10 @@
-package io.github.handofgod94.domain;
+package io.github.handofgod94.domain.coverage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,8 +1,7 @@
 package io.github.handofgod94.service.helper;
 
-import io.github.handofgod94.domain.Coverage;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.Report;
-import io.github.handofgod94.domain.ReportLine;
 
 public class CoverageHelper {
 

@@ -1,6 +1,7 @@
 package io.github.handofgod94.domain;
 
 import com.google.auto.value.AutoValue;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.collection.HashMap;
 import io.vavr.control.Try;
 import org.apache.pdfbox.pdmodel.font.PDFont;

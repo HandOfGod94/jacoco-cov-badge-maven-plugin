@@ -1,4 +1,7 @@
-package io.github.handofgod94.domain;
+package io.github.handofgod94.domain.coverage;
+
+import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.ReportLine;
 
 public class LineCoverage extends Coverage implements CoverageInterface {
 

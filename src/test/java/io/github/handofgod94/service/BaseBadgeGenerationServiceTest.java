@@ -1,7 +1,7 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.Coverage;
+import io.github.handofgod94.domain.coverage.Coverage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

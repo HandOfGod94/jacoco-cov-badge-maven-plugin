@@ -1,7 +1,7 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.Coverage;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.vavr.control.Option;
 import org.junit.jupiter.api.BeforeEach;
