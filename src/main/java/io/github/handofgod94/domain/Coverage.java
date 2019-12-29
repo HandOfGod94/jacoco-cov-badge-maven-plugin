@@ -26,6 +26,7 @@ public class Coverage {
   public long covered;
   public long missed;
   public CoverageCategory category;
+  public Report report;
 
   Coverage(long covered, long missed, CoverageCategory category) {
     this.covered = covered;
@@ -33,8 +34,17 @@ public class Coverage {
     this.category = category;
   }
 
+  Coverage(CoverageCategory category, Report report) {
+    this.category = category;
+    this.report = report;
+  }
+
   public static Coverage create(long covered, long missed, CoverageCategory category) {
     return new Coverage(covered, missed, category);
+  }
+
+  public static Coverage create(CoverageCategory category, Report report) {
+    return new Coverage(category, report);
   }
 
   /**
