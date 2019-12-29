@@ -111,8 +111,9 @@ public class Coverage {
         missed = coverage1.calculateMissed();
         break;
       case BRANCH:
-        covered = totalCoveredBranch();
-        missed = totalMissedBranch();
+        BranchCoverage coverage2 = new BranchCoverage(category, report);
+        covered = coverage2.calculateCovered();
+        missed = coverage2.calculateMissed();
         break;
       case METHOD:
         covered = totalCoveredMethod();
@@ -138,7 +139,7 @@ public class Coverage {
   }
 
   private final long totalMissedBranch() {
-    return report.getLines().map(ReportLine::getBranchMissed).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalMissedMethod() {
@@ -160,7 +161,7 @@ public class Coverage {
   }
 
   private final long totalCoveredBranch() {
-    return report.getLines().map(ReportLine::getBranchCovered).sum().longValue();
+    throw new IllegalAccessError("It should not come here");
   }
 
   private final long totalCoveredMethod() {
