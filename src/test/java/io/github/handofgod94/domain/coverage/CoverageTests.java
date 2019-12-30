@@ -47,20 +47,4 @@ public class CoverageTests {
 
     assertEquals(0f, actualPercentage);
   }
-
-  @Test
-  void loadCoverage_returns_coverage_for_branch() {
-    when(line1.getBranchMissed()).thenReturn(100L);
-    when(line1.getBranchCovered()).thenReturn(50L);
-
-    when(line2.getBranchMissed()).thenReturn(30L);
-    when(line2.getBranchCovered()).thenReturn(50L);
-
-    Coverage actual = Coverage.create(Coverage.CoverageCategory.BRANCH, report);
-
-    long expectedCovered = 100L;
-    long expectedMissed = 130L;
-    assertEquals(expectedCovered, actual.getCovered());
-    assertEquals(expectedMissed, actual.getMissed());
-  }
 }
