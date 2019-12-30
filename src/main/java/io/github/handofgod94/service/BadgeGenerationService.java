@@ -1,9 +1,9 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.FreemarkerConfig;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
@@ -60,6 +60,10 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     );
   }
 
+  /**
+   * Generates badge string, ""empty if calculation is unsuccessful.
+   * @return
+   */
   public String generateBadgeString() {
     return Match(renderBadgeString(badge.get())).of(
       Case($Success($()), str -> str),

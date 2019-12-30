@@ -1,8 +1,9 @@
 package io.github.handofgod94.service.helper;
 
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.coverage.Coverage;
 
+@Deprecated
 public class CoverageHelper {
 
   private final Coverage.CoverageCategory category;
@@ -13,6 +14,10 @@ public class CoverageHelper {
     this.report = report;
   }
 
+  /**
+   * Loads coverage for a report.
+   * @return
+   */
   public Coverage loadCoverage() {
     long missed = 0;
     long covered = 0;

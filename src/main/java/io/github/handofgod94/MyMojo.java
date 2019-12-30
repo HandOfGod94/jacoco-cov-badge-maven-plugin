@@ -1,8 +1,8 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.service.BadgeGenerationService;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
@@ -13,7 +13,9 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
-import static io.vavr.API.*;
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.API.Match;
 import static io.vavr.Patterns.$None;
 import static io.vavr.Patterns.$Some;
 

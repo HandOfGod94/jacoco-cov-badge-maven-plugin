@@ -2,8 +2,8 @@ package io.github.handofgod94.service;
 
 import io.github.handofgod94.BadgeUtility;
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.FormatterFactory;
 import io.github.handofgod94.parser.ReportParser;

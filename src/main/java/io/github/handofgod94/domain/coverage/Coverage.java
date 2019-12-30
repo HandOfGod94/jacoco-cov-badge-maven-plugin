@@ -37,6 +37,12 @@ public abstract class Coverage implements CoverageCalculator {
     this.report = report;
   }
 
+  /**
+   * Creates coverage for a jacoco report.
+   * @param category category fro which coverage needs to be calculated.
+   * @param report parsed jacoco report
+   * @return Coverage instance based on category.
+   */
   public static Coverage create(CoverageCategory category, Report report) {
     switch (category) {
       case INSTRUCTION:
@@ -83,12 +89,12 @@ public abstract class Coverage implements CoverageCalculator {
 
   @Override
   public String toString() {
-    return "Coverage{" +
-      "covered=" + covered +
-      ", missed=" + missed +
-      ", category=" + category +
-      ", report=" + report +
-      '}';
+    return "Coverage{"
+      + "covered=" + covered
+      + ", missed=" + missed
+      + ", category=" + category
+      + ", report=" + report
+      + '}';
   }
 
   @Override
@@ -96,10 +102,10 @@ public abstract class Coverage implements CoverageCalculator {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Coverage coverage = (Coverage) o;
-    return covered == coverage.covered &&
-      missed == coverage.missed &&
-      category == coverage.category &&
-      report.equals(coverage.report);
+    return covered == coverage.covered
+      && missed == coverage.missed
+      && category == coverage.category
+      && report.equals(coverage.report);
   }
 
   @Override

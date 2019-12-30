@@ -19,6 +19,9 @@ public class FreemarkerConfig {
 
   private final Configuration configuration;
 
+  /**
+   * Initializes freemarker config.
+   */
   public FreemarkerConfig() {
     configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
@@ -30,7 +33,7 @@ public class FreemarkerConfig {
     tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
 
     configuration.setTemplateConfigurations(
-      new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
+        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
   }
 
   public Configuration getConfiguration() {
