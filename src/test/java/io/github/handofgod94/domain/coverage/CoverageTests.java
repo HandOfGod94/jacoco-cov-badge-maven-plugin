@@ -65,22 +65,6 @@ public class CoverageTests {
   }
 
   @Test
-  void loadCoverage_returns_coverage_for_line() {
-    when(line1.getLineMissed()).thenReturn(100L);
-    when(line1.getLineCovered()).thenReturn(50L);
-
-    when(line2.getLineMissed()).thenReturn(30L);
-    when(line2.getLineCovered()).thenReturn(50L);
-
-    Coverage actual = Coverage.create(Coverage.CoverageCategory.LINE, report);
-
-    long expectedCovered = 100L;
-    long expectedMissed = 130L;
-    assertEquals(expectedCovered, actual.getCovered());
-    assertEquals(expectedMissed, actual.getMissed());
-  }
-
-  @Test
   void loadCoverage_returns_coverage_for_branch() {
     when(line1.getBranchMissed()).thenReturn(100L);
     when(line1.getBranchCovered()).thenReturn(50L);
