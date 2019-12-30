@@ -17,6 +17,9 @@ public class CoverageHelper {
     long missed = 0;
     long covered = 0;
     Coverage coverage = Coverage.create(category, report);
+
+    //TODO: remove this side effect calculation.
+    float temp = coverage.getCoveragePercentage();
     return coverage;
   }
 }
