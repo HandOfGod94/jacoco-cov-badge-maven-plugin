@@ -27,12 +27,8 @@ public class CoverageTests {
 
   @Test
   void getCoveragePercentage_returns_coverage_for_valid_input() {
-    when(line1.getInstructionMissed()).thenReturn(100L);
+    when(line1.getInstructionMissed()).thenReturn(50L);
     when(line1.getInstructionCovered()).thenReturn(50L);
-
-    when(line2.getInstructionMissed()).thenReturn(30L);
-    when(line2.getInstructionCovered()).thenReturn(50L);
-
     Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
 
     float actualPercentage = coverage.getCoveragePercentage();
@@ -42,30 +38,14 @@ public class CoverageTests {
 
   @Test
   void getCoveragePercentage_returns_zero_for_invalid_input() {
+    when(line1.getInstructionMissed()).thenReturn(-50L);
+    when(line1.getInstructionCovered()).thenReturn(50L);
     Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
     CoverageCalculator calculator = mock(CoverageCalculator.class);
-    when(calculator.calculateCovered()).thenReturn(10L);
-    when(calculator.calculateMissed()).thenReturn(10L);
 
     float actualPercentage = coverage.getCoveragePercentage();
 
     assertEquals(0f, actualPercentage);
-  }
-
-  @Test
-  void loadCoverage_returns_coverage_for_instruction() {
-    when(line1.getInstructionMissed()).thenReturn(100L);
-    when(line1.getInstructionCovered()).thenReturn(50L);
-
-    when(line2.getInstructionMissed()).thenReturn(30L);
-    when(line2.getInstructionCovered()).thenReturn(50L);
-
-    Coverage actual = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
-
-    long expectedCovered = 100L;
-    long expectedMissed = 130L;
-    assertEquals(expectedCovered, actual.getCovered());
-    assertEquals(expectedMissed, actual.getMissed());
   }
 
   @Test
