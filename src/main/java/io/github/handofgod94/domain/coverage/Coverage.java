@@ -1,10 +1,11 @@
 package io.github.handofgod94.domain.coverage;
 
 import io.github.handofgod94.domain.Report;
+import io.vavr.Lazy;
 
 import java.util.Objects;
 
-public class Coverage {
+public abstract class Coverage implements CoverageCalculator {
 
   /**
    * Enum constants for coverage category.
@@ -29,6 +30,7 @@ public class Coverage {
   public long missed;
   public CoverageCategory category;
   public Report report;
+  protected Lazy<CoverageCalculator> calculator = Lazy.of(() -> this);
 
   Coverage(CoverageCategory category, Report report) {
     this.category = category;
@@ -36,7 +38,20 @@ public class Coverage {
   }
 
   public static Coverage create(CoverageCategory category, Report report) {
-    return new Coverage(category, report);
+    switch (category) {
+      case INSTRUCTION:
+        return new InstructionCoverage(category, report);
+      case LINE:
+        return new LineCoverage(category, report);
+      case BRANCH:
+        return new BranchCoverage(category, report);
+      case METHOD:
+        return new MethodCoverage(category, report);
+      case COMPLEXITY:
+        return new ComplexityCoverage(category, report);
+      default:
+        throw new IllegalArgumentException("Invalid Coverage Category provided");
+    }
   }
 
   /**
@@ -45,6 +60,9 @@ public class Coverage {
    *     INVALID_COVERAGE_PERCENTAGE = 0f otherwise
    */
   public float getCoveragePercentage() {
+    covered = calculator.get().calculateCovered();
+    missed = calculator.get().calculateMissed();
+
     if (covered < 0
         || missed < 0) {
       return INVALID_COVERAGE_PERCENTAGE;
@@ -55,56 +73,12 @@ public class Coverage {
     return result;
   }
 
-  /**
-   * Generates an instance of Coverage by calculating the coverage for given category.
-   */
-  public void loadCoverage() {
-    switch (category) {
-      case INSTRUCTION:
-        InstructionCoverage coverage = new InstructionCoverage(category, report);
-        covered = coverage.calculateCovered();
-        missed = coverage.calculateMissed();
-        break;
-      case LINE:
-        LineCoverage coverage1 = new LineCoverage(category, report);
-        covered = coverage1.calculateCovered();
-        missed = coverage1.calculateMissed();
-        break;
-      case BRANCH:
-        BranchCoverage coverage2 = new BranchCoverage(category, report);
-        covered = coverage2.calculateCovered();
-        missed = coverage2.calculateMissed();
-        break;
-      case METHOD:
-        MethodCoverage methodCoverage = new MethodCoverage(category, report);
-        covered = methodCoverage.calculateCovered();
-        missed = methodCoverage.calculateMissed();
-        break;
-      case COMPLEXITY:
-        ComplexityCoverage complexityCoverage = new ComplexityCoverage(category, report);
-        covered = complexityCoverage.calculateCovered();
-        missed = complexityCoverage.calculateMissed();
-        break;
-      default:
-        throw new IllegalArgumentException("Invalid Coverage Category provided");
-    }
-  }
-
-  public long getCovered() {
-    return covered;
-  }
-
   public long getMissed() {
     return missed;
   }
 
-  // TODO: see if setters can be removed
-  public void setCovered(long covered) {
-    this.covered = covered;
-  }
-
-  public void setMissed(long missed) {
-    this.missed = missed;
+  public long getCovered() {
+    return covered;
   }
 
   @Override
@@ -113,6 +87,7 @@ public class Coverage {
       "covered=" + covered +
       ", missed=" + missed +
       ", category=" + category +
+      ", report=" + report +
       '}';
   }
 
@@ -123,11 +98,12 @@ public class Coverage {
     Coverage coverage = (Coverage) o;
     return covered == coverage.covered &&
       missed == coverage.missed &&
-      category == coverage.category;
+      category == coverage.category &&
+      report.equals(coverage.report);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(covered, missed, category);
+    return Objects.hash(covered, missed, category, report);
   }
 }

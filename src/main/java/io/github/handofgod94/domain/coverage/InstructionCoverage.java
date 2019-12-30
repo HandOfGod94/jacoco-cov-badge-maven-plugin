@@ -3,7 +3,7 @@ package io.github.handofgod94.domain.coverage;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 
-public class InstructionCoverage extends Coverage implements CoverageInterface {
+public class InstructionCoverage extends Coverage {
 
   InstructionCoverage(CoverageCategory category, Report report) {
     super(category, report);

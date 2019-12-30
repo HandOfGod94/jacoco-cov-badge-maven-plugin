@@ -17,7 +17,6 @@ public class CoverageHelper {
     long missed = 0;
     long covered = 0;
     Coverage coverage = Coverage.create(category, report);
-    coverage.loadCoverage();
     return coverage;
   }
 }
