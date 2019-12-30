@@ -1,6 +1,7 @@
-package io.github.handofgod94.domain;
+package io.github.handofgod94.domain.coverage;
 
-import io.github.handofgod94.domain.coverage.Coverage;
+import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class InstructionCoverageTest {
+class ComplexityCoverageTest {
 
   private Report report;
   private ReportLine line1;
@@ -23,15 +24,18 @@ class InstructionCoverageTest {
     line2 = mock(ReportLine.class);
     lines = List.of(line1, line2);
     when(report.getLines()).thenReturn(lines);
-    when(line1.getInstructionMissed()).thenReturn(100L);
-    when(line1.getInstructionCovered()).thenReturn(50L);
-    when(line2.getInstructionMissed()).thenReturn(30L);
-    when(line2.getInstructionCovered()).thenReturn(50L);
+
+    when(line1.getComplexityMissed()).thenReturn(100L);
+    when(line1.getComplexityCovered()).thenReturn(50L);
+
+    when(line2.getComplexityMissed()).thenReturn(30L);
+    when(line2.getComplexityCovered()).thenReturn(50L);
   }
 
+
   @Test
-  void calculateMissed_returns_coverage_for_instruction() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+  void calculateMissed_calculatesComplexityMissed() {
+    Coverage coverage = Coverage.create(Coverage.CoverageCategory.COMPLEXITY, report);
 
     long actual = coverage.calculateMissed();
 
@@ -39,8 +43,8 @@ class InstructionCoverageTest {
   }
 
   @Test
-  void calculateCovered_returns_coverage_for_instruction() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+  void calculateCovered_calculatesComplexityCovered() {
+    Coverage coverage = Coverage.create(Coverage.CoverageCategory.COMPLEXITY, report);
 
     long actual = coverage.calculateCovered();
 

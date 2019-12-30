@@ -63,20 +63,4 @@ public class CoverageTests {
     assertEquals(expectedCovered, actual.getCovered());
     assertEquals(expectedMissed, actual.getMissed());
   }
-
-  @Test
-  void loadCoverage_returns_coverage_for_complexity() {
-    when(line1.getComplexityMissed()).thenReturn(100L);
-    when(line1.getComplexityCovered()).thenReturn(50L);
-
-    when(line2.getComplexityMissed()).thenReturn(30L);
-    when(line2.getComplexityCovered()).thenReturn(50L);
-
-    Coverage actual = Coverage.create(Coverage.CoverageCategory.COMPLEXITY, report);
-
-    long expectedCovered = 100L;
-    long expectedMissed = 130L;
-    assertEquals(expectedCovered, actual.getCovered());
-    assertEquals(expectedMissed, actual.getMissed());
-  }
 }
