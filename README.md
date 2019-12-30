@@ -53,8 +53,8 @@ provides badges as a service.
 The plugin needs `jacoco.csv` report, for it to function correctly.
 So you can bind it to any phase after the `jacoco.csv` reports gets generated.
 
-Although these are configurable, but some assumptions made by the plugin:
-**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`
+Although these are configurable, but some assumptions made by the plugin:  
+**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`  
 **Default Output location**:`${project.build.directory}/coverage.svg`
 
 ```xml
