@@ -10,13 +10,13 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FreemarkerConfigTest {
+class BadgeTemplateTest {
 
   @Test
   void getConfiguration_loads_freemarker_config() {
     // TODO: see if we can test other configs as well
 
-    Configuration actual = new FreemarkerConfig().getConfiguration();
+    Configuration actual = new BadgeTemplate().getConfiguration();
     assertAll("it loadsd all the freemarker config",
       () -> assertEquals("UTF-8", actual.getDefaultEncoding()),
       () -> assertEquals(Locale.US, actual.getLocale())
@@ -25,10 +25,10 @@ class FreemarkerConfigTest {
 
   @Test
   void render_WhenBadgeIsValid_ItReturnsSuccess() {
-    FreemarkerConfig freemarkerConfig = new FreemarkerConfig();
+    BadgeTemplate badgeTemplate = new BadgeTemplate();
     Badge badge = Badge.create("Foo", 78);
 
-    Try<String> result = freemarkerConfig.render(badge);
+    Try<String> result = badgeTemplate.render(badge);
 
     assertTrue(result.isSuccess());
     assertTrue(result.get().contains("Foo"));
@@ -36,11 +36,11 @@ class FreemarkerConfigTest {
 
   @Test
   void render_WhenBadgeThrowsError_ItReturnsFailure() {
-    FreemarkerConfig freemarkerConfig = new FreemarkerConfig();
+    BadgeTemplate badgeTemplate = new BadgeTemplate();
     Badge badge = Mockito.mock(Badge.class);
     Mockito.when(badge.templateData()).thenThrow(IOException.class);
 
-    Try<String> result = freemarkerConfig.render(badge);
+    Try<String> result = badgeTemplate.render(badge);
 
     assertTrue(result.isFailure());
   }

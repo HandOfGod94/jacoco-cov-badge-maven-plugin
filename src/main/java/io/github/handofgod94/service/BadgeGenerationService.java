@@ -2,7 +2,7 @@ package io.github.handofgod94.service;
 
 import io.github.handofgod94.BadgeUtility;
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.FreemarkerConfig;
+import io.github.handofgod94.domain.BadgeTemplate;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.format.Formatter;
@@ -31,7 +31,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   private File outputFile;
   private Writer templateWriter;
 
-  private Lazy<FreemarkerConfig> freemarkerConfig = Lazy.of(() -> new FreemarkerConfig());
+  private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(() -> new BadgeTemplate());
   private Lazy<Badge> badge = Lazy.of(() -> {
     Coverage coverage = calculateCoverage(jacocoReportFile, category);
     Badge badge = initializeBadge(coverage, badgeLabel);
@@ -76,7 +76,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   }
 
   protected Try<String> renderBadgeString(Badge badge) {
-    return freemarkerConfig.get().render(badge);
+    return badgeTemplate.get().render(badge);
   }
 
   private String fileExt() {

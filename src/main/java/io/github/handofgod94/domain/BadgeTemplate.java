@@ -15,16 +15,16 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Locale;
 
-public class FreemarkerConfig {
+public class BadgeTemplate {
 
   public static final String DEFAULT_TEMPLATE = "svg-badge-template.ftl";
 
   private final Configuration configuration;
 
   /**
-   * Initializes freemarker config.
+   * Initializes badge template with freemarker config.
    */
-  public FreemarkerConfig() {
+  public BadgeTemplate() {
     configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
     configuration.setDefaultEncoding("UTF-8");
@@ -51,7 +51,7 @@ public class FreemarkerConfig {
   public Try<String> render(Badge badge) {
     return
       Try
-        .withResources(() -> new StringWriter())
+        .withResources(StringWriter::new)
         .of(templateWriter -> {
           getDefaultTemplate().process(badge.templateData(), templateWriter);
           return templateWriter.toString();
