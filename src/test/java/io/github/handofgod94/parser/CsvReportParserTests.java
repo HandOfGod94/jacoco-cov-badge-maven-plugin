@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class CsvReportParserTests {
 
   @Test
-  void parseReport_should_generate_report_if_report_is_valid() throws IOException, URISyntaxException {
+  void parseReport_WhenReportIsValid_ItGeneratesReport() throws IOException, URISyntaxException {
     File file = Paths.get(getClass().getClassLoader().getResource("jacoco-single-line.csv").toURI()).toFile();
     ReportParser reportParser = new CsvReportParser();
     Report actualReport = reportParser.parseReport(file);
@@ -36,6 +36,6 @@ public class CsvReportParserTests {
       .setMethodCovered(3).build();
 
     assertAll("when report is valid",
-      () -> assertTrue("it contains expected report line",actualReport.getLines().contains(expectedReportLine)));
+      () -> assertTrue("it contains expected report line", actualReport.getLines().contains(expectedReportLine)));
   }
 }

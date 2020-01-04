@@ -60,21 +60,20 @@ public class CsvReportParser implements ReportParser {
 
   @Override
   public Report parseReport(File file) {
-    FileReader reader = null;
-
-    try {
-      reader = new FileReader(file);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-
-    CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
-
-    List<ReportLine> report = Try.of(csvReader::readNext)
-        .toStream()
-        .map(csvLineToReportLineMapper)
+    List<ReportLine> report =
+      Try
+        .withResources(() -> createCsvReader(file))
+        .of(CSVReader::readNext)
+        .mapTry(csvLineToReportLineMapper::apply)
         .toList();
 
     return Report.create(report);
+  }
+
+  private CSVReader createCsvReader(File file) throws FileNotFoundException {
+    return
+      new CSVReaderBuilder(new FileReader(file))
+        .withSkipLines(1)
+        .build();
   }
 }
