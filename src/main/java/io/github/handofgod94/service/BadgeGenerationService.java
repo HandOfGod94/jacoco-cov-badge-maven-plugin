@@ -8,15 +8,12 @@ import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.FormatterFactory;
-import io.github.handofgod94.parser.ReportParser;
 import io.github.handofgod94.parser.ReportParserFactory;
 import io.vavr.Lazy;
-import io.vavr.collection.List;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
 import java.io.File;
-import java.io.FileReader;
 
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
@@ -41,6 +38,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
 
   /**
    * Service to generate badges.
+   *
    * @param myMojoConfig config params provided in pom file of user.
    */
   public BadgeGenerationService(MyMojoConfiguration myMojoConfig) {
@@ -53,6 +51,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   /**
    * Generates badge.
    * It calculates and renders the badge using the config values provided
+   *
    * @return Instance of Badge, if rendering is success, Option.empty() otherwise.
    */
   public Option<Badge> generate() {
@@ -69,10 +68,8 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   }
 
   private Report report() {
-    ReportParser reportParser = ReportParserFactory.create(jacocoReportFile);
-    return Try
-      .of(() -> reportParser.parseReport(new FileReader(jacocoReportFile)))
-      .getOrElse(() -> Report.create(List.empty()));
+    return ReportParserFactory.create(jacocoReportFile)
+      .parseReport(jacocoReportFile);
   }
 
   private String generateBadgeString() {

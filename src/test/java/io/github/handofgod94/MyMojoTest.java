@@ -23,12 +23,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
 
     MyMojo mojo = (MyMojo) lookupMojo("badge", testPom);
 
-    Assertions.assertNotNull(mojo);
-
     mojo.execute();
-
-    // Verify svg file generated
-    Assertions.assertTrue(outputFile.exists());
 
     Diff diff =
       DiffBuilder

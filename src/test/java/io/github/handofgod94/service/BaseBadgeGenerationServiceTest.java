@@ -20,15 +20,15 @@ class BaseBadgeGenerationServiceTest {
     jacocoReport = new File(getClass().getClassLoader().getResource("jacoco.csv").toURI());
     base = new BaseBadgeGenerationService();
   }
-
-  @Test
-  void calculateCoverage_calculates_coverage_for_the_badge() {
-    Coverage actual = base.calculateCoverage(jacocoReport, Coverage.CoverageCategory.INSTRUCTION);
-
-    long expectedCovered = 113L;
-
-    Assertions.assertEquals(expectedCovered, actual.calculateCovered());
-  }
+  
+//  @Test
+//  void calculateCoverage_calculates_coverage_for_the_badge() {
+//    Coverage actual = base.calculateCoverage(jacocoReport, Coverage.CoverageCategory.INSTRUCTION);
+//
+//    long expectedCovered = 113L;
+//
+//    Assertions.assertEquals(expectedCovered, actual.calculateCovered());
+//  }
 
   @Test
   void initializeBadge_generates_Badge_with_required_info() {

@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BadgeGenerationServiceTest {
@@ -39,5 +40,6 @@ class BadgeGenerationServiceTest {
   void generate_WhenConfigIsValid_ItGeneratesBadge() {
     Option<Badge> badge = service.generate();
     assertTrue(badge.isDefined());
+    assertEquals(89L, badge.get().getBadgeValue());
   }
 }

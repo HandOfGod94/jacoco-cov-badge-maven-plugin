@@ -7,7 +7,9 @@ import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
 
-import java.io.Reader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.function.Function;
 
 public class CsvReportParser implements ReportParser {
@@ -57,7 +59,15 @@ public class CsvReportParser implements ReportParser {
   };
 
   @Override
-  public Report parseReport(Reader reader) {
+  public Report parseReport(File file) {
+    FileReader reader = null;
+
+    try {
+      reader = new FileReader(file);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
     CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
 
     List<ReportLine> report = Try.of(csvReader::readNext)
