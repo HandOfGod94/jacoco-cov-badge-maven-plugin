@@ -22,8 +22,6 @@ import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerationService extends BaseBadgeGenerationService {
 
-  public static final String DEFAULT_BADGE_LABEL = "coverage";
-
   private Coverage.CoverageCategory category;
   private String badgeLabel;
   private File jacocoReportFile;
@@ -31,10 +29,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
 
   private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(BadgeTemplate::new);
 
-  private Lazy<Badge> badge = Lazy.of(() -> {
-    Badge badge = initializeBadge(coverage(), badgeLabel);
-    return badge;
-  });
+  private Lazy<Badge> badge = Lazy.of(() -> Badge.create(badgeLabel, badgeValue()));
 
   /**
    * Service to generate badges.
@@ -65,6 +60,10 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
 
   private Coverage coverage() {
     return report().getCoverage(category);
+  }
+
+  private int badgeValue() {
+    return (int) Math.floor(coverage().getCoveragePercentage());
   }
 
   private Report report() {

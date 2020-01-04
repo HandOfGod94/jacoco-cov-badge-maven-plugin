@@ -61,11 +61,11 @@ public class CsvReportParser implements ReportParser {
   @Override
   public Report parseReport(File file) {
     List<ReportLine> report =
-      Try
-        .withResources(() -> createCsvReader(file))
-        .of(CSVReader::readNext)
-        .mapTry(csvLineToReportLineMapper::apply)
-        .toList();
+        Try
+          .withResources(() -> createCsvReader(file))
+          .of(CSVReader::readNext)
+          .mapTry(csvLineToReportLineMapper::apply)
+          .toList();
 
     return Report.create(report);
   }
