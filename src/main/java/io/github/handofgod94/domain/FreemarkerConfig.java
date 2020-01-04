@@ -9,8 +9,10 @@ import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 import io.github.handofgod94.MyMojo;
+import io.vavr.control.Try;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Locale;
 
 public class FreemarkerConfig {
@@ -40,7 +42,23 @@ public class FreemarkerConfig {
     return configuration;
   }
 
-  public Template getDefaultTemplate() throws IOException {
+  /**
+   * Renders a badge based with default template.
+   *
+   * @param badge a valid badge with all the data
+   * @return string for Success case
+   */
+  public Try<String> render(Badge badge) {
+    return
+      Try
+        .withResources(() -> new StringWriter())
+        .of(templateWriter -> {
+          getDefaultTemplate().process(badge.templateData(), templateWriter);
+          return templateWriter.toString();
+        });
+  }
+
+  private Template getDefaultTemplate() throws IOException {
     return configuration.getTemplate(DEFAULT_TEMPLATE);
   }
 }

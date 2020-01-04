@@ -76,9 +76,7 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   }
 
   protected Try<String> renderBadgeString(Badge badge) {
-    return Try.of(() -> freemarkerConfig.get().getDefaultTemplate())
-      .andThenTry(template -> template.process(badge.templateData(), templateWriter))
-      .mapTry(ignoreIfError -> templateWriter.toString());
+    return freemarkerConfig.get().render(badge);
   }
 
   private String fileExt() {
