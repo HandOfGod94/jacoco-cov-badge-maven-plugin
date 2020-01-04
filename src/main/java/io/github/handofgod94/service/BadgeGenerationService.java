@@ -4,16 +4,19 @@ import io.github.handofgod94.BadgeUtility;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.BadgeTemplate;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.format.Formatter;
 import io.github.handofgod94.format.FormatterFactory;
+import io.github.handofgod94.parser.ReportParser;
+import io.github.handofgod94.parser.ReportParserFactory;
 import io.vavr.Lazy;
+import io.vavr.collection.List;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
 import java.io.File;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.FileReader;
 
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
@@ -28,12 +31,11 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
   private String badgeLabel;
   private File jacocoReportFile;
   private File outputFile;
-  private Writer templateWriter;
 
-  private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(() -> new BadgeTemplate());
+  private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(BadgeTemplate::new);
+
   private Lazy<Badge> badge = Lazy.of(() -> {
-    Coverage coverage = calculateCoverage(jacocoReportFile, category);
-    Badge badge = initializeBadge(coverage, badgeLabel);
+    Badge badge = initializeBadge(coverage(), badgeLabel);
     return badge;
   });
 
@@ -46,7 +48,6 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     this.badgeLabel = myMojoConfig.getBadgeLabel();
     this.jacocoReportFile = myMojoConfig.getJacocoReportFile();
     this.outputFile = myMojoConfig.getOutputFile();
-    this.templateWriter = new StringWriter();
   }
 
   /**
@@ -61,6 +62,17 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     return Match(result).option(
       Case($Success($()), () -> badge.get())
     );
+  }
+
+  private Coverage coverage() {
+    return report().getCoverage(category);
+  }
+
+  private Report report() {
+    ReportParser reportParser = ReportParserFactory.create(jacocoReportFile);
+    return Try
+      .of(() -> reportParser.parseReport(new FileReader(jacocoReportFile)))
+      .getOrElse(() -> Report.create(List.empty()));
   }
 
   private String generateBadgeString() {

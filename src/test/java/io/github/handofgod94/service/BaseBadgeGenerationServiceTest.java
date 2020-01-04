@@ -40,14 +40,4 @@ class BaseBadgeGenerationServiceTest {
 
     Assertions.assertEquals(execpted, actual);
   }
-
-//  @Test
-//  void saveToFile_returns_true_for_successful_save() throws IOException {
-//    File outputTempFile = Files.createTempFile("temp",".svg").toFile();
-//    String dummyRenderedString = "dummy";
-//
-//    boolean isSaveSuccess = base.saveToFile(outputTempFile, dummyRenderedString).isSuccess();
-//
-//    Assertions.assertTrue(isSaveSuccess);
-//  }
 }

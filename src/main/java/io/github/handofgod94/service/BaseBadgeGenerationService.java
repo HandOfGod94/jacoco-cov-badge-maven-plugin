@@ -22,7 +22,6 @@ class BaseBadgeGenerationService {
     Coverage coverage = Coverage.create(category, report);
     return coverage;
   }
-
   protected Badge initializeBadge(Coverage coverage, String badgeLabel) {
     int badgeValue = (int) Math.floor(coverage.getCoveragePercentage());
     Badge badge = Badge.create(badgeLabel, badgeValue);
