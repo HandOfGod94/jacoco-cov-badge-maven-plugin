@@ -1,9 +1,12 @@
 package io.github.handofgod94.service;
 
+import io.github.handofgod94.BadgeUtility;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.FreemarkerConfig;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.coverage.Coverage;
+import io.github.handofgod94.format.Formatter;
+import io.github.handofgod94.format.FormatterFactory;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
@@ -53,7 +56,8 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
    * @return Instance of Badge, if rendering is success, Option.empty() otherwise.
    */
   public Option<Badge> generate() {
-    Try<Void> result = saveToFile(outputFile, generateBadgeString());
+    Formatter formatter = FormatterFactory.createFormatter(fileExt());
+    Try<Void> result = formatter.save(outputFile, generateBadgeString());
 
     return Match(result).option(
       Case($Success($()), () -> badge.get())
@@ -75,5 +79,10 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     return Try.of(() -> freemarkerConfig.get().getDefaultTemplate())
       .andThenTry(template -> template.process(badge.templateData(), templateWriter))
       .mapTry(ignoreIfError -> templateWriter.toString());
+  }
+
+  private String fileExt() {
+    return BadgeUtility.getFileExt(outputFile)
+      .orElseThrow(() -> new IllegalArgumentException("Invalid output file provided"));
   }
 }

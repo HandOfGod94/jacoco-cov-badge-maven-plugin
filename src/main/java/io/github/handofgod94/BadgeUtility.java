@@ -7,6 +7,7 @@ public class BadgeUtility {
 
   /**
    * Get extension of any file.
+   *
    * @param file java.io.File object of a valid file.
    * @return String wrapped inside Optional if success, Optional.empty() otherwise.
    */
