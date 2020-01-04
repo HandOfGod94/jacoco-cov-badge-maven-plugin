@@ -1,7 +1,6 @@
 package io.github.handofgod94.domain;
 
 import freemarker.template.Configuration;
-import io.vavr.control.Try;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -28,10 +27,9 @@ class BadgeTemplateTest {
     BadgeTemplate badgeTemplate = new BadgeTemplate();
     Badge badge = Badge.create("Foo", 78);
 
-    Try<String> result = badgeTemplate.render(badge);
+    String result = badgeTemplate.render(badge);
 
-    assertTrue(result.isSuccess());
-    assertTrue(result.get().contains("Foo"));
+    assertTrue(result.contains("Foo"));
   }
 
   @Test
@@ -40,9 +38,9 @@ class BadgeTemplateTest {
     Badge badge = Mockito.mock(Badge.class);
     Mockito.when(badge.templateData()).thenThrow(IOException.class);
 
-    Try<String> result = badgeTemplate.render(badge);
+    String result = badgeTemplate.render(badge);
 
-    assertTrue(result.isFailure());
+    assertTrue(result.isEmpty());
   }
 
 }

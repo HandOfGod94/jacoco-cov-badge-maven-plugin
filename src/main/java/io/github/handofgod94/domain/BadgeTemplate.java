@@ -46,16 +46,17 @@ public class BadgeTemplate {
    * Renders a badge based with default template.
    *
    * @param badge a valid badge with all the data
-   * @return string for Success case
+   * @return string for Success case or empty string if exception occurs while processing string.
    */
-  public Try<String> render(Badge badge) {
+  public String render(Badge badge) {
     return
       Try
         .withResources(StringWriter::new)
         .of(templateWriter -> {
           getDefaultTemplate().process(badge.templateData(), templateWriter);
           return templateWriter.toString();
-        });
+        })
+        .getOrElse("");
   }
 
   private Template getDefaultTemplate() throws IOException {

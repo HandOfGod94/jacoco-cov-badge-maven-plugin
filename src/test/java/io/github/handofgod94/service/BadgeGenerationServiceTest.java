@@ -1,8 +1,8 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.control.Option;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BadgeGenerationServiceTest {
@@ -27,7 +26,7 @@ class BadgeGenerationServiceTest {
   @BeforeEach
   void setup() throws IOException, URISyntaxException {
     jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
-    outputFile = Files.createTempFile("temp",".svg").toFile();
+    outputFile = Files.createTempFile("temp", ".svg").toFile();
     configBuilder = MyMojoConfiguration.builder()
       .setCoverageCategory(Coverage.CoverageCategory.INSTRUCTION)
       .setBadgeLabel("foobarfizzbuzz")
@@ -37,17 +36,8 @@ class BadgeGenerationServiceTest {
   }
 
   @Test
-  void execute() {
+  void generate_WhenConfigIsValid_ItGeneratesBadge() {
     Option<Badge> badge = service.generate();
-    assertFalse(badge.isEmpty());
-  }
-
-  @Test
-  void generateBadgeString_WhenValidBadgeIsProvided_ItGeneratesSvgStringWithFilledValues() {
-    Badge badge = service.generate().get();
-
-    String badgeString = service.generateBadgeString();
-
-    assertTrue(badgeString.contains("foobarfizzbuzz"));
+    assertTrue(badge.isDefined());
   }
 }

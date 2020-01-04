@@ -18,7 +18,6 @@ import java.io.Writer;
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
 import static io.vavr.API.Match;
-import static io.vavr.Patterns.$Failure;
 import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerationService extends BaseBadgeGenerationService {
@@ -64,19 +63,8 @@ public class BadgeGenerationService extends BaseBadgeGenerationService {
     );
   }
 
-  /**
-   * Generates badge string, ""empty if calculation is unsuccessful.
-   * @return
-   */
-  public String generateBadgeString() {
-    return Match(renderBadgeString(badge.get())).of(
-      Case($Success($()), str -> str),
-      Case($Failure($()), "")
-    );
-  }
-
-  protected Try<String> renderBadgeString(Badge badge) {
-    return badgeTemplate.get().render(badge);
+  private String generateBadgeString() {
+    return badgeTemplate.get().render(badge.get());
   }
 
   private String fileExt() {
