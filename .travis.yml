@@ -9,10 +9,19 @@ cache:
 jobs:
   include:
     - stage: "test"
+      name: "Unit Tests"
       script: ./mvnw clean test
+    - script: ./mvnw dependency:analyze
+      name: "Dependency Analyze"
+
     - stage: "install"
+      name: "Build"
       script: ./mvnw clean install -Pstaging
       after_success: ./mvnw jacoco:report coveralls:report
+  allow_failures:
+    - script: ./mvnw dependency:analyze -DfailOnWarning=true
+      name: "Dependency Analyze"
+
 
 stages:
   - test
