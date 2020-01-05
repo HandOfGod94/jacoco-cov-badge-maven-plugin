@@ -68,6 +68,7 @@
     <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
     <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
     <maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
+    <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
     <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
     <checkstyle.version>8.21</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
@@ -199,6 +200,11 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven.dependency.plugin.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
