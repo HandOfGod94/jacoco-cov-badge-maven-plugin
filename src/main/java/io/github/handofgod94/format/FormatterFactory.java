@@ -1,7 +1,5 @@
 package io.github.handofgod94.format;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 /**
  * Factory class to generate formatter based on configuration i.e. (jpg, png, svg, etc).
  */
@@ -16,7 +14,7 @@ public class FormatterFactory {
    * to create files of different formats for the badge.
    * @param ext extension of the file format needed
    * @return Instance of {@link JpegFormatter}, {@link PngFormatter} or {@link SvgFormatter}.
-   * @throws NotImplementedException if invalid extension is provided.
+   * @throws UnsupportedOperationException if invalid extension is provided.
    */
   public static Formatter createFormatter(String ext) {
 
@@ -27,7 +25,9 @@ public class FormatterFactory {
     } else if (ext.equals(SVG_EXT)) {
       return new SvgFormatter();
     } else {
-      throw new NotImplementedException(String.format("Format: %s is not yet supported", ext));
+      throw new UnsupportedOperationException(
+        String.format("Format: %s is not yet supported", ext)
+      );
     }
   }
 }

@@ -1,7 +1,6 @@
 package io.github.handofgod94;
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
-import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.junit.jupiter.api.Assertions;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.builder.Input;
@@ -37,7 +36,7 @@ public class MyMojoTest extends AbstractMojoTestCase {
   public void testBadgeGoal_WhenPomIsInvalid_ItThrowsException() throws Exception {
     File testPom = new File(getBasedir(), "src/test/resources/basic-plugin-test-invalid-pom.xml");
 
-    Assertions.assertThrows(ComponentConfigurationException.class, () -> {
+    Assertions.assertThrows(Exception.class, () -> {
       MyMojo mojo = (MyMojo) lookupMojo("badge", testPom);
       mojo.execute();
     });

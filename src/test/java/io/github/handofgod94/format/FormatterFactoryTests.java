@@ -3,7 +3,6 @@ package io.github.handofgod94.format;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,7 +30,7 @@ public class FormatterFactoryTests {
 
   @Test
   void createFormatter_throws_NotImplementedException_when_fileExt_is_invalid() {
-    assertThrows(NotImplementedException.class, () -> {
+    assertThrows(UnsupportedOperationException.class, () -> {
       FormatterFactory.createFormatter("dummy");
     });
   }

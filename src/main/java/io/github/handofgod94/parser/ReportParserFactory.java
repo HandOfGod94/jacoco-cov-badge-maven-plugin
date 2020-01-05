@@ -1,7 +1,6 @@
 package io.github.handofgod94.parser;
 
 import io.github.handofgod94.BadgeUtility;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.io.File;
 
@@ -14,7 +13,7 @@ public class ReportParserFactory {
    * @param file jacoco report file which needs to be parsed.
    * @return ReportParser based on the extension of the jacoco file.
    * @throws IllegalArgumentException if jacoco report file is invalid.
-   * @throws NotImplementedException if file with invalid extension is provided.
+   * @throws UnsupportedOperationException if file with invalid extension is provided.
    */
   public static ReportParser create(File file) {
     String ext =
@@ -24,7 +23,7 @@ public class ReportParserFactory {
     if (ext.equals(CSV_EXT)) {
       return new CsvReportParser();
     } else {
-      throw new NotImplementedException("Report extension is not yet parsable");
+      throw new UnsupportedOperationException("Invalid extension for report");
     }
   }
 }

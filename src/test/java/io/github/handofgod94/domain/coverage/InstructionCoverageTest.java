@@ -2,7 +2,6 @@ package io.github.handofgod94.domain.coverage;
 
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.collection.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
