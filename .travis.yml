@@ -19,7 +19,7 @@ jobs:
       script: ./mvnw clean install -Pstaging
       after_success: ./mvnw jacoco:report coveralls:report
   allow_failures:
-    - script: ./mvnw dependency:analyze -DfailOnWarning=true
+    - script: ./mvnw dependency:analyze
       name: "Dependency Analyze"
 
 
