@@ -20,7 +20,7 @@ import static io.vavr.API.Case;
 import static io.vavr.API.Match;
 import static io.vavr.Patterns.$Success;
 
-public class BadgeGenerationService extends BaseBadgeGenerationService {
+public class BadgeGenerationService {
 
   private Coverage.CoverageCategory category;
   private String badgeLabel;
