@@ -1,7 +1,11 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.BadgeUtility;
-import io.github.handofgod94.domain.*;
+import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.BadgeTemplate;
+import io.github.handofgod94.domain.CoverageCategory;
+import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.service.format.Formatter;
 import io.github.handofgod94.service.format.FormatterFactory;

@@ -4,15 +4,14 @@ import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.vavr.Lazy;
 
-import java.util.Objects;
-
 public abstract class Coverage implements CoverageCalculator {
 
   public static final float INVALID_COVERAGE_PERCENTAGE = 0f;
+  public static final float INVALID_TOTAL = 1f;
 
   public CoverageCategory category;
   public Report report;
-  protected Lazy<CoverageCalculator> calculator = Lazy.of(() -> this);
+
   protected Lazy<Long> covered = Lazy.of(this::calculateCovered);
   protected Lazy<Long> missed = Lazy.of(this::calculateMissed);
 
@@ -49,45 +48,31 @@ public abstract class Coverage implements CoverageCalculator {
    * Calculates coverage percentage.
    *
    * @return float value if coverage calculation is success,
-   * INVALID_COVERAGE_PERCENTAGE = 0f otherwise
+   *     INVALID_COVERAGE_PERCENTAGE = 0f otherwise
    */
   public float getCoveragePercentage() {
-    long covered = this.covered.get();
-    long missed = this.missed.get();
-
-    if (covered < 0
-      || missed < 0) {
-      return INVALID_COVERAGE_PERCENTAGE;
-    }
-
-    float totalInstructions = covered + missed;
-    float result = (covered / totalInstructions) * 100.0f;
-    return result;
+    if (!isValid()) return INVALID_COVERAGE_PERCENTAGE;
+    return covered() / total() * 100.f;
   }
 
-  @Override
-  public String toString() {
-    return "Coverage{"
-      + "covered=" + covered
-      + ", missed=" + missed
-      + ", category=" + category
-      + ", report=" + report
-      + '}';
+  private float covered() {
+    return covered.get();
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Coverage coverage = (Coverage) o;
-    return covered == coverage.covered
-      && missed == coverage.missed
-      && category == coverage.category
-      && report.equals(coverage.report);
+  private float missed() {
+    return missed.get();
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(covered, missed, category, report);
+  private float total() {
+    if (!isTotalGreaterThanZero()) return INVALID_TOTAL;
+    return covered() + missed();
+  }
+
+  private boolean isTotalGreaterThanZero() {
+    return covered() + missed() > 0;
+  }
+
+  private boolean isValid() {
+    return covered() > 0 && missed() > 0;
   }
 }

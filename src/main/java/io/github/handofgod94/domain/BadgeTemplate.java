@@ -39,7 +39,7 @@ public class BadgeTemplate {
     tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
 
     configuration.setTemplateConfigurations(
-      new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
+        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
   }
 
   public Configuration getConfiguration() {
