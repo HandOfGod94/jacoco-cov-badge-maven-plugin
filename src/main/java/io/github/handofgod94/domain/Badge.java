@@ -10,18 +10,15 @@ import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 
 import java.util.Map;
 
-import static io.vavr.API.$;
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
-import static io.vavr.Patterns.$Failure;
-import static io.vavr.Patterns.$Success;
-
 /**
  * Badge class to hold configuration obtained from Maven config.
  * This will be shared across all the classes, who needs badge related information.
  */
 @AutoValue
 public abstract class Badge {
+
+  private static final PDFont FONT_FACE = PDMMType1Font.HELVETICA_BOLD;
+  private static final int FONT_SIZE = 12;
 
   public static Badge create(String badgeLabel, int badgeValue) {
     return new AutoValue_Badge(badgeLabel, badgeValue);
@@ -57,17 +54,15 @@ public abstract class Badge {
     return calculateWidth(getBadgeValue() + "%");
   }
 
-  protected float calculateWidth(String str) {
-    PDFont font = PDMMType1Font.HELVETICA_BOLD;
-    int fontSize = 12;
-    Try<Float> stringWidth = Try.of(() -> font.getStringWidth(str));
+  private float calculateWidth(String str) {
+    return renderingWidth(str) / 1000 * FONT_SIZE + 10.0f;
+  }
 
-    float width = Match(stringWidth).of(
-        Case($Success($()), val -> (val / 1000 * fontSize + 10.0f)),
-        Case($Failure($()), () -> Coverage.INVALID_COVERAGE_PERCENTAGE)
-    );
-
-    return width;
+  private float renderingWidth(String string) {
+    return
+      Try
+        .of(() -> FONT_FACE.getStringWidth(string))
+        .getOrElse(Coverage.INVALID_COVERAGE_PERCENTAGE);
   }
 
   public Map<String, Badge> templateData() {
