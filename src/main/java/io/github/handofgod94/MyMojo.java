@@ -3,7 +3,7 @@ package io.github.handofgod94;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.coverage.Coverage;
-import io.github.handofgod94.service.BadgeGenerationService;
+import io.github.handofgod94.service.BadgeGenerator;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
 import org.apache.maven.plugin.AbstractMojo;
@@ -50,8 +50,8 @@ public class MyMojo extends AbstractMojo {
 
   @Override
   public void execute() {
-    BadgeGenerationService generationService = new BadgeGenerationService(myMojoConfig.get());
-    Option<Badge> badge = generationService.generate();
+    BadgeGenerator generator = new BadgeGenerator(myMojoConfig.get());
+    Option<Badge> badge = generator.generate();
     getLog().info(buildMessage(badge));
   }
 

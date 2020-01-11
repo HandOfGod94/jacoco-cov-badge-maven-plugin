@@ -20,7 +20,7 @@ import static io.vavr.API.Case;
 import static io.vavr.API.Match;
 import static io.vavr.Patterns.$Success;
 
-public class BadgeGenerationService {
+public class BadgeGenerator {
 
   private Coverage.CoverageCategory category;
   private String badgeLabel;
@@ -36,7 +36,7 @@ public class BadgeGenerationService {
    *
    * @param myMojoConfig config params provided in pom file of user.
    */
-  public BadgeGenerationService(MyMojoConfiguration myMojoConfig) {
+  public BadgeGenerator(MyMojoConfiguration myMojoConfig) {
     this.category = myMojoConfig.getCoverageCategory();
     this.badgeLabel = myMojoConfig.getBadgeLabel();
     this.jacocoReportFile = myMojoConfig.getJacocoReportFile();

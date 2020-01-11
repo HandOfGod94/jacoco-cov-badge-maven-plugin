@@ -16,9 +16,9 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BadgeGenerationServiceTest {
+class BadgeGeneratorTest {
 
-  BadgeGenerationService service;
+  BadgeGenerator generator;
   File jacocoReportFile;
   File outputFile;
   MyMojoConfiguration.Builder configBuilder;
@@ -33,12 +33,12 @@ class BadgeGenerationServiceTest {
       .setBadgeLabel("foobarfizzbuzz")
       .setJacocoReportFile(jacocoReportFile)
       .setOutputFile(outputFile);
-    service = new BadgeGenerationService(configBuilder.build());
+    generator = new BadgeGenerator(configBuilder.build());
   }
 
   @Test
   void generate_WhenConfigIsValid_ItGeneratesBadge() {
-    Option<Badge> badge = service.generate();
+    Option<Badge> badge = generator.generate();
     assertTrue(badge.isDefined());
     assertEquals(89L, badge.get().getBadgeValue());
   }
