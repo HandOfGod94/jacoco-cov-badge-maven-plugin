@@ -6,7 +6,6 @@ import io.vavr.Lazy;
 public abstract class Coverage implements CoverageCalculator {
 
   public static final float INVALID_COVERAGE_PERCENTAGE = 0f;
-  public static final float INVALID_TOTAL = 1f;
 
   public CoverageCategory category;
   public Report report;
@@ -63,12 +62,7 @@ public abstract class Coverage implements CoverageCalculator {
   }
 
   private float total() {
-    if (!isTotalGreaterThanZero()) return INVALID_TOTAL;
     return covered() + missed();
-  }
-
-  private boolean isTotalGreaterThanZero() {
-    return covered() + missed() > 0;
   }
 
   private boolean isValid() {

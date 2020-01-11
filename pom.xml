@@ -83,6 +83,7 @@
     <mockito.version>1.10.19</mockito.version>
     <vavr.version>0.9.3</vavr.version>
     <autovalue.version>1.6.5</autovalue.version>
+    <guava.version>28.2-jre</guava.version>
   </properties>
 
   <dependencies>
@@ -131,6 +132,11 @@
       <groupId>com.google.auto.value</groupId>
       <artifactId>auto-value-annotations</artifactId>
       <version>${autovalue.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.auto.value</groupId>

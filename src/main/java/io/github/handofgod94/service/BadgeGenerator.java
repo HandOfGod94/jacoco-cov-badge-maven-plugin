@@ -5,7 +5,6 @@ import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.BadgeTemplate;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.Report;
-import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.domain.coverage.CoverageCategory;
 import io.github.handofgod94.service.format.Formatter;
 import io.github.handofgod94.service.format.FormatterFactory;
@@ -52,28 +51,24 @@ public class BadgeGenerator {
    */
   public Option<Badge> generate() {
     Formatter formatter = FormatterFactory.createFormatter(fileExt());
-    Try<Void> result = formatter.save(outputFile, generateBadgeString());
+    Try<Void> result = formatter.save(outputFile, renderBadge());
 
     return Match(result).option(
       Case($Success($()), () -> badge.get())
     );
   }
 
-  private Coverage coverage() {
-    return report().getCoverage(category);
+  private String renderBadge() {
+    return badgeTemplate.get().render(badge.get());
   }
 
   private int badgeValue() {
-    return (int) Math.floor(coverage().getCoveragePercentage());
+    return report().getCoverageValueFor(category);
   }
 
   private Report report() {
     return ReportParserFactory.create(jacocoReportFile)
       .parseReport(jacocoReportFile);
-  }
-
-  private String generateBadgeString() {
-    return badgeTemplate.get().render(badge.get());
   }
 
   private String fileExt() {

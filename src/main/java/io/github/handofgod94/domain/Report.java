@@ -13,9 +13,10 @@ public abstract class Report {
     return new AutoValue_Report(lines);
   }
 
-  public Coverage getCoverage(CoverageCategory category) {
-    return Coverage.create(category, this);
-  }
-
   public abstract List<ReportLine> getLines();
+
+  public int getCoverageValueFor(CoverageCategory category) {
+    Coverage coverage = Coverage.create(category, this);
+    return (int) Math.floor(coverage.getCoveragePercentage());
+  }
 }
