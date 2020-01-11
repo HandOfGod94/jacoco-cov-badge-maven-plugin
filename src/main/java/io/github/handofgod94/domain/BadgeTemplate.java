@@ -19,12 +19,16 @@ public class BadgeTemplate {
 
   public static final String DEFAULT_TEMPLATE = "svg-badge-template.ftl";
 
-  private final Configuration configuration;
+  private Configuration configuration;
 
   /**
    * Initializes badge template with freemarker config.
    */
   public BadgeTemplate() {
+    initializeConfiguration();
+  }
+
+  private void initializeConfiguration() {
     configuration = new Configuration(new Version(2, 3, 20));
     configuration.setClassForTemplateLoading(MyMojo.class, "templates");
     configuration.setDefaultEncoding("UTF-8");
@@ -35,7 +39,7 @@ public class BadgeTemplate {
     tcSvg.setOutputFormat(XMLOutputFormat.INSTANCE);
 
     configuration.setTemplateConfigurations(
-        new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
+      new ConditionalTemplateConfigurationFactory(new PathGlobMatcher("**/svg-*"), tcSvg));
   }
 
   public Configuration getConfiguration() {
