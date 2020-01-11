@@ -3,6 +3,7 @@ package io.github.handofgod94.domain.coverage;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
@@ -29,7 +30,7 @@ public class CoverageTests {
   void getCoveragePercentage_returns_coverage_for_valid_input() {
     when(line1.getInstructionMissed()).thenReturn(50L);
     when(line1.getInstructionCovered()).thenReturn(50L);
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+    Coverage coverage = Coverage.create(CoverageCategory.INSTRUCTION, report);
 
     float actualPercentage = coverage.getCoveragePercentage();
 
@@ -40,7 +41,7 @@ public class CoverageTests {
   void getCoveragePercentage_returns_zero_for_invalid_input() {
     when(line1.getInstructionMissed()).thenReturn(-50L);
     when(line1.getInstructionCovered()).thenReturn(50L);
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+    Coverage coverage = Coverage.create(CoverageCategory.INSTRUCTION, report);
     CoverageCalculator calculator = mock(CoverageCalculator.class);
 
     float actualPercentage = coverage.getCoveragePercentage();

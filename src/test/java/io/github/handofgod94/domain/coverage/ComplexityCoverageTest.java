@@ -1,5 +1,6 @@
 package io.github.handofgod94.domain.coverage;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
@@ -35,7 +36,7 @@ class ComplexityCoverageTest {
 
   @Test
   void calculateMissed_calculatesComplexityMissed() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.COMPLEXITY, report);
+    Coverage coverage = Coverage.create(CoverageCategory.COMPLEXITY, report);
 
     long actual = coverage.calculateMissed();
 
@@ -44,7 +45,7 @@ class ComplexityCoverageTest {
 
   @Test
   void calculateCovered_calculatesComplexityCovered() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.COMPLEXITY, report);
+    Coverage coverage = Coverage.create(CoverageCategory.COMPLEXITY, report);
 
     long actual = coverage.calculateCovered();
 

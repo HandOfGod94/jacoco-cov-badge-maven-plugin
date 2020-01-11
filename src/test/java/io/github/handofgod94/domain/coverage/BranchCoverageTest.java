@@ -1,5 +1,6 @@
 package io.github.handofgod94.domain.coverage;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
@@ -33,7 +34,7 @@ class BranchCoverageTest {
 
   @Test
   void calculateMissed_calculatesBranchesMissed() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.BRANCH, report);
+    Coverage coverage = Coverage.create(CoverageCategory.BRANCH, report);
 
     long actual = coverage.calculateMissed();
 
@@ -44,7 +45,7 @@ class BranchCoverageTest {
 
   @Test
   void calculateCovered_calculatesBranchesCovered() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.BRANCH, report);
+    Coverage coverage = Coverage.create(CoverageCategory.BRANCH, report);
 
     long actual = coverage.calculateCovered();
 

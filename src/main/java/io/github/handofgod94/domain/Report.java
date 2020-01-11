@@ -12,7 +12,7 @@ public abstract class Report {
     return new AutoValue_Report(lines);
   }
 
-  public Coverage getCoverage(Coverage.CoverageCategory category) {
+  public Coverage getCoverage(CoverageCategory category) {
     return Coverage.create(category, this);
   }
 

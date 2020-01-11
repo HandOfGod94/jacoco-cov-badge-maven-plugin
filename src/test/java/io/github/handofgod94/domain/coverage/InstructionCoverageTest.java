@@ -1,5 +1,6 @@
 package io.github.handofgod94.domain.coverage;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
@@ -32,7 +33,7 @@ class InstructionCoverageTest {
 
   @Test
   void calculateMissed_returns_coverage_for_instruction() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+    Coverage coverage = Coverage.create(CoverageCategory.INSTRUCTION, report);
 
     long actual = coverage.calculateMissed();
 
@@ -41,7 +42,7 @@ class InstructionCoverageTest {
 
   @Test
   void calculateCovered_returns_coverage_for_instruction() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.INSTRUCTION, report);
+    Coverage coverage = Coverage.create(CoverageCategory.INSTRUCTION, report);
 
     long actual = coverage.calculateCovered();
 

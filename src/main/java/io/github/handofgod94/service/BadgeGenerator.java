@@ -1,10 +1,7 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.BadgeUtility;
-import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.BadgeTemplate;
-import io.github.handofgod94.domain.MyMojoConfiguration;
-import io.github.handofgod94.domain.Report;
+import io.github.handofgod94.domain.*;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.service.format.Formatter;
 import io.github.handofgod94.service.format.FormatterFactory;
@@ -22,7 +19,7 @@ import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerator {
 
-  private Coverage.CoverageCategory category;
+  private CoverageCategory category;
   private String badgeLabel;
   private File jacocoReportFile;
   private File outputFile;

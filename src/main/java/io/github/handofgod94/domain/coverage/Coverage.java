@@ -1,5 +1,6 @@
 package io.github.handofgod94.domain.coverage;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.vavr.Lazy;
 
@@ -7,30 +8,13 @@ import java.util.Objects;
 
 public abstract class Coverage implements CoverageCalculator {
 
-  /**
-   * Enum constants for coverage category.
-   * Jacoco CSV Report generates results of various categories
-   * such as branch missed/covered, instructions missed/covered.
-   * This enum maps each of those categories.
-   *
-   * <p>It includes:
-   * <code>INSTRUCTION, BRANCH, LINE, COMPLEXITY, METHOD</code>
-   */
-  public enum CoverageCategory {
-    INSTRUCTION,
-    BRANCH,
-    LINE,
-    COMPLEXITY,
-    METHOD
-  }
-
   public static final float INVALID_COVERAGE_PERCENTAGE = 0f;
 
-  public long covered;
-  public long missed;
   public CoverageCategory category;
   public Report report;
   protected Lazy<CoverageCalculator> calculator = Lazy.of(() -> this);
+  protected Lazy<Long> covered = Lazy.of(this::calculateCovered);
+  protected Lazy<Long> missed = Lazy.of(this::calculateMissed);
 
   Coverage(CoverageCategory category, Report report) {
     this.category = category;
@@ -39,8 +23,9 @@ public abstract class Coverage implements CoverageCalculator {
 
   /**
    * Creates coverage for a jacoco report.
+   *
    * @param category category fro which coverage needs to be calculated.
-   * @param report parsed jacoco report
+   * @param report   parsed jacoco report
    * @return Coverage instance based on category.
    */
   public static Coverage create(CoverageCategory category, Report report) {
@@ -62,29 +47,22 @@ public abstract class Coverage implements CoverageCalculator {
 
   /**
    * Calculates coverage percentage.
+   *
    * @return float value if coverage calculation is success,
-   *     INVALID_COVERAGE_PERCENTAGE = 0f otherwise
+   * INVALID_COVERAGE_PERCENTAGE = 0f otherwise
    */
   public float getCoveragePercentage() {
-    covered = calculator.get().calculateCovered();
-    missed = calculator.get().calculateMissed();
+    long covered = this.covered.get();
+    long missed = this.missed.get();
 
     if (covered < 0
-        || missed < 0) {
+      || missed < 0) {
       return INVALID_COVERAGE_PERCENTAGE;
     }
 
     float totalInstructions = covered + missed;
     float result = (covered / totalInstructions) * 100.0f;
     return result;
-  }
-
-  public long getMissed() {
-    return missed;
-  }
-
-  public long getCovered() {
-    return covered;
   }
 
   @Override

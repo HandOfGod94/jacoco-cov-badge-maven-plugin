@@ -1,5 +1,6 @@
 package io.github.handofgod94.domain.coverage;
 
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;
@@ -34,7 +35,7 @@ class MethodCoverageTest {
 
   @Test
   void calculateMissed_calculatesMissedMethods() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.METHOD, report);
+    Coverage coverage = Coverage.create(CoverageCategory.METHOD, report);
 
     long actual = coverage.calculateMissed();
 
@@ -43,7 +44,7 @@ class MethodCoverageTest {
 
   @Test
   void calculateCovered_calculatesCoveredMethods() {
-    Coverage coverage = Coverage.create(Coverage.CoverageCategory.METHOD, report);
+    Coverage coverage = Coverage.create(CoverageCategory.METHOD, report);
 
     long actual = coverage.calculateCovered();
 

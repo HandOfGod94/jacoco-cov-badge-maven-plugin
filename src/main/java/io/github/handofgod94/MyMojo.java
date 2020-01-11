@@ -1,6 +1,7 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.github.handofgod94.service.BadgeGenerator;
@@ -39,7 +40,7 @@ public class MyMojo extends AbstractMojo {
   private File outputFile;
 
   @Parameter(property = "badge.coverageCategory", defaultValue = "INSTRUCTION")
-  private Coverage.CoverageCategory coverageCategory;
+  private CoverageCategory coverageCategory;
 
   private Lazy<MyMojoConfiguration> myMojoConfig = Lazy.of(() -> MyMojoConfiguration.builder()
       .setBadgeLabel(badgeLabel)

@@ -1,6 +1,7 @@
 package io.github.handofgod94.service;
 
 import io.github.handofgod94.domain.Badge;
+import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.MyMojoConfiguration;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.control.Option;
@@ -29,7 +30,7 @@ class BadgeGeneratorTest {
     jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
     outputFile = Files.createTempFile("temp", ".svg").toFile();
     configBuilder = MyMojoConfiguration.builder()
-      .setCoverageCategory(Coverage.CoverageCategory.INSTRUCTION)
+      .setCoverageCategory(CoverageCategory.INSTRUCTION)
       .setBadgeLabel("foobarfizzbuzz")
       .setJacocoReportFile(jacocoReportFile)
       .setOutputFile(outputFile);
