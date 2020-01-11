@@ -21,14 +21,10 @@ import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerator {
 
-  private CoverageCategory category;
-  private String badgeLabel;
-  private File jacocoReportFile;
   private File outputFile;
+  private Badge badge;
 
   private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(BadgeTemplate::new);
-
-  private Lazy<Badge> badge = Lazy.of(() -> Badge.create(badgeLabel, badgeValue()));
 
   /**
    * Service to generate badges.
@@ -36,10 +32,12 @@ public class BadgeGenerator {
    * @param myMojoConfig config params provided in pom file of user.
    */
   public BadgeGenerator(MyMojoConfiguration myMojoConfig) {
-    this.category = myMojoConfig.getCoverageCategory();
-    this.badgeLabel = myMojoConfig.getBadgeLabel();
-    this.jacocoReportFile = myMojoConfig.getJacocoReportFile();
+    CoverageCategory category = myMojoConfig.getCoverageCategory();
+    String badgeLabel = myMojoConfig.getBadgeLabel();
+    Report report = new CsvReportParser(myMojoConfig.getJacocoReportFile()).parse();
+
     this.outputFile = myMojoConfig.getOutputFile();
+    this.badge = Badge.create(badgeLabel, report.getCoverageValueFor(category));
   }
 
   /**
@@ -53,20 +51,12 @@ public class BadgeGenerator {
     Try<Void> result = formatter.save(outputFile, renderBadge());
 
     return Match(result).option(
-      Case($Success($()), () -> badge.get())
+      Case($Success($()), () -> badge)
     );
   }
 
   private String renderBadge() {
-    return badgeTemplate.get().render(badge.get());
-  }
-
-  private int badgeValue() {
-    return report().getCoverageValueFor(category);
-  }
-
-  private Report report() {
-    return new CsvReportParser(jacocoReportFile).parse();
+    return badgeTemplate.get().render(badge);
   }
 
   private String fileExt() {
