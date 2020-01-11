@@ -1,4 +1,4 @@
-package io.github.handofgod94.parser;
+package io.github.handofgod94.service.parser;
 
 import org.junit.jupiter.api.Test;
 

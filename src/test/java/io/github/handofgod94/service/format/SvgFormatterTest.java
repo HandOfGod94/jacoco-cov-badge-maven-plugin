@@ -1,4 +1,4 @@
-package io.github.handofgod94.format;
+package io.github.handofgod94.service.format;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

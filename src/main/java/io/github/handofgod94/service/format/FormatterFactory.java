@@ -1,4 +1,4 @@
-package io.github.handofgod94.format;
+package io.github.handofgod94.service.format;
 
 /**
  * Factory class to generate formatter based on configuration i.e. (jpg, png, svg, etc).

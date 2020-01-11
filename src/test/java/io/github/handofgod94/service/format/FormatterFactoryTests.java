@@ -1,4 +1,4 @@
-package io.github.handofgod94.format;
+package io.github.handofgod94.service.format;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
