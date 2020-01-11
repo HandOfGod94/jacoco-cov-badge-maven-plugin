@@ -1,5 +1,6 @@
 package io.github.handofgod94.service.parser;
 
+import com.google.common.io.Resources;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class CsvReportParserTests {
 
   @Test
   void parseReport_WhenReportIsValid_ItGeneratesReport() throws IOException, URISyntaxException {
-    File file = Paths.get(getClass().getClassLoader().getResource("jacoco-single-line.csv").toURI()).toFile();
+    File file = new File(Resources.getResource("jacoco-single-line.csv").getFile());
     ReportParser reportParser = new CsvReportParser();
     Report actualReport = reportParser.parseReport(file);
 

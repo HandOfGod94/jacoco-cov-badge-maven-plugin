@@ -1,5 +1,6 @@
 package io.github.handofgod94.service;
 
+import com.google.common.io.Resources;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.coverage.CoverageCategory;
 import io.github.handofgod94.domain.MyMojoConfiguration;
@@ -11,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,7 +26,7 @@ class BadgeGeneratorTest {
 
   @BeforeEach
   void setup() throws IOException, URISyntaxException {
-    jacocoReportFile = Paths.get(getClass().getClassLoader().getResource("jacoco.csv").toURI()).toFile();
+    jacocoReportFile = new File(Resources.getResource("jacoco.csv").getFile());
     outputFile = Files.createTempFile("temp", ".svg").toFile();
     configBuilder = MyMojoConfiguration.builder()
       .setCoverageCategory(CoverageCategory.INSTRUCTION)
