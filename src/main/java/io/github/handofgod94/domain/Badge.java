@@ -1,6 +1,7 @@
 package io.github.handofgod94.domain;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.Range;
 import io.github.handofgod94.domain.coverage.Coverage;
 import io.vavr.collection.HashMap;
 import io.vavr.control.Try;
@@ -33,15 +34,15 @@ public abstract class Badge {
    */
   public String resultColorCode() {
     int badgeValue = getBadgeValue();
-    if (badgeValue >= 0 && badgeValue < 40) {
+    if (Range.closedOpen(0, 40).contains(badgeValue)) {
       return BadgeColors.RED.getColorCode();
-    } else if (badgeValue >= 40 && badgeValue < 50) {
+    } else if (Range.closedOpen(40, 50).contains(badgeValue)) {
       return BadgeColors.ORANGE.getColorCode();
-    } else if (badgeValue >= 50 && badgeValue < 60) {
+    } else if (Range.closedOpen(40, 60).contains(badgeValue)) {
       return BadgeColors.YELLOW.getColorCode();
-    } else if (badgeValue >= 60 && badgeValue < 70) {
+    } else if (Range.closedOpen(60, 70).contains(badgeValue)) {
       return BadgeColors.YELLOWGREEN.getColorCode();
-    } else if (badgeValue >= 70 && badgeValue < 80) {
+    } else if (Range.closedOpen(70, 80).contains(badgeValue)) {
       return BadgeColors.GREEN.getColorCode();
     } else {
       return BadgeColors.BRIGHTGREEN.getColorCode();
