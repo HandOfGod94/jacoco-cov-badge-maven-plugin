@@ -3,7 +3,6 @@ package io.github.handofgod94.domain.coverage;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.ReportLine;
 import io.vavr.collection.List;

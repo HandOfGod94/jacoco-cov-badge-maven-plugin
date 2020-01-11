@@ -1,4 +1,4 @@
-package io.github.handofgod94.domain;
+package io.github.handofgod94.domain.coverage;
 
 /**
  * Enum constants for coverage category.

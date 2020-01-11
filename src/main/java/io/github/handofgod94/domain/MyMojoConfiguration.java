@@ -1,6 +1,7 @@
 package io.github.handofgod94.domain;
 
 import com.google.auto.value.AutoValue;
+import io.github.handofgod94.domain.coverage.CoverageCategory;
 
 import java.io.File;
 

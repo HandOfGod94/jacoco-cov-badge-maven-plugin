@@ -1,8 +1,8 @@
 package io.github.handofgod94;
 
 import io.github.handofgod94.domain.Badge;
-import io.github.handofgod94.domain.CoverageCategory;
 import io.github.handofgod94.domain.MyMojoConfiguration;
+import io.github.handofgod94.domain.coverage.CoverageCategory;
 import io.github.handofgod94.service.BadgeGenerator;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
