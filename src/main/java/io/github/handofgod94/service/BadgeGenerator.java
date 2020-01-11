@@ -1,6 +1,6 @@
 package io.github.handofgod94.service;
 
-import io.github.handofgod94.BadgeUtility;
+import com.google.common.io.Files;
 import io.github.handofgod94.domain.Badge;
 import io.github.handofgod94.domain.BadgeTemplate;
 import io.github.handofgod94.domain.MyMojoConfiguration;
@@ -72,7 +72,6 @@ public class BadgeGenerator {
   }
 
   private String fileExt() {
-    return BadgeUtility.getFileExt(outputFile)
-      .orElseThrow(() -> new IllegalArgumentException("Invalid output file provided"));
+    return Files.getFileExtension(outputFile.getName());
   }
 }
