@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 import static junit.framework.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -18,7 +17,7 @@ public class CsvReportParserTests {
   @Test
   void parseReport_WhenReportIsValid_ItGeneratesReport() throws IOException, URISyntaxException {
     File file = new File(Resources.getResource("jacoco-single-line.csv").getFile());
-    ReportParser reportParser = new CsvReportParser();
+    CsvReportParser reportParser = new CsvReportParser();
     Report actualReport = reportParser.parseReport(file);
 
     ReportLine expectedReportLine = ReportLine.builder()
