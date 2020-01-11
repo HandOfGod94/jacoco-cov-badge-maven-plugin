@@ -1,4 +1,4 @@
-package io.github.handofgod94.service.parser;
+package io.github.handofgod94.service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -12,7 +12,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.function.Function;
 
-public class CsvReportParser implements ReportParser {
+public class CsvReportParser {
+
+  private File jacocoReportFile;
+
+  public CsvReportParser(File jacocoReportFile) {
+    this.jacocoReportFile = jacocoReportFile;
+  }
 
   // jacoco csv report column number
   public static final int GROUP_COL_NO = 0;
@@ -58,14 +64,13 @@ public class CsvReportParser implements ReportParser {
       .setMethodCovered(methodCovered).build();
   };
 
-  @Override
-  public Report parseReport(File file) {
+  public Report parse() {
     List<ReportLine> report =
-        Try
-          .withResources(() -> createCsvReader(file))
-          .of(CSVReader::readNext)
-          .mapTry(csvLineToReportLineMapper::apply)
-          .toList();
+      Try
+        .withResources(() -> createCsvReader(this.jacocoReportFile))
+        .of(CSVReader::readNext)
+        .mapTry(csvLineToReportLineMapper::apply)
+        .toList();
 
     return Report.create(report);
   }

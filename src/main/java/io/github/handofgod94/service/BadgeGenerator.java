@@ -8,7 +8,6 @@ import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.coverage.CoverageCategory;
 import io.github.handofgod94.service.format.Formatter;
 import io.github.handofgod94.service.format.FormatterFactory;
-import io.github.handofgod94.service.parser.CsvReportParser;
 import io.vavr.Lazy;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
@@ -67,7 +66,7 @@ public class BadgeGenerator {
   }
 
   private Report report() {
-    return new CsvReportParser().parseReport(jacocoReportFile);
+    return new CsvReportParser(jacocoReportFile).parse();
   }
 
   private String fileExt() {
