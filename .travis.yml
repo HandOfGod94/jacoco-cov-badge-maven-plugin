@@ -11,7 +11,7 @@ jobs:
     - stage: "test"
       script: ./mvnw clean test
     - stage: "install"
-      script: ./mvnw clean install -DskipTests=true -Pstaging
+      script: ./mvnw clean install -Pstaging
     - stage: "deploy"
       before_install:
         - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
