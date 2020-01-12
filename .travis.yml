@@ -18,12 +18,20 @@ jobs:
       name: "Build"
       script: ./mvnw clean install -Pstaging
       after_success: ./mvnw jacoco:report coveralls:report
+
+    - stage: "deploy"
+      name: "Deploy"
+      before_install:
+        - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+        - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrus
+      script: ./mvnw clean deploy --settings .maven.settings.xml -DskipTests=true -B -U -Prelease
   allow_failures:
     - script: ./mvnw dependency:analyze
       name: "Dependency Analyze"
-
 
 stages:
   - test
   - name: install
     if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
+  - name: deploy
+      if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
