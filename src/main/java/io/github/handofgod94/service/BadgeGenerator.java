@@ -8,7 +8,6 @@ import io.github.handofgod94.domain.Report;
 import io.github.handofgod94.domain.coverage.CoverageCategory;
 import io.github.handofgod94.service.format.Formatter;
 import io.github.handofgod94.service.format.FormatterFactory;
-import io.vavr.Lazy;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 
@@ -21,23 +20,24 @@ import static io.vavr.Patterns.$Success;
 
 public class BadgeGenerator {
 
-  private File outputFile;
-  private Badge badge;
-
-  private Lazy<BadgeTemplate> badgeTemplate = Lazy.of(BadgeTemplate::new);
+  private final File outputFile;
+  private final Badge badge;
+  private final BadgeTemplate template;
 
   /**
    * Service to generate badges.
    *
    * @param myMojoConfig config params provided in pom file of user.
+   * @param template     template to be used for rendering.
    */
-  public BadgeGenerator(MyMojoConfiguration myMojoConfig) {
+  public BadgeGenerator(MyMojoConfiguration myMojoConfig, BadgeTemplate template) {
     CoverageCategory category = myMojoConfig.getCoverageCategory();
     String badgeLabel = myMojoConfig.getBadgeLabel();
     Report report = new CsvReportParser(myMojoConfig.getJacocoReportFile()).parse();
 
     this.outputFile = myMojoConfig.getOutputFile();
     this.badge = Badge.create(badgeLabel, report.getCoverageValueFor(category));
+    this.template = template;
   }
 
   /**
@@ -48,15 +48,11 @@ public class BadgeGenerator {
    */
   public Option<Badge> generate() {
     Formatter formatter = FormatterFactory.createFormatter(fileExt());
-    Try<Void> result = formatter.save(outputFile, renderBadge());
+    Try<Void> result = formatter.save(outputFile, template.render(badge));
 
     return Match(result).option(
       Case($Success($()), () -> badge)
     );
-  }
-
-  private String renderBadge() {
-    return badgeTemplate.get().render(badge);
   }
 
   private String fileExt() {

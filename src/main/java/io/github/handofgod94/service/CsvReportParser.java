@@ -64,13 +64,17 @@ public class CsvReportParser {
       .setMethodCovered(methodCovered).build();
   };
 
+  /**
+   * Parses jacoco csv report.
+   * @return report parsed data.
+   */
   public Report parse() {
     List<ReportLine> report =
-      Try
-        .withResources(() -> createCsvReader(this.jacocoReportFile))
-        .of(CSVReader::readNext)
-        .mapTry(csvLineToReportLineMapper::apply)
-        .toList();
+        Try
+          .withResources(() -> createCsvReader(jacocoReportFile))
+          .of(CSVReader::readNext)
+          .mapTry(csvLineToReportLineMapper::apply)
+          .toList();
 
     return Report.create(report);
   }
