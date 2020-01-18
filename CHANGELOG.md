@@ -1,3 +1,14 @@
+# 1.1.0 (12th January, 2020)
+
+## Bug fixes
+
+* Upgrade pdfbox for security issue ([#35](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/issues/35)) ([ded91b3](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/commit/ded91b366784de4a6b5a23b59186c1de797c6652))
+
+## Features
+
+* Improve colors for badge ([#33](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/issues/33)) ([3237ae6](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/commit/3237ae689c211152d47c62c3f89aea8de37ebe48))
+* Modify padding for content in badge ([#33](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/issues/33)) ([3237ae6](https://github.com/HandOfGod94/jacoco-cov-badge-maven-plugin/commit/3237ae689c211152d47c62c3f89aea8de37ebe48))
+
 # 1.0.0 (5th October, 2018)
 
 ## Bug Fixes
