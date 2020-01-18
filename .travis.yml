@@ -34,4 +34,4 @@ stages:
   - name: install
     if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
   - name: deploy
-    if: ((branch =~ /(master|release-\d+\.\d+\.x+)/) OR (type = pull_request))
+    if: ((branch =~ /(master|release-\d+\.\d+\.x+)/))

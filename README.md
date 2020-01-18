@@ -53,15 +53,15 @@ provides badges as a service.
 The plugin needs `jacoco.csv` report, for it to function correctly.
 So you can bind it to any phase after the `jacoco.csv` reports gets generated.
 
-Although these are configurable, but some assumptions made by the plugin:  
-**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`  
+Although these are configurable, but some assumptions made by the plugin:
+**Default jacoco report location**: `${project.reporting.outputDirectory}/jacoco/jacoco.csv`
 **Default Output location**:`${project.build.directory}/coverage.svg`
 
 ```xml
 <plugin>
   <groupId>io.github.handofgod94</groupId>
   <artifactId>jacoco-cov-badge-maven-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <executions>
     <execution>
       <id>generate-badge</id>
@@ -91,7 +91,7 @@ Use `mvnw.cmd` for windows system.
 
 ## Usage
 ```shell
-mvn io.github.handofgod94:jacoco-cov-badge-maven-plugin:1.0.0:badge # if you just want to execute goal
+mvn io.github.handofgod94:jacoco-cov-badge-maven-plugin:1.1.0:badge # if you just want to execute goal
 ```
 
 See [quickstart](#quickstart) example, if you want to use it inside `pom.xml`
