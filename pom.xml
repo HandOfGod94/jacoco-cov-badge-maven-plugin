@@ -70,7 +70,7 @@
     <maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
     <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
     <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
-    <checkstyle.version>8.21</checkstyle.version>
+    <checkstyle.version>8.29</checkstyle.version>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <pdfbox.version>2.0.16</pdfbox.version>
     <freemarker.version>2.3.28</freemarker.version>
